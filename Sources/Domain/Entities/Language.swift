@@ -1,0 +1,2 @@
+import Foundation
+public struct Language: Codable, Identifiable, Hashable { public let id: String; public let code: String; public let name: String; public let nativeName: String; public let isSupported: Bool; public init(id: String, code: String, name: String, nativeName: String, isSupported: Bool = true) { self.id = id; self.code = code; self.name = name; self.nativeName = nativeName; self.isSupported = isSupported } }
