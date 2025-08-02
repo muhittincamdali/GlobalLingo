@@ -1,1 +1,1 @@
-# GlobalLingo - Multi-Language Translation App
+# 🌍 GlobalLingo - Multi-Language Translation App
