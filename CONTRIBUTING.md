@@ -1,277 +1,258 @@
-# 🤝 Contributing to GlobalLingo
+# 🤝 Contributing Guidelines
 
-Thank you for your interest in contributing to GlobalLingo! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to GlobalLingo! This document provides guidelines for contributing to the project.
 
 ## 📋 Table of Contents
 
-- [Types of Contributions](#types-of-contributions)
-- [Contribution Process](#contribution-process)
-- [Development Environment](#development-environment)
-- [Code Standards](#code-standards)
-- [Testing Guidelines](#testing-guidelines)
-- [Documentation Standards](#documentation-standards)
+- [Code of Conduct](#code-of-conduct)
+- [How Can I Contribute?](#how-can-i-contribute)
+- [Development Setup](#development-setup)
+- [Pull Request Process](#pull-request-process)
+- [Reporting Bugs](#reporting-bugs)
+- [Suggesting Enhancements](#suggesting-enhancements)
 
-## 🎯 Types of Contributions
+## 📜 Code of Conduct
 
-### 🐛 Bug Reports
-- **Clear Description**: Provide a clear and descriptive title
-- **Reproduction Steps**: Include steps to reproduce the issue
-- **Expected vs Actual**: Describe expected vs actual behavior
-- **Environment Info**: Include OS, device, app version
-- **Screenshots**: Add screenshots if applicable
+This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code.
 
-### 💡 Feature Requests
-- **Problem Statement**: Clearly describe the problem
-- **Proposed Solution**: Suggest a solution or feature
-- **Use Cases**: Provide real-world use cases
-- **Mockups**: Include UI mockups if applicable
+## 🚀 How Can I Contribute?
 
-### 📚 Documentation
-- **API Documentation**: Update API reference docs
-- **User Guides**: Improve user-facing documentation
-- **Code Comments**: Add inline code documentation
-- **README Updates**: Enhance project documentation
+### **Reporting Bugs**
+- Use the GitHub issue tracker
+- Include detailed steps to reproduce
+- Provide system information
+- Include error logs if applicable
 
-### 🧪 Tests
-- **Unit Tests**: Add tests for new features
-- **Integration Tests**: Test component interactions
-- **Performance Tests**: Benchmark critical paths
-- **UI Tests**: Test user interface flows
+### **Suggesting Enhancements**
+- Use the GitHub issue tracker
+- Describe the enhancement clearly
+- Explain why this enhancement would be useful
+- Include mockups if applicable
 
-## 🔄 Contribution Process
-
-### 1. Fork the Repository
-```bash
-git clone https://github.com/muhittincamdali/GlobalLingo.git
-cd GlobalLingo
-```
-
-### 2. Create Feature Branch
-```bash
-git checkout -b feature/amazing-feature
-# or
-git checkout -b fix/bug-fix
-```
-
-### 3. Make Changes
-- Write clean, well-documented code
-- Follow the coding standards below
+### **Code Contributions**
+- Fork the repository
+- Create a feature branch
+- Make your changes
 - Add tests for new functionality
-- Update documentation as needed
-
-### 4. Commit Changes
-```bash
-git add .
-git commit -m "feat: add amazing feature"
-git commit -m "fix: resolve translation bug"
-git commit -m "docs: update API documentation"
-```
-
-### 5. Push to Branch
-```bash
-git push origin feature/amazing-feature
-```
-
-### 6. Open Pull Request
-- Provide a clear description of changes
-- Include any relevant issue numbers
-- Add screenshots for UI changes
 - Ensure all tests pass
+- Submit a pull request
 
-## 🛠️ Development Environment
+## 🛠️ Development Setup
 
-### Prerequisites
-- **Xcode 15.0+**: Latest Xcode version
-- **iOS 15.0+**: Target iOS version
-- **Swift 5.9+**: Latest Swift version
-- **Git**: Version control
+### **Prerequisites**
+- Xcode 14.0+
+- iOS 15.0+
+- Swift 5.7+
 
-### Setup
-```bash
-# Clone repository
-git clone https://github.com/muhittincamdali/GlobalLingo.git
-cd GlobalLingo
+### **Setup Steps**
+1. Fork the repository
+2. Clone your fork locally
+3. Open `GlobalLingo.xcodeproj` in Xcode
+4. Build and run the project
+5. Run tests to ensure everything works
 
-# Install dependencies
-swift package resolve
-
-# Open in Xcode
-open GlobalLingo.xcodeproj
-```
-
-### Project Structure
+### **Project Structure**
 ```
 GlobalLingo/
 ├── Sources/
-│   ├── Core/
-│   ├── Features/
-│   ├── UI/
-│   └── Services/
+│   ├── TranslationEngine.swift
+│   ├── VoiceRecognition.swift
+│   ├── LanguageManager.swift
+│   └── OfflineService.swift
 ├── Tests/
+│   └── GlobalLingoTests/
 ├── Documentation/
-└── Resources/
+│   ├── GettingStarted.md
+│   ├── API.md
+│   ├── Architecture.md
+│   ├── Performance.md
+│   └── Security.md
+└── Examples/
+    └── BasicExample.swift
 ```
 
-## 📝 Code Standards
+## 🔄 Pull Request Process
 
-### Swift Style Guide
-- **Naming**: Use descriptive names for variables, functions, and classes
-- **Indentation**: Use 4 spaces for indentation
-- **Line Length**: Keep lines under 120 characters
-- **Comments**: Add comments for complex logic
+### **Before Submitting**
+1. Ensure your code follows the style guidelines
+2. Add tests for new functionality
+3. Update documentation if needed
+4. Ensure all tests pass
+5. Update the CHANGELOG.md
 
-### Architecture Principles
-- **Clean Architecture**: Follow Domain, Data, Presentation layers
-- **SOLID Principles**: Apply SOLID design principles
-- **Dependency Injection**: Use DI for testability
-- **Protocol-Oriented**: Prefer protocols over classes
+### **Pull Request Template**
+```markdown
+## Description
+Brief description of changes
 
-### Code Example
-```swift
-// ✅ Good
-protocol TranslationServiceProtocol {
-    func translate(text: String, from: Language, to: Language) async throws -> String
-}
+## Type of Change
+- [ ] Bug fix
+- [ ] New feature
+- [ ] Breaking change
+- [ ] Documentation update
 
-class TranslationService: TranslationServiceProtocol {
-    private let networkService: NetworkServiceProtocol
-    
-    init(networkService: NetworkServiceProtocol) {
-        self.networkService = networkService
-    }
-    
-    func translate(text: String, from: Language, to: Language) async throws -> String {
-        // Implementation
-    }
-}
+## Testing
+- [ ] Unit tests pass
+- [ ] Integration tests pass
+- [ ] Manual testing completed
 
-// ❌ Bad
-class TranslationService {
-    func translate(text: String, from: String, to: String) -> String {
-        // Implementation without protocols
-    }
-}
-```
-
-## 🧪 Testing Guidelines
-
-### Unit Tests
-- **Coverage**: Aim for 100% code coverage
-- **Naming**: Use descriptive test names
-- **Structure**: Follow Given-When-Then pattern
-- **Mocking**: Use mocks for external dependencies
-
-### Test Example
-```swift
-class TranslationServiceTests: XCTestCase {
-    func testTranslateTextSuccess() async throws {
-        // Given
-        let mockNetworkService = MockNetworkService()
-        let service = TranslationService(networkService: mockNetworkService)
-        
-        // When
-        let result = try await service.translate(
-            text: "Hello",
-            from: .english,
-            to: .spanish
-        )
-        
-        // Then
-        XCTAssertEqual(result, "Hola")
-    }
-}
-```
-
-### Performance Tests
-```swift
-func testTranslationPerformance() {
-    measure {
-        // Performance test implementation
-    }
-}
-```
-
-## 📚 Documentation Standards
-
-### Code Documentation
-- **Header Comments**: Document public interfaces
-- **Inline Comments**: Explain complex logic
-- **API Documentation**: Use Swift documentation comments
-
-### Documentation Example
-```swift
-/// Translates text from one language to another
-/// - Parameters:
-///   - text: The text to translate
-///   - from: Source language
-///   - to: Target language
-/// - Returns: Translated text
-/// - Throws: TranslationError if translation fails
-func translate(text: String, from: Language, to: Language) async throws -> String {
-    // Implementation
-}
-```
-
-### README Updates
-- **Feature Documentation**: Document new features
-- **Usage Examples**: Provide code examples
-- **Installation**: Update installation instructions
-- **Changelog**: Update version history
-
-## 🔍 Review Process
-
-### Pull Request Review
-- **Code Review**: All PRs require review
-- **Automated Tests**: Must pass all tests
-- **Documentation**: Update docs for new features
-- **Performance**: Ensure no performance regressions
-
-### Review Checklist
+## Checklist
 - [ ] Code follows style guidelines
-- [ ] Tests are included and passing
-- [ ] Documentation is updated
-- [ ] No breaking changes (or documented)
-- [ ] Performance impact considered
+- [ ] Self-review completed
+- [ ] Documentation updated
+- [ ] CHANGELOG updated
+```
 
-## 🚀 Release Process
+### **Code Style Guidelines**
+- Follow Swift API Design Guidelines
+- Use meaningful variable and function names
+- Add comments for complex logic
+- Keep functions small and focused
+- Use proper error handling
 
-### Versioning
-- **Semantic Versioning**: Follow MAJOR.MINOR.PATCH
-- **Changelog**: Update CHANGELOG.md
-- **Release Notes**: Document breaking changes
+## 🐛 Reporting Bugs
 
-### Release Steps
-1. **Update Version**: Bump version numbers
-2. **Update Changelog**: Document changes
-3. **Create Release**: Tag and release on GitHub
-4. **Update Documentation**: Update README if needed
+### **Bug Report Template**
+```markdown
+**Describe the bug**
+A clear and concise description of what the bug is.
+
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
+
+**Expected behavior**
+A clear and concise description of what you expected to happen.
+
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
+
+**Environment:**
+- iOS Version: [e.g. 16.0]
+- Device: [e.g. iPhone 14]
+- GlobalLingo Version: [e.g. 1.0.0]
+
+**Additional context**
+Add any other context about the problem here.
+```
+
+## 💡 Suggesting Enhancements
+
+### **Enhancement Request Template**
+```markdown
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is.
+
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.
+```
+
+## 📚 Documentation
+
+### **Documentation Guidelines**
+- Keep documentation clear and concise
+- Include code examples
+- Update documentation with code changes
+- Use proper markdown formatting
+
+### **Documentation Structure**
+- `GettingStarted.md` - Quick start guide
+- `API.md` - Complete API reference
+- `Architecture.md` - System architecture
+- `Performance.md` - Performance guidelines
+- `Security.md` - Security considerations
+
+## 🧪 Testing
+
+### **Testing Guidelines**
+- Write unit tests for all new functionality
+- Ensure test coverage is maintained
+- Test edge cases and error conditions
+- Use descriptive test names
+
+### **Running Tests**
+```bash
+# Run all tests
+xcodebuild test -scheme GlobalLingo
+
+# Run specific test target
+xcodebuild test -scheme GlobalLingo -only-testing:GlobalLingoTests
+```
+
+## 🔧 Development Workflow
+
+### **Branch Naming**
+- `feature/description` - New features
+- `bugfix/description` - Bug fixes
+- `docs/description` - Documentation updates
+- `refactor/description` - Code refactoring
+
+### **Commit Messages**
+Use conventional commit format:
+```
+type(scope): description
+
+feat: add new language support
+fix: resolve translation accuracy issue
+docs: update API documentation
+refactor: improve voice recognition
+```
+
+## 📈 Performance Considerations
+
+### **Performance Guidelines**
+- Profile code before optimization
+- Use Instruments for performance analysis
+- Consider memory usage and battery impact
+- Test on real devices
+
+### **Performance Testing**
+- Measure translation speed
+- Monitor memory usage
+- Test battery impact
+- Validate accuracy metrics
+
+## 🔒 Security Considerations
+
+### **Security Guidelines**
+- Never commit sensitive data
+- Use secure coding practices
+- Validate all inputs
+- Handle errors securely
+
+### **Security Checklist**
+- [ ] No hardcoded secrets
+- [ ] Input validation implemented
+- [ ] Error handling secure
+- [ ] Dependencies up to date
 
 ## 📞 Getting Help
 
-### Communication Channels
-- **GitHub Issues**: For bug reports and feature requests
-- **GitHub Discussions**: For questions and discussions
-- **Pull Requests**: For code contributions
+### **Support Channels**
+- GitHub Issues: [Create an issue](https://github.com/muhittincamdali/GlobalLingo/issues)
+- GitHub Discussions: [Join discussions](https://github.com/muhittincamdali/GlobalLingo/discussions)
+- Documentation: [Read docs](https://github.com/muhittincamdali/GlobalLingo/tree/master/Documentation)
 
-### Code of Conduct
-- **Respect**: Treat all contributors with respect
-- **Inclusive**: Welcome contributors from all backgrounds
-- **Professional**: Maintain professional communication
+### **Community Guidelines**
+- Be respectful and inclusive
+- Help others learn and grow
+- Share knowledge and experiences
+- Follow the code of conduct
 
 ## 🙏 Recognition
 
-### Contributors
-- **Code Contributors**: Listed in GitHub contributors
-- **Documentation**: Credit in documentation
-- **Special Thanks**: Recognition in README
+Contributors will be recognized in:
+- Project README
+- Release notes
+- Contributor hall of fame
 
-### Contribution Levels
-- **Bronze**: 1-5 contributions
-- **Silver**: 6-20 contributions
-- **Gold**: 21+ contributions
-
----
-
-**Thank you for contributing to GlobalLingo! 🌍**
-
-For questions or support, please open an issue or start a discussion.
+Thank you for contributing to GlobalLingo! 🚀
