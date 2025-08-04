@@ -365,6 +365,21 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## 📊 Project Statistics
+
+<div align="center">
+
+[![GitHub stars](https://img.shields.io/github/stars/muhittincamdali/GlobalLingo?style=social)](https://github.com/muhittincamdali/GlobalLingo/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/muhittincamdali/GlobalLingo?style=social)](https://github.com/muhittincamdali/GlobalLingo/network)
+[![GitHub issues](https://img.shields.io/github/issues/muhittincamdali/GlobalLingo)](https://github.com/muhittincamdali/GlobalLingo/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/muhittincamdali/GlobalLingo)](https://github.com/muhittincamdali/GlobalLingo/pulls)
+
+</div>
+
+## 🌟 Stargazers
+
+[![Stargazers repo roster for @muhittincamdali/GlobalLingo](https://reporoster.com/stars/muhittincamdali/GlobalLingo)](https://github.com/muhittincamdali/GlobalLingo/stargazers)
+
 ## 🙏 Acknowledgments
 
 - Apple for Speech and Natural Language frameworks
@@ -376,7 +391,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Documentation**: [Complete Documentation](Documentation/)
 - **Issues**: [GitHub Issues](https://github.com/muhittincamdali/GlobalLingo/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/muhittincamdali/GlobalLingo/discussions)
-- **Email**: [Contact Support](mailto:support@muhittincamdali.com)
+- **Email**: Contact through GitHub Issues
 
 ## 🚀 Roadmap
 
@@ -400,7 +415,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made with ❤️ by [Muhittin Camdali](https://github.com/muhittincamdali)**
+**Built with ❤️ for the iOS community**
 
 *GlobalLingo - Breaking language barriers, one translation at a time.*
 
@@ -425,4 +440,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
   <a href="https://github.com/topics/swiftui"><img src="https://img.shields.io/badge/SwiftUI-Modern%20UI%20Framework-blue?style=flat-square" alt="SwiftUI"></a>
 </div>
 
-**Keywords**: `swift` `ios` `translation` `nlp` `ai` `privacy` `offline` `accessibility` `mvvm` `clean-architecture` `machine-learning` `artificial-intelligence` `voice-recognition` `vision` `coreml` `swiftui` `multilingual` `ml`
+**Keywords**: `swift` `ios` `translation` `nlp` `ai` `privacy` `offline` `accessibility` `mvvm` `clean-architecture` `machine-learning` `artificial-intelligence` `voice-recognition` `vision` `coreml` `swiftui` `multilingual`
