@@ -1,1 +1,1 @@
-# LocalizationGuide
+# Localization Guide

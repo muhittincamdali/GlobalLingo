@@ -1,1 +1,1 @@
-# CulturalAdaptationGuide
+# Cultural Adaptation Guide
