@@ -1,1 +1,1 @@
-# LocalizationBestPracticesGuide
+# Localization Best Practices Guide
