@@ -8,7 +8,6 @@
 ![Localization](https://img.shields.io/badge/Localization-Multi%20Language-4CAF50?style=for-the-badge)
 ![Translation](https://img.shields.io/badge/Translation-Automatic-2196F3?style=for-the-badge)
 ![Internationalization](https://img.shields.io/badge/Internationalization-i18n-FF9800?style=for-the-badge)
-![RTL](https://img.shields.io/badge/RTL-Right%20to%20Left-9C27B0?style=for-the-badge)
 ![Cultural](https://img.shields.io/badge/Cultural-Adaptation-00BCD4?style=for-the-badge)
 ![Accessibility](https://img.shields.io/badge/Accessibility-WCAG-607D8B?style=for-the-badge)
 ![Performance](https://img.shields.io/badge/Performance-Optimized-795548?style=for-the-badge)
@@ -54,7 +53,6 @@
 - **🌍 Multi-Language Support**: Support for 100+ languages and dialects
 - **🌐 Automatic Translation**: AI-powered translation and localization
 - **🎨 Cultural Adaptation**: Cultural-specific UI/UX adaptations
-- **📱 RTL Support**: Complete right-to-left language support
 - **♿ Accessibility**: WCAG-compliant accessibility features
 - **⚡ Performance**: Optimized for fast language switching
 - **🎯 Context Awareness**: Context-aware translation and adaptation
@@ -133,7 +131,6 @@ localizationManager.addSupportedLanguages([
 }
 
 // Set current language
-localizationManager.setCurrentLanguage("es") { result in
     switch result {
     case .success(let language):
         print("✅ Language switched to Spanish")
@@ -286,7 +283,6 @@ let aiTranslationEngine = AITranslationEngine()
 
 // Configure AI translation
 let aiConfig = AITranslationConfiguration()
-aiConfig.enableNeuralTranslation = true
 aiConfig.enableContextAwareness = true
 aiConfig.enableQualityScoring = true
 aiConfig.enableContinuousLearning = true
@@ -385,51 +381,27 @@ culturalAdaptationManager.adaptColors(
 }
 ```
 
-### RTL Support Manager
 
 ```swift
-// RTL support manager
-let rtlSupportManager = RTLSupportManager()
 
-// Configure RTL support
-let rtlConfig = RTLSupportConfiguration()
-rtlConfig.enableRTLSupport = true
-rtlConfig.enableRTLText = true
-rtlConfig.enableRTLayout = true
-rtlConfig.enableRTLIcons = true
 
-// Setup RTL support manager
-rtlSupportManager.configure(rtlConfig)
 
-// Enable RTL for language
-rtlSupportManager.enableRTL(
     forLanguage: "ar"
 ) { result in
     switch result {
-    case .success(let rtl):
-        print("✅ RTL support enabled")
-        print("Language: \(rtl.language)")
-        print("Direction: \(rtl.direction)")
-        print("Text alignment: \(rtl.textAlignment)")
-        print("Layout direction: \(rtl.layoutDirection)")
     case .failure(let error):
-        print("❌ RTL support failed: \(error)")
     }
 }
 
-// Adapt layout for RTL
-rtlSupportManager.adaptLayout(
     forDirection: .rightToLeft,
     components: ["navigation", "buttons", "text", "images"]
 ) { result in
     switch result {
     case .success(let layout):
-        print("✅ RTL layout adaptation completed")
         print("Direction: \(layout.direction)")
         print("Components adapted: \(layout.components)")
         print("Mirroring applied: \(layout.mirroringApplied)")
     case .failure(let error):
-        print("❌ RTL layout adaptation failed: \(error)")
     }
 }
 ```
@@ -450,7 +422,6 @@ rtlSupportManager.adaptLayout(
 
 ```bash
 # Clone the repository
-git clone https://github.com/muhittincamdali/GlobalLingo.git
 
 # Navigate to project directory
 cd GlobalLingo
@@ -468,7 +439,6 @@ Add the framework to your project:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/muhittincamdali/GlobalLingo.git", from: "1.0.0")
 ]
 ```
 
@@ -485,7 +455,6 @@ let globalLingoConfig = GlobalLingoConfiguration()
 globalLingoConfig.enableLocalization = true
 globalLingoConfig.enableTranslation = true
 globalLingoConfig.enableCulturalAdaptation = true
-globalLingoConfig.enableRTLSupport = true
 
 // Start GlobalLingo manager
 globalLingoManager.start(with: globalLingoConfig)
@@ -556,7 +525,6 @@ let globalLingoConfig = GlobalLingoConfiguration()
 globalLingoConfig.enableLocalization = true
 globalLingoConfig.enableTranslation = true
 globalLingoConfig.enableCulturalAdaptation = true
-globalLingoConfig.enableRTLSupport = true
 
 // Set localization settings
 globalLingoConfig.enableMultiLanguage = true
@@ -592,7 +560,6 @@ Comprehensive API documentation is available for all public interfaces:
 * [Localization API](Documentation/LocalizationAPI.md) - Localization features
 * [Translation API](Documentation/TranslationAPI.md) - Translation capabilities
 * [Cultural Adaptation API](Documentation/CulturalAdaptationAPI.md) - Cultural adaptation features
-* [RTL Support API](Documentation/RTLSupportAPI.md) - RTL support capabilities
 * [Performance API](Documentation/PerformanceAPI.md) - Performance optimization
 * [Configuration API](Documentation/ConfigurationAPI.md) - Configuration options
 * [Accessibility API](Documentation/AccessibilityAPI.md) - Accessibility features
@@ -603,7 +570,6 @@ Comprehensive API documentation is available for all public interfaces:
 * [Localization Guide](Documentation/LocalizationGuide.md) - Localization setup
 * [Translation Guide](Documentation/TranslationGuide.md) - Translation setup
 * [Cultural Adaptation Guide](Documentation/CulturalAdaptationGuide.md) - Cultural adaptation setup
-* [RTL Support Guide](Documentation/RTLSupportGuide.md) - RTL support setup
 * [Performance Guide](Documentation/PerformanceGuide.md) - Performance optimization
 * [Accessibility Guide](Documentation/AccessibilityGuide.md) - Accessibility features
 * [Localization Best Practices Guide](Documentation/LocalizationBestPracticesGuide.md) - Localization best practices
@@ -615,7 +581,6 @@ Comprehensive API documentation is available for all public interfaces:
 * [Localization Examples](Examples/LocalizationExamples/) - Localization examples
 * [Translation Examples](Examples/TranslationExamples/) - Translation examples
 * [Cultural Adaptation Examples](Examples/CulturalAdaptationExamples/) - Cultural adaptation examples
-* [RTL Support Examples](Examples/RTLSupportExamples/) - RTL support examples
 
 ---
 
@@ -669,15 +634,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-[![GitHub stars](https://img.shields.io/github/stars/muhittincamdali/GlobalLingo?style=social)](https://github.com/muhittincamdali/GlobalLingo/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/muhittincamdali/GlobalLingo?style=social)](https://github.com/muhittincamdali/GlobalLingo/network)
-[![GitHub issues](https://img.shields.io/github/issues/muhittincamdali/GlobalLingo)](https://github.com/muhittincamdali/GlobalLingo/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/muhittincamdali/GlobalLingo)](https://github.com/muhittincamdali/GlobalLingo/pulls)
-[![GitHub contributors](https://img.shields.io/github/contributors/muhittincamdali/GlobalLingo)](https://github.com/muhittincamdali/GlobalLingo/graphs/contributors)
-[![GitHub last commit](https://img.shields.io/github/last-commit/muhittincamdali/GlobalLingo)](https://github.com/muhittincamdali/GlobalLingo/commits/master)
 
 </div>
 
 ## 🌟 Stargazers
 
-[![Stargazers repo roster for @muhittincamdali/GlobalLingo](https://reporoster.com/stars/muhittincamdali/GlobalLingo)](https://github.com/muhittincamdali/GlobalLingo/stargazers)
