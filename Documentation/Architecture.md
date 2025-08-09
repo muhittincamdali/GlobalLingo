@@ -1,5 +1,52 @@
 # 🏗️ Architecture Guide
 
+<!-- TOC START -->
+## Table of Contents
+- [🏗️ Architecture Guide](#-architecture-guide)
+- [📋 Table of Contents](#-table-of-contents)
+- [🌟 Overview](#-overview)
+  - [Key Principles](#key-principles)
+- [🏛️ System Architecture](#-system-architecture)
+  - [High-Level Architecture](#high-level-architecture)
+  - [Layer Responsibilities](#layer-responsibilities)
+    - [Presentation Layer](#presentation-layer)
+    - [Business Logic Layer](#business-logic-layer)
+    - [Data Access Layer](#data-access-layer)
+    - [Infrastructure Layer](#infrastructure-layer)
+- [🔧 Core Components](#-core-components)
+  - [TranslationEngine](#translationengine)
+  - [VoiceRecognition](#voicerecognition)
+  - [LanguageManager](#languagemanager)
+  - [OfflineService](#offlineservice)
+- [🔄 Data Flow](#-data-flow)
+  - [Text Translation Flow](#text-translation-flow)
+  - [Voice Translation Flow](#voice-translation-flow)
+  - [Offline Translation Flow](#offline-translation-flow)
+- [🎨 Design Patterns](#-design-patterns)
+  - [Dependency Injection](#dependency-injection)
+  - [Factory Pattern](#factory-pattern)
+  - [Observer Pattern](#observer-pattern)
+  - [Strategy Pattern](#strategy-pattern)
+- [⚡ Performance Considerations](#-performance-considerations)
+  - [Caching Strategy](#caching-strategy)
+  - [Batch Processing](#batch-processing)
+  - [Memory Management](#memory-management)
+- [🔒 Security Architecture](#-security-architecture)
+  - [Data Protection](#data-protection)
+  - [Privacy Features](#privacy-features)
+  - [Authentication](#authentication)
+- [📊 Monitoring and Analytics](#-monitoring-and-analytics)
+  - [Performance Monitoring](#performance-monitoring)
+  - [Error Tracking](#error-tracking)
+- [🔄 Deployment Architecture](#-deployment-architecture)
+  - [Release Strategy](#release-strategy)
+  - [CI/CD Pipeline](#cicd-pipeline)
+- [📈 Scalability Considerations](#-scalability-considerations)
+  - [Horizontal Scaling](#horizontal-scaling)
+  - [Vertical Scaling](#vertical-scaling)
+<!-- TOC END -->
+
+
 Comprehensive architecture documentation for GlobalLingo translation framework.
 
 ## 📋 Table of Contents

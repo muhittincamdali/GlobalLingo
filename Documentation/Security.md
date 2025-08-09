@@ -1,5 +1,46 @@
 # 🔒 Security Guide
 
+<!-- TOC START -->
+## Table of Contents
+- [🔒 Security Guide](#-security-guide)
+- [📋 Table of Contents](#-table-of-contents)
+- [🛡️ Security Overview](#-security-overview)
+  - [Security Principles](#security-principles)
+- [🔐 Data Protection](#-data-protection)
+  - [On-Device Processing](#on-device-processing)
+  - [Secure Data Storage](#secure-data-storage)
+  - [Memory Protection](#memory-protection)
+- [🔒 Privacy Features](#-privacy-features)
+  - [No Data Collection](#no-data-collection)
+  - [Temporary Data Handling](#temporary-data-handling)
+  - [Voice Data Protection](#voice-data-protection)
+- [🔑 Authentication](#-authentication)
+  - [API Key Management](#api-key-management)
+  - [Certificate Pinning](#certificate-pinning)
+  - [Biometric Authentication](#biometric-authentication)
+- [🔐 Encryption](#-encryption)
+  - [Data Encryption](#data-encryption)
+  - [Network Encryption](#network-encryption)
+  - [Key Management](#key-management)
+- [✅ Input Validation](#-input-validation)
+  - [Text Input Validation](#text-input-validation)
+  - [Language Validation](#language-validation)
+  - [Audio Input Validation](#audio-input-validation)
+- [❌ Error Handling](#-error-handling)
+  - [Security Error Types](#security-error-types)
+  - [Secure Error Handling](#secure-error-handling)
+  - [Error Logging](#error-logging)
+- [📋 Compliance](#-compliance)
+  - [GDPR Compliance](#gdpr-compliance)
+  - [CCPA Compliance](#ccpa-compliance)
+  - [Security Audit](#security-audit)
+- [🎯 Security Best Practices](#-security-best-practices)
+  - [Code Security](#code-security)
+  - [Configuration Security](#configuration-security)
+  - [Security Monitoring](#security-monitoring)
+<!-- TOC END -->
+
+
 Comprehensive security documentation for GlobalLingo translation framework.
 
 ## 📋 Table of Contents

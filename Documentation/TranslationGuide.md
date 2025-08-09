@@ -1,5 +1,53 @@
 # Translation Guide
 
+<!-- TOC START -->
+## Table of Contents
+- [Translation Guide](#translation-guide)
+- [Overview](#overview)
+- [Table of Contents](#table-of-contents)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+  - [Swift Package Manager](#swift-package-manager)
+- [Basic Setup](#basic-setup)
+  - [1. Import the Framework](#1-import-the-framework)
+  - [2. Initialize the Translation Manager](#2-initialize-the-translation-manager)
+- [Translation Configuration](#translation-configuration)
+  - [Configuration Options](#configuration-options)
+- [Basic Translation](#basic-translation)
+  - [Simple Text Translation](#simple-text-translation)
+  - [SwiftUI Integration](#swiftui-integration)
+  - [UIKit Integration](#uikit-integration)
+- [Batch Translation](#batch-translation)
+  - [Multiple Text Translation](#multiple-text-translation)
+- [Context-Aware Translation](#context-aware-translation)
+  - [Context-Sensitive Translation](#context-sensitive-translation)
+- [Translation Quality](#translation-quality)
+  - [Quality Assessment](#quality-assessment)
+  - [Quality Thresholds](#quality-thresholds)
+- [Translation Memory](#translation-memory)
+  - [Memory Management](#memory-management)
+- [Human Review](#human-review)
+  - [Review Workflow](#review-workflow)
+- [Testing](#testing)
+  - [Unit Tests](#unit-tests)
+- [Best Practices](#best-practices)
+  - [1. Configuration](#1-configuration)
+  - [2. Error Handling](#2-error-handling)
+  - [3. Performance](#3-performance)
+  - [4. Quality Assurance](#4-quality-assurance)
+  - [5. Security](#5-security)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+    - [1. Network Errors](#1-network-errors)
+    - [2. Timeout Issues](#2-timeout-issues)
+    - [3. Quality Issues](#3-quality-issues)
+    - [4. API Limits](#4-api-limits)
+  - [Debugging Tips](#debugging-tips)
+- [Support](#support)
+- [Next Steps](#next-steps)
+<!-- TOC END -->
+
+
 ## Overview
 
 This comprehensive guide will walk you through setting up and using the GlobalLingo translation framework in your iOS applications. You'll learn how to implement AI-powered translation, machine learning, human review, and translation memory management.

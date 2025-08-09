@@ -1,5 +1,47 @@
 # Accessibility API
 
+<!-- TOC START -->
+## Table of Contents
+- [Accessibility API](#accessibility-api)
+- [Overview](#overview)
+- [Core Classes](#core-classes)
+  - [AccessibilityManager](#accessibilitymanager)
+  - [AccessibilityConfiguration](#accessibilityconfiguration)
+  - [AccessibilityElement](#accessibilityelement)
+  - [AccessibilityLevel](#accessibilitylevel)
+  - [AccessibilityValidationResult](#accessibilityvalidationresult)
+  - [AccessibilityIssue](#accessibilityissue)
+  - [AccessibilityIssueType](#accessibilityissuetype)
+  - [AccessibilityIssueSeverity](#accessibilityissueseverity)
+  - [WCAGCompliance](#wcagcompliance)
+  - [WCAGLevel](#wcaglevel)
+  - [WCAGCriterion](#wcagcriterion)
+  - [AccessibilityError](#accessibilityerror)
+- [Usage Examples](#usage-examples)
+  - [Basic Accessibility Setup](#basic-accessibility-setup)
+  - [Accessibility Labels and Hints](#accessibility-labels-and-hints)
+  - [Accessibility Validation](#accessibility-validation)
+  - [SwiftUI Integration](#swiftui-integration)
+  - [UIKit Integration](#uikit-integration)
+- [Testing](#testing)
+  - [Unit Tests](#unit-tests)
+- [Best Practices](#best-practices)
+  - [1. Configuration](#1-configuration)
+  - [2. VoiceOver Support](#2-voiceover-support)
+  - [3. Dynamic Type](#3-dynamic-type)
+  - [4. WCAG Compliance](#4-wcag-compliance)
+  - [5. Testing](#5-testing)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+    - [1. VoiceOver Not Working](#1-voiceover-not-working)
+    - [2. Dynamic Type Issues](#2-dynamic-type-issues)
+    - [3. WCAG Compliance Issues](#3-wcag-compliance-issues)
+    - [4. Validation Errors](#4-validation-errors)
+  - [Debugging Tips](#debugging-tips)
+- [Support](#support)
+<!-- TOC END -->
+
+
 ## Overview
 
 The Accessibility API provides comprehensive accessibility features for iOS applications, including VoiceOver support, Dynamic Type, accessibility labels, and WCAG compliance tools.

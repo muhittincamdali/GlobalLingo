@@ -1,5 +1,56 @@
 # RTL Support Guide
 
+<!-- TOC START -->
+## Table of Contents
+- [RTL Support Guide](#rtl-support-guide)
+- [Overview](#overview)
+- [Table of Contents](#table-of-contents)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+  - [Swift Package Manager](#swift-package-manager)
+- [Basic Setup](#basic-setup)
+  - [1. Import the Framework](#1-import-the-framework)
+  - [2. Initialize the RTL Support Manager](#2-initialize-the-rtl-support-manager)
+- [RTL Configuration](#rtl-configuration)
+  - [Configuration Options](#configuration-options)
+- [Text Direction](#text-direction)
+  - [Enable RTL for Language](#enable-rtl-for-language)
+  - [Text Adaptation](#text-adaptation)
+- [Layout Adaptation](#layout-adaptation)
+  - [Basic Layout Adaptation](#basic-layout-adaptation)
+  - [SwiftUI Integration](#swiftui-integration)
+  - [UIKit Integration](#uikit-integration)
+- [Icon Mirroring](#icon-mirroring)
+  - [Basic Icon Mirroring](#basic-icon-mirroring)
+  - [Icon Mirroring Rules](#icon-mirroring-rules)
+- [Navigation Adaptation](#navigation-adaptation)
+  - [Navigation Bar Adaptation](#navigation-bar-adaptation)
+  - [Tab Bar Adaptation](#tab-bar-adaptation)
+- [Cultural Considerations](#cultural-considerations)
+  - [Color Adaptation](#color-adaptation)
+  - [Typography Adaptation](#typography-adaptation)
+- [Testing](#testing)
+  - [Unit Tests](#unit-tests)
+  - [UI Tests](#ui-tests)
+- [Best Practices](#best-practices)
+  - [1. Configuration](#1-configuration)
+  - [2. Layout Design](#2-layout-design)
+  - [3. Text Handling](#3-text-handling)
+  - [4. Icon and Image Handling](#4-icon-and-image-handling)
+  - [5. Navigation](#5-navigation)
+  - [6. Testing](#6-testing)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+    - [1. Layout Not Adapting](#1-layout-not-adapting)
+    - [2. Icons Not Mirroring](#2-icons-not-mirroring)
+    - [3. Text Alignment Issues](#3-text-alignment-issues)
+    - [4. Navigation Problems](#4-navigation-problems)
+  - [Debugging Tips](#debugging-tips)
+- [Support](#support)
+- [Next Steps](#next-steps)
+<!-- TOC END -->
+
+
 ## Overview
 
 This comprehensive guide will walk you through implementing right-to-left (RTL) language support in your iOS applications using the GlobalLingo framework. You'll learn how to handle RTL languages like Arabic, Hebrew, Persian, and Urdu.

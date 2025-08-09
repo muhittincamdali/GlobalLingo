@@ -1,5 +1,50 @@
 # ⚡ Performance Guide
 
+<!-- TOC START -->
+## Table of Contents
+- [⚡ Performance Guide](#-performance-guide)
+- [📋 Table of Contents](#-table-of-contents)
+- [📊 Performance Metrics](#-performance-metrics)
+  - [Key Performance Indicators (KPIs)](#key-performance-indicators-kpis)
+    - [Translation Speed](#translation-speed)
+    - [Memory Usage](#memory-usage)
+    - [Network Performance](#network-performance)
+    - [User Experience](#user-experience)
+- [🚀 Optimization Strategies](#-optimization-strategies)
+  - [Translation Engine Optimization](#translation-engine-optimization)
+    - [Lazy Loading](#lazy-loading)
+    - [Batch Processing](#batch-processing)
+    - [Parallel Processing](#parallel-processing)
+  - [Voice Recognition Optimization](#voice-recognition-optimization)
+    - [Audio Quality Optimization](#audio-quality-optimization)
+    - [Real-time Processing](#real-time-processing)
+- [💾 Caching Mechanisms](#-caching-mechanisms)
+  - [Multi-Level Caching](#multi-level-caching)
+    - [Memory Cache](#memory-cache)
+    - [Disk Cache](#disk-cache)
+    - [Network Cache](#network-cache)
+  - [Cache Invalidation Strategy](#cache-invalidation-strategy)
+- [🧠 Memory Management](#-memory-management)
+  - [Memory Monitoring](#memory-monitoring)
+  - [Memory Optimization](#memory-optimization)
+  - [Automatic Memory Management](#automatic-memory-management)
+- [🌐 Network Optimization](#-network-optimization)
+  - [Request Optimization](#request-optimization)
+  - [Connection Pooling](#connection-pooling)
+  - [Offline-First Strategy](#offline-first-strategy)
+- [📈 Benchmarking](#-benchmarking)
+  - [Performance Testing](#performance-testing)
+  - [Load Testing](#load-testing)
+- [📊 Monitoring](#-monitoring)
+  - [Real-time Monitoring](#real-time-monitoring)
+  - [Alert System](#alert-system)
+- [🎯 Best Practices](#-best-practices)
+  - [Code Optimization](#code-optimization)
+  - [Configuration Optimization](#configuration-optimization)
+  - [Monitoring Setup](#monitoring-setup)
+<!-- TOC END -->
+
+
 Comprehensive performance optimization guide for GlobalLingo translation framework.
 
 ## 📋 Table of Contents

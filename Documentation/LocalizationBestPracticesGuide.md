@@ -1,5 +1,52 @@
 # Localization Best Practices Guide
 
+<!-- TOC START -->
+## Table of Contents
+- [Localization Best Practices Guide](#localization-best-practices-guide)
+- [Overview](#overview)
+- [Table of Contents](#table-of-contents)
+- [Planning and Strategy](#planning-and-strategy)
+  - [1. Define Your Localization Strategy](#1-define-your-localization-strategy)
+  - [2. Cultural Research](#2-cultural-research)
+  - [3. Resource Planning](#3-resource-planning)
+- [String Management](#string-management)
+  - [1. String Key Naming Convention](#1-string-key-naming-convention)
+  - [2. String Organization](#2-string-organization)
+  - [3. String Context](#3-string-context)
+  - [4. String Length Considerations](#4-string-length-considerations)
+- [UI Design Considerations](#ui-design-considerations)
+  - [1. Layout Flexibility](#1-layout-flexibility)
+  - [2. RTL Support](#2-rtl-support)
+  - [3. Image and Icon Localization](#3-image-and-icon-localization)
+- [Technical Implementation](#technical-implementation)
+  - [1. Configuration Best Practices](#1-configuration-best-practices)
+  - [2. Error Handling](#2-error-handling)
+  - [3. Performance Optimization](#3-performance-optimization)
+- [Quality Assurance](#quality-assurance)
+  - [1. Translation Quality](#1-translation-quality)
+  - [2. Automated Testing](#2-automated-testing)
+- [Performance Optimization](#performance-optimization)
+  - [1. Lazy Loading](#1-lazy-loading)
+  - [2. Memory Management](#2-memory-management)
+- [Testing Strategies](#testing-strategies)
+  - [1. Unit Testing](#1-unit-testing)
+  - [2. UI Testing](#2-ui-testing)
+- [Common Pitfalls](#common-pitfalls)
+  - [1. Hard-coded Strings](#1-hard-coded-strings)
+  - [2. Concatenated Strings](#2-concatenated-strings)
+  - [3. Cultural Assumptions](#3-cultural-assumptions)
+  - [4. Date and Number Formats](#4-date-and-number-formats)
+- [Tools and Resources](#tools-and-resources)
+  - [1. Development Tools](#1-development-tools)
+  - [2. Translation Tools](#2-translation-tools)
+  - [3. Testing Tools](#3-testing-tools)
+- [Case Studies](#case-studies)
+  - [1. Successful Localization Example](#1-successful-localization-example)
+  - [2. Performance Optimization Example](#2-performance-optimization-example)
+- [Conclusion](#conclusion)
+<!-- TOC END -->
+
+
 ## Overview
 
 This comprehensive guide provides best practices for implementing localization in iOS applications using the GlobalLingo framework. You'll learn industry-standard approaches, common pitfalls to avoid, and strategies for creating truly global applications.

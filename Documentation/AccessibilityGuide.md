@@ -1,5 +1,36 @@
 # ♿ Accessibility Guide
 
+<!-- TOC START -->
+## Table of Contents
+- [♿ Accessibility Guide](#-accessibility-guide)
+- [📋 Table of Contents](#-table-of-contents)
+- [🌟 Introduction](#-introduction)
+  - [Why Accessibility Matters](#why-accessibility-matters)
+  - [Accessibility Standards](#accessibility-standards)
+- [🚀 Getting Started](#-getting-started)
+  - [Basic Accessibility Setup](#basic-accessibility-setup)
+  - [Accessibility Configuration](#accessibility-configuration)
+- [🎤 VoiceOver Integration](#-voiceover-integration)
+  - [VoiceOver Setup](#voiceover-setup)
+  - [VoiceOver Announcements](#voiceover-announcements)
+  - [VoiceOver Navigation](#voiceover-navigation)
+- [📝 Dynamic Type Support](#-dynamic-type-support)
+  - [Dynamic Type Configuration](#dynamic-type-configuration)
+  - [Text Size Adaptation](#text-size-adaptation)
+- [🎨 High Contrast Mode](#-high-contrast-mode)
+  - [High Contrast Support](#high-contrast-support)
+  - [High Contrast Color Schemes](#high-contrast-color-schemes)
+- [🏷️ Accessibility Best Practices](#-accessibility-best-practices)
+  - [Accessibility Labels](#accessibility-labels)
+  - [Accessibility Actions](#accessibility-actions)
+- [🧪 Testing Accessibility](#-testing-accessibility)
+  - [Accessibility Testing Framework](#accessibility-testing-framework)
+  - [Accessibility Metrics](#accessibility-metrics)
+- [📊 Accessibility Compliance](#-accessibility-compliance)
+  - [WCAG 2.1 AA Compliance](#wcag-21-aa-compliance)
+<!-- TOC END -->
+
+
 Comprehensive accessibility guide for GlobalLingo translation framework.
 
 ## 📋 Table of Contents
