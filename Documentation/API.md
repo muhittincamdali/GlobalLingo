@@ -1,5 +1,58 @@
 # 📚 API Reference
 
+<!-- TOC START -->
+## Table of Contents
+- [📚 API Reference](#-api-reference)
+- [📋 Table of Contents](#-table-of-contents)
+- [🔧 TranslationEngine](#-translationengine)
+  - [Initialization](#initialization)
+  - [Configuration](#configuration)
+  - [Text Translation](#text-translation)
+    - [Single Translation](#single-translation)
+    - [Batch Translation](#batch-translation)
+  - [Voice Translation](#voice-translation)
+    - [Voice to Text](#voice-to-text)
+  - [Language Detection](#language-detection)
+  - [Offline Translation](#offline-translation)
+    - [Check Availability](#check-availability)
+    - [Offline Translation](#offline-translation)
+- [🎤 VoiceRecognition](#-voicerecognition)
+  - [Initialization](#initialization)
+  - [Configuration](#configuration)
+  - [Speech Recognition](#speech-recognition)
+    - [Start Recording](#start-recording)
+    - [Stop Recording](#stop-recording)
+    - [Get Recognized Text](#get-recognized-text)
+    - [Recognize Speech from Audio](#recognize-speech-from-audio)
+  - [Voice Quality](#voice-quality)
+    - [Set Audio Quality](#set-audio-quality)
+    - [Get Audio Quality](#get-audio-quality)
+- [🌍 LanguageManager](#-languagemanager)
+  - [Get Supported Languages](#get-supported-languages)
+  - [Check Language Support](#check-language-support)
+  - [Get Language Info](#get-language-info)
+- [📱 OfflineService](#-offlineservice)
+  - [Check Offline Availability](#check-offline-availability)
+  - [Download Language Pack](#download-language-pack)
+  - [Get Downloaded Languages](#get-downloaded-languages)
+  - [Remove Language Pack](#remove-language-pack)
+- [⚡ PerformanceMonitor](#-performancemonitor)
+  - [Get Performance Metrics](#get-performance-metrics)
+  - [Performance Metrics Structure](#performance-metrics-structure)
+  - [Enable Performance Monitoring](#enable-performance-monitoring)
+  - [Disable Performance Monitoring](#disable-performance-monitoring)
+- [❌ Error Handling](#-error-handling)
+  - [TranslationError](#translationerror)
+  - [Error Handling Example](#error-handling-example)
+  - [VoiceRecognitionError](#voicerecognitionerror)
+  - [Error Handling for Voice](#error-handling-for-voice)
+- [📊 Data Structures](#-data-structures)
+  - [Language Enum](#language-enum)
+  - [LanguageInfo Structure](#languageinfo-structure)
+  - [VoiceTranslationResult Structure](#voicetranslationresult-structure)
+<!-- TOC END -->
+
+
 Complete API documentation for GlobalLingo translation framework.
 
 ## 📋 Table of Contents

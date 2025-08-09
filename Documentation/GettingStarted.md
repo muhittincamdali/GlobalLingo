@@ -1,5 +1,40 @@
 # 🚀 Getting Started with GlobalLingo
 
+<!-- TOC START -->
+## Table of Contents
+- [🚀 Getting Started with GlobalLingo](#-getting-started-with-globallingo)
+- [📋 Table of Contents](#-table-of-contents)
+- [🔧 Prerequisites](#-prerequisites)
+  - [System Requirements](#system-requirements)
+  - [Development Tools](#development-tools)
+- [📦 Installation](#-installation)
+  - [Swift Package Manager (Recommended)](#swift-package-manager-recommended)
+  - [CocoaPods](#cocoapods)
+- [🚀 Quick Start](#-quick-start)
+  - [1. Initialize Translation Engine](#1-initialize-translation-engine)
+  - [2. Basic Text Translation](#2-basic-text-translation)
+  - [3. Voice Recognition](#3-voice-recognition)
+- [📱 Basic Usage](#-basic-usage)
+  - [Text Translation](#text-translation)
+  - [Voice Translation](#voice-translation)
+  - [Language Detection](#language-detection)
+  - [Offline Translation](#offline-translation)
+- [🔧 Advanced Features](#-advanced-features)
+  - [Custom Language Models](#custom-language-models)
+  - [Performance Optimization](#performance-optimization)
+  - [Error Handling](#error-handling)
+- [🛠️ Troubleshooting](#-troubleshooting)
+  - [Common Issues](#common-issues)
+    - [1. Network Connection](#1-network-connection)
+    - [2. Language Support](#2-language-support)
+    - [3. Memory Issues](#3-memory-issues)
+  - [Performance Tips](#performance-tips)
+  - [Debug Mode](#debug-mode)
+- [📚 Next Steps](#-next-steps)
+- [🤝 Getting Help](#-getting-help)
+<!-- TOC END -->
+
+
 Welcome to GlobalLingo! This guide will help you get started with our professional multi-language translation app.
 
 ## 📋 Table of Contents

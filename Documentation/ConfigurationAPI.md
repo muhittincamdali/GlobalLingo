@@ -1,5 +1,50 @@
 # Configuration API
 
+<!-- TOC START -->
+## Table of Contents
+- [Configuration API](#configuration-api)
+- [Overview](#overview)
+- [Core Classes](#core-classes)
+  - [ConfigurationManager](#configurationmanager)
+  - [ConfigurationSettings](#configurationsettings)
+  - [Configuration](#configuration)
+  - [ConfigurationSource](#configurationsource)
+  - [ConfigurationValidationStatus](#configurationvalidationstatus)
+  - [ConfigurationValidationResult](#configurationvalidationresult)
+  - [ConfigurationValidationError](#configurationvalidationerror)
+  - [ConfigurationErrorType](#configurationerrortype)
+  - [ConfigurationErrorSeverity](#configurationerrorseverity)
+  - [ConfigurationError](#configurationerror)
+- [Usage Examples](#usage-examples)
+  - [Basic Configuration](#basic-configuration)
+  - [Feature Flags](#feature-flags)
+  - [Environment Management](#environment-management)
+  - [Configuration Validation](#configuration-validation)
+- [Advanced Features](#advanced-features)
+  - [Remote Configuration](#remote-configuration)
+  - [Configuration Encryption](#configuration-encryption)
+  - [Configuration Backup](#configuration-backup)
+- [Integration Examples](#integration-examples)
+  - [SwiftUI Integration](#swiftui-integration)
+  - [UIKit Integration](#uikit-integration)
+- [Testing](#testing)
+  - [Unit Tests](#unit-tests)
+- [Best Practices](#best-practices)
+  - [1. Configuration](#1-configuration)
+  - [2. Security](#2-security)
+  - [3. Performance](#3-performance)
+  - [4. Reliability](#4-reliability)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+    - [1. Configuration Not Loading](#1-configuration-not-loading)
+    - [2. Validation Errors](#2-validation-errors)
+    - [3. Encryption Issues](#3-encryption-issues)
+    - [4. Performance Issues](#4-performance-issues)
+  - [Debugging Tips](#debugging-tips)
+- [Support](#support)
+<!-- TOC END -->
+
+
 ## Overview
 
 The Configuration API provides comprehensive configuration management capabilities for iOS applications, including dynamic configuration, feature flags, environment management, and configuration validation.

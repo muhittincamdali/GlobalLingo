@@ -1,5 +1,48 @@
 # Localization API
 
+<!-- TOC START -->
+## Table of Contents
+- [Localization API](#localization-api)
+- [Overview](#overview)
+- [Core Classes](#core-classes)
+  - [LocalizationManager](#localizationmanager)
+  - [LocalizationConfiguration](#localizationconfiguration)
+  - [Language](#language)
+  - [TextDirection](#textdirection)
+  - [PluralizationRules](#pluralizationrules)
+  - [PluralizationRule](#pluralizationrule)
+  - [DateFormat](#dateformat)
+  - [NumberFormat](#numberformat)
+  - [LocalizationError](#localizationerror)
+- [Usage Examples](#usage-examples)
+  - [Basic Localization](#basic-localization)
+  - [Dynamic Language Switching](#dynamic-language-switching)
+  - [String with Arguments](#string-with-arguments)
+  - [Pluralization](#pluralization)
+- [Advanced Features](#advanced-features)
+  - [Context-Aware Localization](#context-aware-localization)
+  - [Regional Variants](#regional-variants)
+  - [Language Detection](#language-detection)
+  - [Fallback System](#fallback-system)
+- [Performance Optimization](#performance-optimization)
+  - [Caching](#caching)
+  - [Preloading](#preloading)
+- [Integration Examples](#integration-examples)
+  - [SwiftUI Integration](#swiftui-integration)
+  - [UIKit Integration](#uikit-integration)
+- [Testing](#testing)
+  - [Unit Tests](#unit-tests)
+- [Best Practices](#best-practices)
+- [Migration Guide](#migration-guide)
+  - [From Version 1.0 to 2.0](#from-version-10-to-20)
+  - [Breaking Changes](#breaking-changes)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+  - [Solutions](#solutions)
+- [Support](#support)
+<!-- TOC END -->
+
+
 ## Overview
 
 The Localization API provides comprehensive localization capabilities for iOS applications, including multi-language support, dynamic language switching, pluralization rules, and gender-specific text adaptation.

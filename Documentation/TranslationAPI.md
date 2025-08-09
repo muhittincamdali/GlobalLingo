@@ -1,5 +1,46 @@
 # Translation API
 
+<!-- TOC START -->
+## Table of Contents
+- [Translation API](#translation-api)
+- [Overview](#overview)
+- [Core Classes](#core-classes)
+  - [TranslationManager](#translationmanager)
+  - [TranslationConfiguration](#translationconfiguration)
+  - [Translation](#translation)
+  - [ContextualTranslation](#contextualtranslation)
+  - [TranslationQuality](#translationquality)
+  - [TranslationFeedback](#translationfeedback)
+  - [TranslationError](#translationerror)
+- [Usage Examples](#usage-examples)
+  - [Basic Translation](#basic-translation)
+  - [Batch Translation](#batch-translation)
+  - [Context-Aware Translation](#context-aware-translation)
+  - [Translation Improvement](#translation-improvement)
+- [Advanced Features](#advanced-features)
+  - [Translation Memory](#translation-memory)
+  - [Quality Assurance](#quality-assurance)
+  - [Collaborative Translation](#collaborative-translation)
+- [Performance Optimization](#performance-optimization)
+  - [Caching](#caching)
+  - [Batch Processing](#batch-processing)
+- [Error Handling](#error-handling)
+- [Best Practices](#best-practices)
+- [Integration Examples](#integration-examples)
+  - [SwiftUI Integration](#swiftui-integration)
+  - [UIKit Integration](#uikit-integration)
+- [Testing](#testing)
+  - [Unit Tests](#unit-tests)
+- [Migration Guide](#migration-guide)
+  - [From Version 1.0 to 2.0](#from-version-10-to-20)
+  - [Breaking Changes](#breaking-changes)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+  - [Solutions](#solutions)
+- [Support](#support)
+<!-- TOC END -->
+
+
 ## Overview
 
 The Translation API provides comprehensive translation capabilities for iOS applications, including AI-powered translation, machine learning, human review, and translation memory management.

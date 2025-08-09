@@ -1,5 +1,50 @@
 # Performance API
 
+<!-- TOC START -->
+## Table of Contents
+- [Performance API](#performance-api)
+- [Overview](#overview)
+- [Core Classes](#core-classes)
+  - [PerformanceManager](#performancemanager)
+  - [PerformanceConfiguration](#performanceconfiguration)
+  - [PerformanceMetrics](#performancemetrics)
+  - [MemoryMetrics](#memorymetrics)
+  - [CPUMetrics](#cpumetrics)
+  - [NetworkMetrics](#networkmetrics)
+  - [BatteryMetrics](#batterymetrics)
+  - [FrameRateMetrics](#frameratemetrics)
+  - [PerformanceThreshold](#performancethreshold)
+  - [PerformanceMetric](#performancemetric)
+  - [ThresholdAction](#thresholdaction)
+  - [MemoryPressure](#memorypressure)
+  - [NetworkConnectionType](#networkconnectiontype)
+  - [PerformanceError](#performanceerror)
+- [Usage Examples](#usage-examples)
+  - [Basic Performance Monitoring](#basic-performance-monitoring)
+  - [Performance Optimization](#performance-optimization)
+  - [Performance Thresholds](#performance-thresholds)
+  - [Performance Reports](#performance-reports)
+- [Advanced Features](#advanced-features)
+  - [Custom Metrics](#custom-metrics)
+  - [Performance Alerts](#performance-alerts)
+  - [Performance Logging](#performance-logging)
+  - [Performance Analytics](#performance-analytics)
+- [Integration Examples](#integration-examples)
+  - [SwiftUI Integration](#swiftui-integration)
+  - [UIKit Integration](#uikit-integration)
+- [Testing](#testing)
+  - [Unit Tests](#unit-tests)
+- [Best Practices](#best-practices)
+- [Migration Guide](#migration-guide)
+  - [From Version 1.0 to 2.0](#from-version-10-to-20)
+  - [Breaking Changes](#breaking-changes)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+  - [Solutions](#solutions)
+- [Support](#support)
+<!-- TOC END -->
+
+
 ## Overview
 
 The Performance API provides comprehensive performance monitoring, optimization, and analytics capabilities for iOS applications, including memory management, CPU profiling, network optimization, and performance metrics.

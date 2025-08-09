@@ -1,5 +1,43 @@
 # RTL Support API
 
+<!-- TOC START -->
+## Table of Contents
+- [RTL Support API](#rtl-support-api)
+- [Overview](#overview)
+- [Core Classes](#core-classes)
+  - [RTLSupportManager](#rtlsupportmanager)
+  - [RTLSupportConfiguration](#rtlsupportconfiguration)
+  - [RTLSupport](#rtlsupport)
+  - [RTLayout](#rtlayout)
+  - [TextDirection](#textdirection)
+  - [MirroringRule](#mirroringrule)
+  - [RTLError](#rtlerror)
+- [Usage Examples](#usage-examples)
+  - [Basic RTL Support](#basic-rtl-support)
+  - [Layout Adaptation](#layout-adaptation)
+  - [Icon Mirroring](#icon-mirroring)
+  - [Text Adaptation](#text-adaptation)
+- [Advanced Features](#advanced-features)
+  - [Cultural Adaptation](#cultural-adaptation)
+  - [Navigation Adaptation](#navigation-adaptation)
+  - [Gesture Adaptation](#gesture-adaptation)
+  - [Animation Adaptation](#animation-adaptation)
+- [Integration Examples](#integration-examples)
+  - [SwiftUI Integration](#swiftui-integration)
+  - [UIKit Integration](#uikit-integration)
+- [Testing](#testing)
+  - [Unit Tests](#unit-tests)
+- [Best Practices](#best-practices)
+- [Migration Guide](#migration-guide)
+  - [From Version 1.0 to 2.0](#from-version-10-to-20)
+  - [Breaking Changes](#breaking-changes)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+  - [Solutions](#solutions)
+- [Support](#support)
+<!-- TOC END -->
+
+
 ## Overview
 
 The RTL Support API provides comprehensive right-to-left language support for iOS applications, including text direction, layout adaptation, icon mirroring, and cultural considerations.

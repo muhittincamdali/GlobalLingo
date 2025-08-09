@@ -1,5 +1,27 @@
 # GlobalLingo Manager API
 
+<!-- TOC START -->
+## Table of Contents
+- [GlobalLingo Manager API](#globallingo-manager-api)
+- [Overview](#overview)
+- [Core Classes](#core-classes)
+  - [GlobalLingoManager](#globallingomanager)
+  - [GlobalLingoConfiguration](#globallingoconfiguration)
+- [Key Methods](#key-methods)
+  - [Initialization](#initialization)
+  - [Language Configuration](#language-configuration)
+  - [Localization Management](#localization-management)
+- [Error Handling](#error-handling)
+- [Performance Monitoring](#performance-monitoring)
+- [Accessibility Support](#accessibility-support)
+- [Best Practices](#best-practices)
+- [Integration Examples](#integration-examples)
+  - [Basic Integration](#basic-integration)
+  - [Advanced Integration](#advanced-integration)
+- [API Reference](#api-reference)
+<!-- TOC END -->
+
+
 ## Overview
 
 The `GlobalLingoManager` is the core component of the GlobalLingo framework. It provides centralized control over all localization, translation, and cultural adaptation operations.

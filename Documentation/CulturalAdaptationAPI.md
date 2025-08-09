@@ -1,5 +1,32 @@
 # 🌍 Cultural Adaptation API
 
+<!-- TOC START -->
+## Table of Contents
+- [🌍 Cultural Adaptation API](#-cultural-adaptation-api)
+- [📋 Table of Contents](#-table-of-contents)
+- [🌟 Overview](#-overview)
+  - [Cultural Adaptation Features](#cultural-adaptation-features)
+- [🎭 Cultural Context](#-cultural-context)
+  - [Cultural Context Manager](#cultural-context-manager)
+  - [Cultural Context Detection](#cultural-context-detection)
+- [🌍 Localization Features](#-localization-features)
+  - [Cultural Localization](#cultural-localization)
+  - [Regional Customization](#regional-customization)
+- [🎯 Cultural Sensitivity](#-cultural-sensitivity)
+  - [Cultural Sensitivity Checker](#cultural-sensitivity-checker)
+  - [Cultural Taboo Detection](#cultural-taboo-detection)
+- [🌏 Regional Adaptations](#-regional-adaptations)
+  - [Regional Adaptation Manager](#regional-adaptation-manager)
+  - [Regional Preferences](#regional-preferences)
+- [🎨 Custom Cultural Rules](#-custom-cultural-rules)
+  - [Custom Cultural Rule Engine](#custom-cultural-rule-engine)
+  - [Custom Cultural Rule Definition](#custom-cultural-rule-definition)
+- [📊 Cultural Analytics](#-cultural-analytics)
+  - [Cultural Adaptation Analytics](#cultural-adaptation-analytics)
+  - [Cultural Adaptation Reporting](#cultural-adaptation-reporting)
+<!-- TOC END -->
+
+
 Complete cultural adaptation API documentation for GlobalLingo translation framework.
 
 ## 📋 Table of Contents
