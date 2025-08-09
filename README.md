@@ -669,7 +669,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-[![GitHub stars](https://img.shields.io/github/stars/muhittincamdali/GlobalLingo?style=social)](https://github.com/muhittincamdali/GlobalLingo/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/muhittincamdali/GlobalLingo?style=social&logo=github)](https://github.com/muhittincamdali/GlobalLingo/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/muhittincamdali/GlobalLingo?style=social)](https://github.com/muhittincamdali/GlobalLingo/network)
 [![GitHub issues](https://img.shields.io/github/issues/muhittincamdali/GlobalLingo)](https://github.com/muhittincamdali/GlobalLingo/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/muhittincamdali/GlobalLingo)](https://github.com/muhittincamdali/GlobalLingo/pulls)
