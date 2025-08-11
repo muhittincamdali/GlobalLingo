@@ -684,3 +684,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🌟 Stargazers
 
 [![Stargazers repo roster for @muhittincamdali/GlobalLingo](https://starchart.cc/muhittincamdali/GlobalLingo.svg)](https://github.com/muhittincamdali/GlobalLingo/stargazers)
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=muhittincamdali/GlobalLingo&type=Date)](https://star-history.com/#muhittincamdali/GlobalLingo&Date)
+
