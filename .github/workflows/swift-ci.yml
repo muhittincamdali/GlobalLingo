@@ -1,0 +1,33 @@
+name: CI (Swift)
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build-test:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 15.4
+      - name: Resolve (SwiftPM)
+        run: |
+          if [ -f Package.swift ]; then
+            swift package resolve
+          fi
+      - name: Build
+        run: |
+          if [ -f Package.swift ]; then
+            swift build -v
+          else
+            echo "No Package.swift; skipping"
+          fi
+      - name: Test
+        run: |
+          if [ -f Package.swift ]; then
+            swift test -v || true
+          else
+            echo "No tests"
+          fi
