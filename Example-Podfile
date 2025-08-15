@@ -1,0 +1,62 @@
+# Podfile Example for GlobalLingo Integration
+# Uncomment the next line to define a global platform for your project
+platform :ios, '15.0'
+
+# Comment the next line if you don't want to use dynamic frameworks
+use_frameworks!
+
+target 'YourAppName' do
+  # GlobalLingo Installation Options:
+  
+  # Option 1: Basic Installation (Core + Features)
+  pod 'GlobalLingo', '~> 2.0.0'
+  
+  # Option 2: Specific Components
+  # pod 'GlobalLingo/Core', '~> 2.0.0'
+  # pod 'GlobalLingo/Features', '~> 2.0.0'
+  # pod 'GlobalLingo/Security', '~> 2.0.0'
+  # pod 'GlobalLingo/Advanced', '~> 2.0.0'
+  
+  # Option 3: Enterprise Installation (All Features)
+  # pod 'GlobalLingo/Enterprise', '~> 2.0.0'
+  
+  # Option 4: Development Pod (Local Path)
+  # pod 'GlobalLingo', :path => '../GlobalLingo'
+  
+  # Option 5: Direct from GitHub
+  # pod 'GlobalLingo', :git => 'https://github.com/muhittincamdali/GlobalLingo.git', :tag => '2.0.0'
+  
+  # Option 6: Development Branch
+  # pod 'GlobalLingo', :git => 'https://github.com/muhittincamdali/GlobalLingo.git', :branch => 'develop'
+  
+  target 'YourAppNameTests' do
+    inherit! :search_paths
+    # Test dependencies
+    pod 'Quick', '~> 7.0'
+    pod 'Nimble', '~> 13.0'
+  end
+  
+  target 'YourAppNameUITests' do
+    # UI test dependencies
+  end
+end
+
+# Post Install Configuration
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      # Enable whole module optimization for better performance
+      config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-O'
+      config.build_settings['SWIFT_COMPILATION_MODE'] = 'wholemodule'
+      
+      # iOS 15.0+ deployment target
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+      
+      # Disable bitcode (deprecated in Xcode 14)
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      
+      # Exclude arm64 for simulator builds on M1 Macs (if needed)
+      # config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+    end
+  end
+end
