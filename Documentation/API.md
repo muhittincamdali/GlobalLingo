@@ -1,41 +1,43 @@
-# 📚 API Reference
+# 📚 GlobalLingo API Reference
 
-Complete API documentation for our iOS development framework.
+Complete API documentation for GlobalLingo framework.
 
-## Core Components
+## Core Classes
 
-### Main Class
+### GlobalLingoManager
+
+The main entry point for GlobalLingo framework.
 
 ```swift
-public class MainFramework {
-    public init()
-    public func start()
-    public func stop()
-    public func configure(_ settings: FrameworkSettings)
+class GlobalLingoManager {
+    func start(completion: @escaping (Result<Void, Error>) -> Void)
+    func translate(text: String, to: String, from: String, completion: @escaping (Result<Translation, Error>) -> Void)
+    func recognizeVoice(audioData: Data, language: String, completion: @escaping (Result<VoiceRecognition, Error>) -> Void)
 }
 ```
 
-## Public Methods
+### TranslationEngine
 
-### Initialization
-
-- `init()` - Initialize the framework
-- `configure(_:)` - Configure framework settings
-
-### Lifecycle
-
-- `start()` - Start the framework
-- `stop()` - Stop the framework
-- `pause()` - Pause operations
-- `resume()` - Resume operations
-
-## Error Handling
+Advanced translation capabilities with AI support.
 
 ```swift
-public enum FrameworkError: Error {
-    case initializationFailed
-    case configurationError
-    case networkError
-    case dataError
+class TranslationEngine {
+    func translateWithAI(text: String, from: String, to: String, context: TranslationContext?, options: AITranslationOptions, completion: @escaping (Result<AITranslation, Error>) -> Void)
+    func batchTranslate(texts: [String], from: String, to: String, completion: @escaping (Result<[Translation], Error>) -> Void)
 }
 ```
+
+## Configuration
+
+### GlobalLingoConfiguration
+
+```swift
+struct GlobalLingoConfiguration {
+    var debugMode: Bool
+    var logLevel: LogLevel
+    var enablePerformanceMonitoring: Bool
+    var enableAnalytics: Bool
+}
+```
+
+For complete API reference, see the inline documentation in the source code.
