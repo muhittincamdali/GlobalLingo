@@ -1,1 +1,0 @@
-# Cultural Adaptation

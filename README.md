@@ -685,8 +685,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 ### **📚 Learning Resources**
 - **Documentation**: [Complete documentation](Documentation/)
 - **Examples**: [Code examples](Examples/)
-- **Tutorials**: [Step-by-step guides](Documentation/Tutorials/)
-- **Video Courses**: [Video tutorials](https://globallingo.com/courses)
+- **Getting Started**: [Quick setup guide](Documentation/GettingStarted.md)
+- **API Reference**: [Complete API documentation](Documentation/API.md)
 
 ---
 
