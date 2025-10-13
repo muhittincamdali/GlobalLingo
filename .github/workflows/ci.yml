@@ -217,7 +217,7 @@ jobs:
         sudo xcode-select -s /Applications/Xcode_15.0.app/Contents/Developer
         
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
+      uses: github/codeql-action/init@v4
       with:
         languages: swift
         
@@ -228,7 +228,7 @@ jobs:
         swift build --target GlobalLingoUtilities || echo "Utilities build completed"
         
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
+      uses: github/codeql-action/analyze@v4
       with:
         category: "/language:swift"
 
