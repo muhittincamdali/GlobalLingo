@@ -90,7 +90,7 @@ jobs:
         swift package archive --output GlobalLingo.zip || echo "Package creation completed"
         
     - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       if: success()
       with:
         name: globallingo-build-${{ github.sha }}
