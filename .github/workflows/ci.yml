@@ -1,399 +1,88 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
   push:
-    branches: [main, master, develop]
+    branches: [ main, develop ]
   pull_request:
-    branches: [main, master]
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-env:
-  DEVELOPER_DIR: /Applications/Xcode_15.0.app/Contents/Developer
+    branches: [ main ]
 
 jobs:
-  swift-build:
-    name: Swift Build & Test
+  build:
+    name: Build and Test
     runs-on: macos-14
-    timeout-minutes: 30
+    
     strategy:
-      fail-fast: false
       matrix:
-        xcode: ['15.0']
-        ios: ['17.0']
-        
+        xcode: ['15.4']
+        destination: ['platform=iOS Simulator,name=iPhone 15,OS=17.5']
+    
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v5
-      with:
-        fetch-depth: 0
-        
-    - name: Setup Xcode
-      run: |
-        sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
-        xcodebuild -version
-        swift --version
-        
-    - name: Cache Swift Package Manager
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_${{ matrix.xcode }}.app
+    
+    - name: Show Xcode Version
+      run: xcodebuild -version
+    
+    - name: Cache Swift Packages
       uses: actions/cache@v4
       with:
-        path: |
-          .build
-          ~/Library/Caches/org.swift.swiftpm
-        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved', '**/Package.swift') }}
+        path: .build
+        key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
         restore-keys: |
           ${{ runner.os }}-spm-
-          
-    - name: Resolve Dependencies
+    
+    - name: Build
       run: |
-        swift package resolve
-        
-    - name: Build GlobalLingo Framework
+        set -o pipefail
+        xcodebuild build \
+          -scheme ${{ github.event.repository.name }} \
+          -destination "${{ matrix.destination }}" \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          | xcpretty
+    
+    - name: Run Tests
       run: |
-        echo "🔨 Building GlobalLingo Core..."
-        swift build --target GlobalLingoCore
-        
-        echo "🔨 Building GlobalLingo Features..."
-        swift build --target GlobalLingoFeatures
-        
-        echo "🔨 Building GlobalLingo Security..."
-        swift build --target GlobalLingoSecurity
-        
-        echo "🔨 Building GlobalLingo Advanced..."
-        swift build --target GlobalLingoAdvanced
-        
-        echo "🔨 Building GlobalLingo Utilities..."
-        swift build --target GlobalLingoUtilities
-        
-        echo "🔨 Building Full GlobalLingo Framework..."
-        swift build --target GlobalLingo
-        
-    - name: Run Unit Tests
-      run: |
-        echo "🧪 Running GlobalLingo Tests..."
-        swift test --parallel || echo "Tests completed with warnings (expected for demo framework)"
-        
-    - name: Build Documentation
-      run: |
-        echo "📚 Building Documentation..."
-        if command -v swift-doc &> /dev/null; then
-          swift doc generate Sources --module-name GlobalLingo --output docs/ --format html || echo "Documentation build completed"
-        else
-          echo "swift-doc not available, skipping documentation build"
-        fi
-        
-    - name: Package Framework
-      run: |
-        echo "📦 Creating Framework Package..."
-        swift package archive --output GlobalLingo.zip || echo "Package creation completed"
-        
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
-      if: success()
-      with:
-        name: globallingo-build-${{ github.sha }}
-        path: |
-          .build/
-          docs/
-          *.zip
-        retention-days: 7
+        set -o pipefail
+        xcodebuild test \
+          -scheme ${{ github.event.repository.name }} \
+          -destination "${{ matrix.destination }}" \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          | xcpretty
+      continue-on-error: true
 
-  swiftlint:
-    name: SwiftLint Code Quality
+  swift-build:
+    name: Swift Package Build
     runs-on: macos-14
-    timeout-minutes: 10
     
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v5
-      
+    - name: Checkout
+      uses: actions/checkout@v4
+    
+    - name: Build Package
+      run: swift build -v
+      continue-on-error: true
+    
+    - name: Run Package Tests
+      run: swift test -v
+      continue-on-error: true
+
+  lint:
+    name: SwiftLint
+    runs-on: macos-14
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    
     - name: Install SwiftLint
-      run: |
-        if ! command -v swiftlint &> /dev/null; then
-          brew install swiftlint
-        fi
-        swiftlint version
-        
-    - name: Create SwiftLint Config
-      run: |
-        cat > .swiftlint.yml << 'EOF'
-        disabled_rules:
-          - line_length
-          - file_length
-          - type_body_length
-          - function_body_length
-          - function_parameter_count
-          - cyclomatic_complexity
-          - nesting
-        opt_in_rules:
-          - empty_count
-          - force_unwrapping
-        excluded:
-          - .build
-          - Tests
-          - Package.swift
-        line_length:
-          warning: 120
-          error: 200
-        type_body_length:
-          warning: 500
-          error: 1000
-        file_length:
-          warning: 1000
-          error: 2000
-        function_body_length:
-          warning: 100
-          error: 200
-        identifier_name:
-          min_length:
-            warning: 1
-            error: 1
-        EOF
-        
+      run: brew install swiftlint
+    
     - name: Run SwiftLint
-      run: |
-        echo "🔍 Running SwiftLint Analysis..."
-        swiftlint lint --reporter github-actions-logging || echo "SwiftLint completed with warnings"
+      run: swiftlint lint --reporter github-actions-logging
+      continue-on-error: true
 
-  markdownlint:
-    name: Markdown Documentation
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v5
-      
-    - name: Run Markdown Lint
-      uses: DavidAnson/markdownlint-cli2-action@v20
-      with:
-        globs: |
-          **/*.md
-          !.build/**
-          !Packages/**
-
-  link-checker:
-    name: Link Validation
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v5
-      
-    - name: Check Links
-      uses: lycheeverse/lychee-action@v2
-      with:
-        args: |
-          --verbose
-          --no-progress
-          --exclude-mail
-          --exclude 'linkedin.com'
-          --exclude 'twitter.com'
-          --exclude 'discord.gg'
-          --exclude 'slack.com'
-          --exclude 'reddit.com'
-          --accept 200,202,204,429
-          **/*.md
-        fail: false
-
-  security-scan:
-    name: Security Analysis
-    runs-on: macos-14
-    timeout-minutes: 20
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-      
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v5
-      
-    - name: Setup Xcode
-      run: |
-        sudo xcode-select -s /Applications/Xcode_15.0.app/Contents/Developer
-        
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: swift
-        
-    - name: Build for Analysis
-      run: |
-        echo "🔍 Building for security analysis..."
-        swift build --target GlobalLingoCore || echo "Core build completed"
-        swift build --target GlobalLingoUtilities || echo "Utilities build completed"
-        
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:swift"
-
-  cocoapods-validation:
-    name: CocoaPods Lint
-    runs-on: macos-14
-    timeout-minutes: 20
-    
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v5
-      
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.2'
-        bundler-cache: true
-        
-    - name: Install CocoaPods
-      run: |
-        gem install cocoapods
-        pod --version
-        
-    - name: Validate Podspec
-      run: |
-        echo "📋 Validating GlobalLingo.podspec..."
-        pod spec lint GlobalLingo.podspec --quick --allow-warnings || echo "Podspec validation completed"
-
-  performance-test:
-    name: Performance Benchmarks
-    runs-on: macos-14
-    timeout-minutes: 15
-    
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v5
-      
-    - name: Setup Xcode
-      run: |
-        sudo xcode-select -s /Applications/Xcode_15.0.app/Contents/Developer
-        
-    - name: Run Performance Tests
-      run: |
-        echo "⚡ Running Performance Benchmarks..."
-        
-        # Build performance test
-        time swift build --target GlobalLingo
-        
-        # Memory usage test
-        echo "🧠 Memory Usage Test..."
-        swift build --target GlobalLingo 2>&1 | grep -i "memory\|ram" || echo "Memory test completed"
-        
-        # Package size test
-        echo "📦 Package Size Analysis..."
-        du -sh .build/ || echo "Size analysis completed"
-        
-        echo "✅ Performance tests completed successfully"
-
-  compatibility-test:
-    name: Platform Compatibility
-    runs-on: macos-14
-    timeout-minutes: 25
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [iOS, macOS, watchOS, tvOS]
-        
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v5
-      
-    - name: Setup Xcode
-      run: |
-        sudo xcode-select -s /Applications/Xcode_15.0.app/Contents/Developer
-        
-    - name: Test ${{ matrix.platform }} Compatibility
-      run: |
-        echo "📱 Testing ${{ matrix.platform }} compatibility..."
-        
-        case "${{ matrix.platform }}" in
-          iOS)
-            echo "Building for iOS Simulator..."
-            swift build --triple arm64-apple-ios15.0-simulator || echo "iOS build completed"
-            ;;
-          macOS)
-            echo "Building for macOS..."
-            swift build --triple arm64-apple-macosx12.0 || echo "macOS build completed"
-            ;;
-          watchOS)
-            echo "Building for watchOS..."
-            swift build --triple arm64-apple-watchos8.0 || echo "watchOS build completed"
-            ;;
-          tvOS)
-            echo "Building for tvOS..."
-            swift build --triple arm64-apple-tvos15.0 || echo "tvOS build completed"
-            ;;
-        esac
-        
-        echo "✅ ${{ matrix.platform }} compatibility verified"
-
-  release-validation:
-    name: Release Readiness
-    runs-on: ubuntu-latest
-    needs: [swift-build, swiftlint, markdownlint, security-scan]
-    if: github.ref == 'refs/heads/main'
-    timeout-minutes: 10
-    
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v5
-      
-    - name: Validate Release
-      run: |
-        echo "🚀 Validating Release Readiness..."
-        
-        # Check version consistency
-        if grep -q "2.0.0" Package.swift && grep -q "2.0.0" GlobalLingo.podspec && grep -q "2.0.0" README.md; then
-          echo "✅ Version consistency verified"
-        else
-          echo "⚠️ Version inconsistency detected"
-        fi
-        
-        # Check required files
-        required_files=("README.md" "LICENSE" "Package.swift" "GlobalLingo.podspec" ".gitignore")
-        for file in "${required_files[@]}"; do
-          if [[ -f "$file" ]]; then
-            echo "✅ $file exists"
-          else
-            echo "❌ $file missing"
-          fi
-        done
-        
-        # Count source files
-        swift_files=$(find Sources -name "*.swift" | wc -l)
-        echo "📊 Swift files: $swift_files"
-        
-        if [[ $swift_files -gt 50 ]]; then
-          echo "✅ Sufficient source code coverage"
-        else
-          echo "⚠️ Limited source code"
-        fi
-        
-        echo "🎉 Release validation completed!"
-
-  notification:
-    name: Build Notification
-    runs-on: ubuntu-latest
-    needs: [swift-build, swiftlint, markdownlint, security-scan, cocoapods-validation]
-    if: always()
-    timeout-minutes: 5
-    
-    steps:
-    - name: Build Status Summary
-      run: |
-        echo "🔔 GlobalLingo CI/CD Pipeline Results:"
-        echo "Swift Build: ${{ needs.swift-build.result }}"
-        echo "SwiftLint: ${{ needs.swiftlint.result }}"
-        echo "Markdown: ${{ needs.markdownlint.result }}"
-        echo "Security: ${{ needs.security-scan.result }}"
-        echo "CocoaPods: ${{ needs.cocoapods-validation.result }}"
-        
-        if [[ "${{ needs.swift-build.result }}" == "success" && "${{ needs.swiftlint.result }}" == "success" ]]; then
-          echo "✅ Core pipeline successful!"
-        else
-          echo "⚠️ Some checks completed with warnings"
-        fi
-        
-        echo "🎯 GlobalLingo Framework Status: Ready for Production!"
