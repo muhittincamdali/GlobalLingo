@@ -21,11 +21,11 @@
 <div align="center">
 
 [![Swift](https://img.shields.io/badge/Swift-5.9+-F05138?style=flat&logo=swift&logoColor=white)](https://swift.org)
-[![Platform](https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20visionOS-blue?style=flat)]()
-[![SPM](https://img.shields.io/badge/SPM-Compatible-green?style=flat&logo=swift)](https://swift.org/package-manager/)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat)](LICENSE)
-[![Version](https://img.shields.io/badge/Version-2.0.0-purple?style=flat)]()
-
+[![CI](https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/muhittincamdali/GlobalLingo/actions)[![Platform](https://img.shields.io/badge/Platforms-iOS%20%7C%20macOS%20%7C%20tvOS%20%7C%20watchOS%20%7C%20visionOS-blue?style=flat)]()
+[![CI](https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/muhittincamdali/GlobalLingo/actions)[![SPM](https://img.shields.io/badge/SPM-Compatible-green?style=flat&logo=swift)](https://swift.org/package-manager/)
+[![CI](https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/muhittincamdali/GlobalLingo/actions)[![License](https://img.shields.io/badge/License-MIT-yellow?style=flat)](LICENSE)
+[![CI](https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/muhittincamdali/GlobalLingo/actions)[![Version](https://img.shields.io/badge/Version-2.0.0-purple?style=flat)]()
+[![CI](https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/muhittincamdali/GlobalLingo/actions)
 **Modern localization toolkit with String Catalogs, pluralization, and SwiftGen support.**
 
 [Installation](#installation) • [Quick Start](#quick-start) • [String Catalogs](#string-catalogs) • [Pluralization](#pluralization) • [SwiftGen](#swiftgen-integration)
