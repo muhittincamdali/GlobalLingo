@@ -1,258 +1,80 @@
-# 🤝 Contributing Guidelines
+# Contributing to SwiftRouter
 
-Thank you for your interest in contributing to GlobalLingo! This document provides guidelines for contributing to the project.
+First off, thank you for considering contributing to SwiftRouter! It's people like you that make SwiftRouter such a great tool.
 
-## 📋 Table of Contents
-
-- [Code of Conduct](#code-of-conduct)
-- [How Can I Contribute?](#how-can-i-contribute)
-- [Development Setup](#development-setup)
-- [Pull Request Process](#pull-request-process)
-- [Reporting Bugs](#reporting-bugs)
-- [Suggesting Enhancements](#suggesting-enhancements)
-
-## 📜 Code of Conduct
+## Code of Conduct
 
 This project and everyone participating in it is governed by our Code of Conduct. By participating, you are expected to uphold this code.
 
-## 🚀 How Can I Contribute?
+## How Can I Contribute?
 
-### **Reporting Bugs**
-- Use the GitHub issue tracker
-- Include detailed steps to reproduce
-- Provide system information
-- Include error logs if applicable
+### Reporting Bugs
 
-### **Suggesting Enhancements**
-- Use the GitHub issue tracker
-- Describe the enhancement clearly
-- Explain why this enhancement would be useful
-- Include mockups if applicable
+Before creating bug reports, please check the existing issues as you might find out that you don't need to create one. When you are creating a bug report, please include as many details as possible:
 
-### **Code Contributions**
-- Fork the repository
-- Create a feature branch
-- Make your changes
-- Add tests for new functionality
-- Ensure all tests pass
-- Submit a pull request
+- **Use a clear and descriptive title**
+- **Describe the exact steps which reproduce the problem**
+- **Provide specific examples to demonstrate the steps**
+- **Describe the behavior you observed after following the steps**
+- **Explain which behavior you expected to see instead and why**
+- **Include Swift version and OS version**
 
-## 🛠️ Development Setup
+### Suggesting Enhancements
 
-### **Prerequisites**
-- Xcode 14.0+
-- iOS 15.0+
-- Swift 5.7+
+Enhancement suggestions are tracked as GitHub issues. When creating an enhancement suggestion, please include:
 
-### **Setup Steps**
-1. Fork the repository
-2. Clone your fork locally
-3. Open `GlobalLingo.xcodeproj` in Xcode
-4. Build and run the project
-5. Run tests to ensure everything works
+- **Use a clear and descriptive title**
+- **Provide a step-by-step description of the suggested enhancement**
+- **Provide specific examples to demonstrate the steps**
+- **Describe the current behavior and explain which behavior you expected to see instead**
+- **Explain why this enhancement would be useful**
 
-### **Project Structure**
-```
-GlobalLingo/
-├── Sources/
-│   ├── TranslationEngine.swift
-│   ├── VoiceRecognition.swift
-│   ├── LanguageManager.swift
-│   └── OfflineService.swift
-├── Tests/
-│   └── GlobalLingoTests/
-├── Documentation/
-│   ├── GettingStarted.md
-│   ├── API.md
-│   ├── Architecture.md
-│   ├── Performance.md
-│   └── Security.md
-└── Examples/
-    └── BasicExample.swift
-```
+### Pull Requests
 
-## 🔄 Pull Request Process
+1. Fork the repo and create your branch from `main`
+2. If you've added code that should be tested, add tests
+3. If you've changed APIs, update the documentation
+4. Ensure the test suite passes
+5. Make sure your code follows the existing style (SwiftLint)
+6. Issue that pull request!
 
-### **Before Submitting**
-1. Ensure your code follows the style guidelines
-2. Add tests for new functionality
-3. Update documentation if needed
-4. Ensure all tests pass
-5. Update the CHANGELOG.md
+## Development Setup
 
-### **Pull Request Template**
-```markdown
-## Description
-Brief description of changes
-
-## Type of Change
-- [ ] Bug fix
-- [ ] New feature
-- [ ] Breaking change
-- [ ] Documentation update
-
-## Testing
-- [ ] Unit tests pass
-- [ ] Integration tests pass
-- [ ] Manual testing completed
-
-## Checklist
-- [ ] Code follows style guidelines
-- [ ] Self-review completed
-- [ ] Documentation updated
-- [ ] CHANGELOG updated
-```
-
-### **Code Style Guidelines**
-- Follow Swift API Design Guidelines
-- Use meaningful variable and function names
-- Add comments for complex logic
-- Keep functions small and focused
-- Use proper error handling
-
-## 🐛 Reporting Bugs
-
-### **Bug Report Template**
-```markdown
-**Describe the bug**
-A clear and concise description of what the bug is.
-
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
-
-**Expected behavior**
-A clear and concise description of what you expected to happen.
-
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Environment:**
-- iOS Version: [e.g. 16.0]
-- Device: [e.g. iPhone 14]
-- GlobalLingo Version: [e.g. 1.0.0]
-
-**Additional context**
-Add any other context about the problem here.
-```
-
-## 💡 Suggesting Enhancements
-
-### **Enhancement Request Template**
-```markdown
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is.
-
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
-
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
-```
-
-## 📚 Documentation
-
-### **Documentation Guidelines**
-- Keep documentation clear and concise
-- Include code examples
-- Update documentation with code changes
-- Use proper markdown formatting
-
-### **Documentation Structure**
-- `GettingStarted.md` - Quick start guide
-- `API.md` - Complete API reference
-- `Architecture.md` - System architecture
-- `Performance.md` - Performance guidelines
-- `Security.md` - Security considerations
-
-## 🧪 Testing
-
-### **Testing Guidelines**
-- Write unit tests for all new functionality
-- Ensure test coverage is maintained
-- Test edge cases and error conditions
-- Use descriptive test names
-
-### **Running Tests**
 ```bash
-# Run all tests
-xcodebuild test -scheme GlobalLingo
+# Clone your fork
+git clone https://github.com/YOUR_USERNAME/SwiftRouter.git
 
-# Run specific test target
-xcodebuild test -scheme GlobalLingo -only-testing:GlobalLingoTests
+# Navigate to the project
+cd SwiftRouter
+
+# Open in Xcode
+open Package.swift
+
+# Run tests
+swift test
 ```
 
-## 🔧 Development Workflow
+## Style Guide
 
-### **Branch Naming**
-- `feature/description` - New features
-- `bugfix/description` - Bug fixes
-- `docs/description` - Documentation updates
-- `refactor/description` - Code refactoring
+- Follow [Swift API Design Guidelines](https://swift.org/documentation/api-design-guidelines/)
+- Use SwiftLint for code style consistency
+- Write meaningful commit messages following [Conventional Commits](https://www.conventionalcommits.org/)
+- Document public APIs with DocC-compatible comments
 
-### **Commit Messages**
-Use conventional commit format:
-```
-type(scope): description
+## Commit Messages
 
-feat: add new language support
-fix: resolve translation accuracy issue
-docs: update API documentation
-refactor: improve voice recognition
-```
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
-## 📈 Performance Considerations
+- `feat:` A new feature
+- `fix:` A bug fix
+- `docs:` Documentation only changes
+- `style:` Code style changes (formatting, semicolons, etc)
+- `refactor:` Code change that neither fixes a bug nor adds a feature
+- `test:` Adding missing tests
+- `chore:` Changes to the build process or auxiliary tools
 
-### **Performance Guidelines**
-- Profile code before optimization
-- Use Instruments for performance analysis
-- Consider memory usage and battery impact
-- Test on real devices
+Example: `feat(deeplink): add universal link support`
 
-### **Performance Testing**
-- Measure translation speed
-- Monitor memory usage
-- Test battery impact
-- Validate accuracy metrics
+## License
 
-## 🔒 Security Considerations
-
-### **Security Guidelines**
-- Never commit sensitive data
-- Use secure coding practices
-- Validate all inputs
-- Handle errors securely
-
-### **Security Checklist**
-- [ ] No hardcoded secrets
-- [ ] Input validation implemented
-- [ ] Error handling secure
-- [ ] Dependencies up to date
-
-## 📞 Getting Help
-
-### **Support Channels**
-- GitHub Issues: [Create an issue](https://github.com/muhittincamdali/GlobalLingo/issues)
-- GitHub Discussions: [Join discussions](https://github.com/muhittincamdali/GlobalLingo/discussions)
-- Documentation: [Read docs](https://github.com/muhittincamdali/GlobalLingo/tree/master/Documentation)
-
-### **Community Guidelines**
-- Be respectful and inclusive
-- Help others learn and grow
-- Share knowledge and experiences
-- Follow the code of conduct
-
-## 🙏 Recognition
-
-Contributors will be recognized in:
-- Project README
-- Release notes
-- Contributor hall of fame
-
-Thank you for contributing to GlobalLingo! 🚀
+By contributing, you agree that your contributions will be licensed under the MIT License.
