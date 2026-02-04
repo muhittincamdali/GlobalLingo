@@ -12,9 +12,13 @@
   <a href="https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml">
     <img src="https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml/badge.svg" alt="CI Status"/>
   </a>
-  <img src="https://img.shields.io/badge/Swift-6.0-orange.svg" alt="Swift 6.0"/>
-  <img src="https://img.shields.io/badge/iOS-17.0+-blue.svg" alt="iOS 17.0+"/>
-  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"/>
+  <img src="https://img.shields.io/badge/Swift-6.0-FA7343?style=flat-square&logo=swift&logoColor=white" alt="Swift 6.0"/>
+  <img src="https://img.shields.io/badge/iOS-17.0+-000000?style=flat-square&logo=apple&logoColor=white" alt="iOS 17.0+"/>
+  <img src="https://img.shields.io/badge/SPM-Compatible-FA7343?style=flat-square&logo=swift&logoColor=white" alt="SPM"/>
+  <a href="https://cocoapods.org/pods/GlobalLingo">
+    <img src="https://img.shields.io/badge/CocoaPods-Compatible-EE3322?style=flat-square&logo=cocoapods&logoColor=white" alt="CocoaPods"/>
+  </a>
+  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License"/>
 </p>
 
 <p align="center">
@@ -23,6 +27,20 @@
   <a href="#quick-start">Quick Start</a> •
   <a href="#documentation">Documentation</a>
 </p>
+
+---
+
+## 📋 Table of Contents
+
+- [Why GlobalLingo?](#why-globallingo)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [License](#license)
+- [Star History](#-star-history)
 
 ---
 
