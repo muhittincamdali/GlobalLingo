@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="Assets/logo.png" alt="GlobalLingo" width="200"/>
-</p>
-
 <h1 align="center">GlobalLingo</h1>
 
 <p align="center">
