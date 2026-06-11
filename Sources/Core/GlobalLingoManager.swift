@@ -1,8 +1,8 @@
 import Foundation
 import Combine
 import CryptoKit
-import Logging
-import Metrics
+
+
 import Network
 import OSLog
 import LocalAuthentication
@@ -880,7 +880,6 @@ public enum SecuritySeverity: String, CaseIterable {
     case medium = "Medium"
     case high = "High"
     case critical = "Critical"
-}
 }
 
 /// Threat level enumeration
