@@ -27,8 +27,13 @@ let package = Package(
                 "Performance",
                 "Presentation",
                 "Security",
-                "UI"
+                "Utilities"
             ]
+        ),
+        .testTarget(
+            name: "GlobalLingoTests",
+            dependencies: ["GlobalLingo"],
+            path: "Tests/GlobalLingoTests"
         )
     ]
 )
