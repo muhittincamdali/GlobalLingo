@@ -15,6 +15,10 @@
 
 <h1 align="center">GlobalLingo</h1>
 
+## 🚀 Killer Feature: On-Device AI Translation
+Why pay for Google Translate API calls? GlobalLingo integrates Apple's native `NaturalLanguage` and `CoreML` frameworks to provide 100% offline, zero-latency text detection and translation directly on the device.
+
+
 <p align="center">
   <strong>🌍 Powerful localization and internationalization framework for iOS</strong>
 </p>
