@@ -101,8 +101,9 @@ describe('options', () => {
   it('writes a baseline that a later run accepts', async () => {
     const root = project();
     const write = await cli(['--locales', 'de,fr', '--write-baseline', 'baseline.json'], root);
-    expect(write.code).toBe(EXIT.findings);
+    expect(write.code).toBe(EXIT.ok);
     expect(write.stderr).toContain('Wrote baseline.json with ');
+    expect(write.stdout).toContain('ERROR');
     const again = await cli(['--locales', 'de,fr', '--baseline', 'baseline.json'], root);
     expect(again.code).toBe(EXIT.ok);
     expect(again.stdout).toContain('BASELINE');

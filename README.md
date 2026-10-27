@@ -149,7 +149,8 @@ globallingo [path] [options]
 | `--no-color`              | Plain text even in a terminal (`NO_COLOR` and `FORCE_COLOR` are respected) |
 
 Exit codes: `0` no findings at or above `--fail-on`, `1` findings at or above it, `2` bad
-arguments or settings, no localization files found, or an unexpected error. A folder without
+arguments or settings, no localization files found, or an unexpected error. With
+`--write-baseline` the exit code is `0` once the file is written. A folder without
 localization files is an error, so a wrong path in CI does not pass quietly.
 
 ### Run it in CI
@@ -165,7 +166,7 @@ npx @mcamdali/globallingo --write-baseline .globallingo-baseline.json
 npx @mcamdali/globallingo --baseline .globallingo-baseline.json
 ```
 
-The first command accepts today's findings; the second fails only on new ones. Fingerprints do
+The first command accepts today's findings and exits 0; the second fails only on new ones. Fingerprints do
 not include line numbers, so moving code does not invalidate the file.
 
 ### Configure

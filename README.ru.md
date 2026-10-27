@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@c66ef6076bb5586c3e05781155e2bfca9aa9e2be status=reviewed -->
+<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -124,7 +124,7 @@ globallingo [path] [options]
 | `--no-code`               | Проверять только файлы локализации, не исходный код                                |
 | `--no-color`              | Обычный текст даже в терминале (`NO_COLOR` и `FORCE_COLOR` учитываются)            |
 
-Коды выхода: `0` — нет находок уровня `--fail-on` и выше, `1` — есть находки этого уровня или выше, `2` — неверные аргументы или настройки, файлы локализации не найдены или произошла непредвиденная ошибка. Папка без файлов локализации считается ошибкой, чтобы неверный путь в CI не проходил молча.
+Коды выхода: `0` — нет находок уровня `--fail-on` и выше, `1` — есть находки этого уровня или выше, `2` — неверные аргументы или настройки, файлы локализации не найдены или произошла непредвиденная ошибка. С `--write-baseline` код выхода — `0`, если файл записан. Папка без файлов локализации считается ошибкой, чтобы неверный путь в CI не проходил молча.
 
 ### Запуск в CI
 

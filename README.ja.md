@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@c66ef6076bb5586c3e05781155e2bfca9aa9e2be status=reviewed -->
+<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -124,7 +124,7 @@ globallingo [path] [options]
 | `--no-code`               | ローカライズファイルのみ検査し、ソースコードは検査しない                      |
 | `--no-color`              | ターミナルでもプレーンテキストにする（`NO_COLOR` と `FORCE_COLOR` に従います）|
 
-終了コード：`0` は `--fail-on` 以上の検出結果がないこと、`1` は `--fail-on` 以上の検出結果があること、`2` は引数や設定が不正、ローカライズファイルが見つからない、または予期しないエラーを表します。ローカライズファイルのないフォルダはエラーになるため、CI でパスを間違えても黙って通ることはありません。
+終了コード：`0` は `--fail-on` 以上の検出結果がないこと、`1` は `--fail-on` 以上の検出結果があること、`2` は引数や設定が不正、ローカライズファイルが見つからない、または予期しないエラーを表します。`--write-baseline` を指定した場合は、ファイルを書き込めば `0` になります。ローカライズファイルのないフォルダはエラーになるため、CI でパスを間違えても黙って通ることはありません。
 
 ### CI で実行する
 

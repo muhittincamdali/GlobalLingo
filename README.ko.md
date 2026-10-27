@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@c66ef6076bb5586c3e05781155e2bfca9aa9e2be status=reviewed -->
+<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -124,7 +124,7 @@ globallingo [path] [options]
 | `--no-code`               | 현지화 파일만 검사하고 소스 코드는 검사하지 않음                           |
 | `--no-color`              | 터미널에서도 일반 텍스트로 출력(`NO_COLOR`와 `FORCE_COLOR`를 따름)         |
 
-종료 코드: `0`은 `--fail-on` 이상의 결과가 없음, `1`은 그 이상의 결과가 있음, `2`는 잘못된 인수나 설정, 현지화 파일을 찾지 못함, 또는 예기치 않은 오류입니다. 현지화 파일이 없는 폴더는 오류로 처리되므로, CI에서 경로가 잘못되어도 조용히 통과하지 않습니다.
+종료 코드: `0`은 `--fail-on` 이상의 결과가 없음, `1`은 그 이상의 결과가 있음, `2`는 잘못된 인수나 설정, 현지화 파일을 찾지 못함, 또는 예기치 않은 오류입니다. `--write-baseline`을 지정하면 파일을 쓴 뒤 `0`으로 종료합니다. 현지화 파일이 없는 폴더는 오류로 처리되므로, CI에서 경로가 잘못되어도 조용히 통과하지 않습니다.
 
 ### CI에서 실행하기
 

@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@c66ef6076bb5586c3e05781155e2bfca9aa9e2be status=reviewed -->
+<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -124,7 +124,7 @@ globallingo [path] [options]
 | `--no-code`               | Ne vérifie que les fichiers de localisation, pas le code source                    |
 | `--no-color`              | Texte brut même dans un terminal (`NO_COLOR` et `FORCE_COLOR` sont respectés)      |
 
-Codes de sortie : `0` aucun résultat au niveau de `--fail-on` ou au-dessus, `1` des résultats à ce niveau ou au-dessus, `2` arguments ou paramètres incorrects, aucun fichier de localisation trouvé, ou erreur inattendue. Un dossier sans fichiers de localisation est une erreur, afin qu’un mauvais chemin en CI ne passe pas en silence.
+Codes de sortie : `0` aucun résultat au niveau de `--fail-on` ou au-dessus, `1` des résultats à ce niveau ou au-dessus, `2` arguments ou paramètres incorrects, aucun fichier de localisation trouvé, ou erreur inattendue. Avec `--write-baseline`, le code est `0` une fois le fichier écrit. Un dossier sans fichiers de localisation est une erreur, afin qu’un mauvais chemin en CI ne passe pas en silence.
 
 ### L’exécuter en CI
 

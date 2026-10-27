@@ -50,7 +50,8 @@ Options:
   -v, --version              show the version
 
 Exit codes:
-  0  no findings at or above --fail-on (baseline findings do not count)
+  0  no findings at or above --fail-on (baseline findings do not count), or
+     --write-baseline wrote its file
   1  findings at or above --fail-on
   2  bad arguments or settings, no localization files found, or an unexpected error
 
@@ -230,6 +231,8 @@ export async function run(argv: readonly string[], environment: CliEnvironment):
     } else {
       io.stdout(output);
     }
+    // Writing a baseline accepts the findings it holds, so that run does not fail on them.
+    if (options.writeBaseline) return EXIT.ok;
     return failsOn(report, options.failOn) ? EXIT.findings : EXIT.ok;
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

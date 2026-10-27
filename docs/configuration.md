@@ -79,7 +79,8 @@ npx @mcamdali/globallingo --write-baseline .globallingo-baseline.json
 npx @mcamdali/globallingo --baseline .globallingo-baseline.json
 ```
 
-The file stores a fingerprint per finding (rule, file, key, locale and what the finding is
-about, hashed), not line numbers, so findings keep matching when lines move. Fixed findings drop
-out of the count; write the file again to shrink it. Baseline findings are still reported, marked
-`BASELINE` in the terminal and as suppressed results in SARIF.
+The run that writes the file exits 0, since it accepts what it finds. The file stores a fingerprint
+per finding (rule, file, key, locale and what the finding is about, hashed), not line numbers, so
+findings keep matching when lines move. Fixed findings drop out of the count; write the file again
+to shrink it. Baseline findings are still reported, marked `BASELINE` in the terminal and as
+suppressed results in SARIF.

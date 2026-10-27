@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@c66ef6076bb5586c3e05781155e2bfca9aa9e2be status=reviewed -->
+<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -124,7 +124,7 @@ globallingo [path] [options]
 | `--no-code`               | Verifica apenas os arquivos de localização, não o código-fonte                     |
 | `--no-color`              | Texto simples mesmo em um terminal (`NO_COLOR` e `FORCE_COLOR` são respeitados)    |
 
-Códigos de saída: `0` nenhum achado no nível de `--fail-on` ou acima, `1` achados nesse nível ou acima, `2` argumentos ou configurações inválidos, nenhum arquivo de localização encontrado ou um erro inesperado. Uma pasta sem arquivos de localização é um erro, para que um caminho errado no CI não passe em silêncio.
+Códigos de saída: `0` nenhum achado no nível de `--fail-on` ou acima, `1` achados nesse nível ou acima, `2` argumentos ou configurações inválidos, nenhum arquivo de localização encontrado ou um erro inesperado. Com `--write-baseline`, o código é `0` depois que o arquivo é gravado. Uma pasta sem arquivos de localização é um erro, para que um caminho errado no CI não passe em silêncio.
 
 ### Execute no CI
 

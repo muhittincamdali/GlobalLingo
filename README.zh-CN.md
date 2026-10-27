@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@c66ef6076bb5586c3e05781155e2bfca9aa9e2be status=reviewed -->
+<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -142,7 +142,7 @@ globallingo [path] [options]
 | `--no-color`              | 即使在终端中也输出纯文本（遵循 `NO_COLOR` 和 `FORCE_COLOR`）            |
 
 退出码：`0` 表示没有达到或超过 `--fail-on` 级别的问题，`1` 表示有达到或超过该级别的问题，`2`
-表示参数或设置有误、没有找到本地化文件，或发生意外错误。没有本地化文件的文件夹会被视为错误，因此 CI 中写错路径不会悄无声息地通过。
+表示参数或设置有误、没有找到本地化文件，或发生意外错误。使用 `--write-baseline` 时，写入文件后退出码为 `0`。没有本地化文件的文件夹会被视为错误，因此 CI 中写错路径不会悄无声息地通过。
 
 ### 在 CI 中运行
 

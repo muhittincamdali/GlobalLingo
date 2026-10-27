@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@c66ef6076bb5586c3e05781155e2bfca9aa9e2be status=reviewed -->
+<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -159,7 +159,7 @@ globallingo [path] [options]
 Çıkış kodları: `0` `--fail-on` düzeyinde veya üstünde bulgu yok, `1` bu düzeyde veya üstünde bulgu
 var, `2` hatalı argümanlar ya da ayarlar, yerelleştirme dosyası bulunamadı veya beklenmeyen bir
 hata. Yerelleştirme dosyası olmayan bir klasör hata sayılır; böylece CI'da yanlış bir yol sessizce
-geçmez.
+geçmez. `--write-baseline` ile dosya yazıldığında çıkış kodu `0` olur.
 
 ### CI'da çalıştırma
 
