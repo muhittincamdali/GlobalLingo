@@ -5,7 +5,7 @@
 // - i18next: `key_one`, `key_other`, `key_ordinal_one`. https://www.i18next.com/translation-function/plurals
 // - i18n-js: `{ "key": { "one": "…", "other": "…" } }`. https://github.com/fnando/i18n
 import type { Catalog, CatalogEntry, MessageSyntax, MessageText, Translation } from '../model.js';
-import { asObject, type JsonObject, type JsonValue, parseJson } from '../parse/json.js';
+import { asObject, type JsonObject, type JsonValue, parseJson, uniqueMembers } from '../parse/json.js';
 import { icuTranslation } from './arb.js';
 
 export interface JsonFile {
@@ -38,7 +38,8 @@ function flatten(
   problems: string[],
   depth = 0,
 ): void {
-  for (const item of object.members) {
+  // Duplicates resolve as JSON.parse resolves them: the last one is what the app loads.
+  for (const item of uniqueMembers(object)) {
     const key = prefix ? `${prefix}.${item.key}` : item.key;
     const value: JsonValue = item.value;
     if (value.type === 'string') into.push({ key, text: value.value as string, line: item.line });
