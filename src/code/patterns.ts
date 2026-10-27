@@ -52,7 +52,7 @@ export const SWIFTUI_TEXT = new RegExp(
 export const SWIFT_LOOKUP_CALLS =
   /\b(?:NSLocalizedString\s*\(|String\s*\(\s*localized:|\.localizedString\s*\(\s*forKey:)/g;
 export const OBJC_LOOKUP_CALLS = /\bNSLocalizedString(?:FromTable)?\s*\(/g;
-export const JS_LOOKUP_CALLS = /(?<![\w$])(?:[A-Za-z_$][\w$]*\.)*t\s*\(|\bformatMessage\s*\(/g;
+export const JS_LOOKUP_CALLS = /(?<![\w$.])(?:[A-Za-z_$][\w$]*\.)*t\s*\(|\bformatMessage\s*\(/g;
 
 /** Case changes that use the device locale. */
 export const SWIFT_LOCALE_CASE =
@@ -80,10 +80,10 @@ export function dartPlainCase(outputClasses: readonly string[]): RegExp {
 
 // JavaScript lookups with a literal key.
 export const JS_KEY_LOOKUPS: RegExp[] = [
-  new RegExp(`(?<![\\w$])(?:[A-Za-z_$][\\w$]*\\.)*t\\s*\\(\\s*${SQ_OR_DQ}(?=\\s*[,)])`, 'g'),
-  new RegExp(`<Trans\\b[^>]*?\\bi18nKey=(?:\\{\\s*)?${SQ_OR_DQ}`, 'g'),
+  new RegExp(`(?<![\\w$.])(?:[A-Za-z_$][\\w$]*\\.)*t\\s*\\(\\s*${SQ_OR_DQ}(?=\\s*[,)])`, 'g'),
+  new RegExp(`<Trans\\b[^<>]{0,400}?\\bi18nKey=(?:\\{\\s*)?${SQ_OR_DQ}`, 'g'),
   new RegExp(`\\bformatMessage\\s*\\(\\s*\\{\\s*id:\\s*${SQ_OR_DQ}`, 'g'),
-  new RegExp(`<FormattedMessage\\b[^>]*?\\bid=(?:\\{\\s*)?${SQ_OR_DQ}`, 'g'),
+  new RegExp(`<FormattedMessage\\b[^<>]{0,400}?\\bid=(?:\\{\\s*)?${SQ_OR_DQ}`, 'g'),
 ];
 
 // Hard-coded UI text. Group `text` (named) holds the literal body.
@@ -97,7 +97,7 @@ export const SWIFT_HARDCODED: RegExp[] = [
     `\\b(?:UIAlertController|UIAlertAction|UIBarButtonItem)\\s*\\(\\s*title:\\s*${DQ}`,
     'g',
   ),
-  new RegExp(`\\bUIAlertController\\s*\\([^()\\n]*?message:\\s*${DQ}`, 'g'),
+  new RegExp(`\\bUIAlertController\\s*\\([^()\\n]{0,300}?message:\\s*${DQ}`, 'g'),
 ];
 
 export const OBJC_HARDCODED: RegExp[] = [
@@ -115,7 +115,7 @@ export const DART_HARDCODED: RegExp[] = [
 ];
 
 export const JS_HARDCODED: RegExp[] = [
-  /<(?:Text|Animated\.Text)\b[^<>]*>([^<>{}]*\p{L}[^<>{}]*)</gu,
+  /<(?:Text|Animated\.Text)\b[^<>]{0,400}>([^<>{}]{1,2000})</gu,
   new RegExp(
     `\\b(?:title|placeholder|accessibilityLabel|accessibilityHint|headerTitle|tabBarLabel|headerBackTitle)=${SQ_OR_DQ}`,
     'g',

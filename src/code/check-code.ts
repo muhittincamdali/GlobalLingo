@@ -3,7 +3,7 @@
 import type { Catalog, Ecosystem } from '../model.js';
 import { isTurkic } from '../plural.js';
 import { type Draft, quote } from '../rules/draft.js';
-import { closingParen, literalValue, type SourceLanguage, stripComments } from './lexer.js';
+import { literalValue, parenPairs, type SourceLanguage, stripComments } from './lexer.js';
 import {
   DART_HARDCODED,
   dartPlainCase,
@@ -131,9 +131,15 @@ export function checkSource(file: CodeFile, context: CodeContext): Draft[] {
   const code = stripComments(file.text, language);
   const lineOf = lineFinder(code);
   const lines = file.text.split('\n');
-  const suppressed = (line: number) =>
-    /globallingo-ignore(?!-next-line)/.test(lines[line - 1] ?? '') ||
-    /globallingo-ignore-next-line/.test(lines[line - 2] ?? '');
+  const closingParen = parenPairs(code);
+  // Lines with a suppression comment, found once rather than per finding.
+  const quiet = new Set<number>();
+  lines.forEach((line, index) => {
+    if (!line.includes('globallingo-ignore')) return;
+    if (/globallingo-ignore-next-line/.test(line)) quiet.add(index + 2);
+    if (/globallingo-ignore(?!-next-line)/.test(line)) quiet.add(index + 1);
+  });
+  const suppressed = (line: number) => quiet.has(line);
   const drafts: Draft[] = [];
   const add = (draft: Omit<Draft, 'ecosystem' | 'file'>) => {
     if (!suppressed(draft.line)) drafts.push({ ...draft, ecosystem, file: file.path });
@@ -147,7 +153,7 @@ export function checkSource(file: CodeFile, context: CodeContext): Draft[] {
         const key = literalValue(match[1] ?? '', 'swift');
         if (key === undefined || key === '') continue;
         const open = code.indexOf('(', match.index);
-        const end = closingParen(code, open);
+        const end = closingParen(open);
         const args = end === -1 ? '' : code.slice(match.index + match[0].length, end);
         const tableName = pattern.tableArgument?.exec(args)?.[1] ?? 'Localizable';
         const table = context.appleTables.get(tableName);
@@ -168,7 +174,7 @@ export function checkSource(file: CodeFile, context: CodeContext): Draft[] {
       const key = literalValue(body, 'swift');
       if (key === undefined || !/\p{L}/u.test(key) || key.includes('%')) continue;
       const open = code.indexOf('(', match.index);
-      const end = closingParen(code, open);
+      const end = closingParen(open);
       const args = end === -1 ? '' : code.slice(open, end);
       const tableName = /\btableName:\s*"([^"\n]*)"/.exec(args)?.[1] ?? 'Localizable';
       const table = context.appleTables.get(tableName);
@@ -249,7 +255,7 @@ export function checkSource(file: CodeFile, context: CodeContext): Draft[] {
   }[language];
   for (const match of calls ? code.matchAll(calls) : []) {
     const open = code.indexOf('(', match.index);
-    const end = closingParen(code, open);
+    const end = closingParen(open);
     if (end === -1) continue;
     const args = code.slice(open + 1, end);
     const caseCall = localeCase?.exec(args);

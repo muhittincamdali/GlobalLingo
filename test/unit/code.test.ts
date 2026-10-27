@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { type CodeContext, checkSource, sourceLanguage } from '../../src/code/check-code.ts';
-import { closingParen, literalValue, stripComments } from '../../src/code/lexer.ts';
+import { literalValue, parenPairs, stripComments } from '../../src/code/lexer.ts';
 
 const context = (overrides: Partial<CodeContext> = {}): CodeContext => ({
   appleTables: new Map([
@@ -41,8 +41,9 @@ describe('lexer', () => {
 
   it('finds the closing parenthesis outside strings', () => {
     const code = 'f(a, ")", g(b)) + 1';
-    expect(closingParen(code, 1)).toBe(14);
-    expect(closingParen('f(never closed', 1)).toBe(-1);
+    expect(parenPairs(code)(1)).toBe(14);
+    expect(parenPairs(code)(11)).toBe(13);
+    expect(parenPairs('f(never closed')(1)).toBe(-1);
   });
 
   it('decodes literals and refuses interpolated ones', () => {

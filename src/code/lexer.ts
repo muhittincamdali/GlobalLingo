@@ -105,24 +105,27 @@ export function stripComments(source: string, language: SourceLanguage): string 
   return output;
 }
 
-/** Index of the `)` that closes the `(` at `open`, or -1 within `limit` characters. */
-export function closingParen(code: string, open: number, limit = 4000): number {
-  let depth = 0;
-  const end = Math.min(code.length, open + limit);
-  for (let i = open; i < end; i += 1) {
+/**
+ * The `)` that closes each `(` of the code, found in one pass (string literals skipped), so
+ * looking up many calls in a crafted file stays linear. Unclosed parentheses map to -1.
+ */
+export function parenPairs(code: string): (open: number) => number {
+  const pairs = new Map<number, number>();
+  const stack: number[] = [];
+  for (let i = 0; i < code.length; i += 1) {
     const char = code[i];
     if (char === '"' || char === "'" || char === '`') {
       let j = i + 1;
-      while (j < end && code[j] !== char && code[j] !== '\n') j += code[j] === '\\' ? 2 : 1;
+      while (j < code.length && code[j] !== char && code[j] !== '\n') j += code[j] === '\\' ? 2 : 1;
       i = j;
     } else if (char === '(') {
-      depth += 1;
+      stack.push(i);
     } else if (char === ')') {
-      depth -= 1;
-      if (depth === 0) return i;
+      const open = stack.pop();
+      if (open !== undefined) pairs.set(open, i);
     }
   }
-  return -1;
+  return (open) => pairs.get(open) ?? -1;
 }
 
 /** 1-based line of an offset. */
