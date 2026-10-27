@@ -1,5 +1,5 @@
 // What GlobalLingo must find in each fixture (fixtures/README.md says why each mistake is there),
-// and the terminal report it prints, recorded in test/__snapshots__/fixtures. Change the lists
+// and the terminal report it prints, recorded in test/__snapshots__/fixtures/*.out. Change the lists
 // deliberately, never to make a run pass.
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
@@ -76,7 +76,7 @@ describe.each(Object.keys(EXPECTED))('fixture %s', (name) => {
     const report = await scan(`${FIXTURES}${name}`);
     report.path = `fixtures/${name}`;
     await expect(render(report, 'tty', { color: false, width: 100 })).toMatchFileSnapshot(
-      `../__snapshots__/fixtures/${name}.txt`,
+      `../__snapshots__/fixtures/${name}.out`,
     );
   });
 });
