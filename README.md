@@ -290,9 +290,8 @@ on 28 October 2026.
 | --------- | --------------- |
 | Node.js   | 22.12           |
 
-GlobalLingo does not need Xcode, Flutter or React Native: it reads files, so it also runs on Linux
-and Windows. CI runs the tests on Node.js 22 and 24 (Linux); locally all 192 pass on Node.js
-22.23, 24.22 and 26.12 on a Mac (Apple silicon).
+GlobalLingo does not need Xcode, Flutter or React Native: it reads files, so it also runs on Linux. CI runs the tests on Node.js 22 and 24 (Linux); locally
+all 192 pass on Node.js 22.23, 24.22 and 26.12 on a Mac (Apple silicon).
 
 ## Architecture
 
