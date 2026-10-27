@@ -35,6 +35,9 @@ export class NothingToCheckError extends Error {}
 /** At most this many source files are read; a monorepo gets a note to narrow the path. */
 export const MAX_SOURCE_FILES = 20_000;
 
+/** At most this many findings are kept; more than that is a project to fix in steps. */
+export const MAX_FINDINGS = 100_000;
+
 const SEVERITY_ORDER: Record<Severity, number> = { error: 0, warning: 1, info: 2 };
 
 function finalize(drafts: Draft[], config: Config): Finding[] {
@@ -93,13 +96,16 @@ export async function scan(root: string, options: ScanOptions = {}): Promise<Rep
   }
 
   const drafts: Draft[] = [];
+  let truncated = false;
   const summaries: CatalogSummary[] = [];
   for (const catalog of catalogs) {
     const result = checkCatalog(catalog, {
       ...(config.locales ? { locales: config.locales } : {}),
       ignoreKey: ignoredKey,
+      limit: MAX_FINDINGS - drafts.length,
     });
     drafts.push(...result.drafts);
+    truncated ||= result.truncated;
     summaries.push({
       id: catalog.id,
       name: catalog.name,
@@ -131,11 +137,14 @@ export async function scan(root: string, options: ScanOptions = {}): Promise<Rep
       sourceFiles += 1;
       const file: CodeFile = { path, text: decode(read.bytes).text };
       for (const draft of checkSource(file, context)) {
-        if (draft.key === undefined || !ignoredKey(draft.key)) drafts.push(draft);
+        if (draft.key !== undefined && ignoredKey(draft.key)) continue;
+        if (drafts.length >= MAX_FINDINGS) truncated = true;
+        else drafts.push(draft);
       }
     }
   }
 
+  if (truncated) notes.push(`Stopped after ${MAX_FINDINGS} findings; fix or baseline these first`);
   const findings = finalize(drafts, config);
   if (options.baseline) applyBaseline(findings, options.baseline);
   const summary = { error: 0, warning: 0, info: 0, baselined: 0 };

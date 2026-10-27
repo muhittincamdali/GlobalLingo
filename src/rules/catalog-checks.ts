@@ -17,12 +17,16 @@ export interface CatalogCheckOptions {
   locales?: string[];
   /** Keys to leave out (from the configuration). */
   ignoreKey: (key: string) => boolean;
+  /** Stop adding findings after this many; a crafted catalog cannot fill the memory. */
+  limit?: number;
 }
 
 export interface CatalogCheckResult {
   drafts: Draft[];
   coverage: LocaleCoverage[];
   keys: number;
+  /** Whether findings were left out because of `limit`. */
+  truncated: boolean;
 }
 
 const displayNames = new Intl.DisplayNames(['en'], { type: 'language', fallback: 'none' });
@@ -61,11 +65,19 @@ const hasLetters = (text: string) => (text.match(/\p{L}/gu)?.length ?? 0) >= 3;
 
 class Checker {
   readonly drafts: Draft[] = [];
+  truncated = false;
   private readonly seen = new Set<string>();
 
-  constructor(private readonly catalog: Catalog) {}
+  constructor(
+    private readonly catalog: Catalog,
+    private readonly limit: number,
+  ) {}
 
   add(draft: Omit<Draft, 'ecosystem'>): void {
+    if (this.drafts.length >= this.limit) {
+      this.truncated = true;
+      return;
+    }
     const id = `${draft.rule}|${draft.file}|${draft.key ?? ''}|${draft.locale ?? ''}|${draft.subject}`;
     if (this.seen.has(id)) return;
     this.seen.add(id);
@@ -261,7 +273,7 @@ function targetsOf(catalog: Catalog, options: CatalogCheckOptions): string[] {
 }
 
 export function checkCatalog(catalog: Catalog, options: CatalogCheckOptions): CatalogCheckResult {
-  const check = new Checker(catalog);
+  const check = new Checker(catalog, options.limit ?? Number.POSITIVE_INFINITY);
   const sourceFile = catalog.files.get(catalog.sourceLocale) ?? catalog.id;
 
   for (const problem of catalog.problems) {
@@ -421,6 +433,7 @@ export function checkCatalog(catalog: Catalog, options: CatalogCheckOptions): Ca
   }
   return {
     drafts: check.drafts,
+    truncated: check.truncated,
     keys: total,
     coverage: targets.map((locale) => ({ locale, translated: counts.get(locale) ?? 0, total })),
   };

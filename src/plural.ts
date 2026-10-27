@@ -38,6 +38,8 @@ export function pluralCategories(
   return categories;
 }
 
+const rulesCache = new Map<string, Intl.PluralRules>();
+
 const SAMPLES = [0, 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 15, 20, 21, 22, 25, 100, 101, 1000000];
 
 /** Up to three numbers that select `category` in `locale`, to show in a message. */
@@ -48,7 +50,12 @@ export function pluralExamples(
 ): number[] {
   const tag = toLanguageTag(locale);
   if (!tag) return [];
-  const rules = new Intl.PluralRules(tag, { type });
+  const cacheKey = `${type}:${tag}`;
+  let rules = rulesCache.get(cacheKey);
+  if (!rules) {
+    rules = new Intl.PluralRules(tag, { type });
+    rulesCache.set(cacheKey, rules);
+  }
   return SAMPLES.filter((sample) => rules.select(sample) === category).slice(0, 3);
 }
 
