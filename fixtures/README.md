@@ -36,13 +36,13 @@ FMT002). `flutter gen-l10n` accepts it and adds a third parameter, `Object regal
 `booksOnShelf` in every generated locale class, so the existing call
 `l10n.booksOnShelf(count, shelf)` stops compiling (`flutter analyze`: "3 positional arguments
 expected by 'booksOnShelf', but 2 found"). Also: Polish without few and many (PLU001), a
-Polish message still in English (MIS004), a message missing in Turkish (MIS001), hard-coded
+Polish message still in English (MIS004), a message missing in Turkish and used nowhere in the code (MIS001, KEY003), hard-coded
 `MaterialApp(title:)` and `Text('Pull to refresh')` (HCS001), and translated text upper-cased
 with Dart's `toUpperCase()` in an app that ships Turkish (TRI003).
 
 **expo-i18next**: a renamed placeholder in German (FMT001, FMT002), a duplicate `checkout`
 object in German whose second copy hides `checkout.total` (DUP001, MIS001), Polish without few
-and many (PLU001), a missing and an empty Turkish translation (MIS001, MIS002), a Turkish key the
+and many (PLU001), a missing and an empty Turkish translation (MIS001, MIS002; the empty one's key is also unused, KEY003), a Turkish key the
 source does not have (STA002), `checkout.terms` looked up but not defined (KEY001), hard-coded
 text in `<Text>` (HCS001), a key built with `toLocaleLowerCase()` (TRI001) and
 `t('cart.title').toUpperCase()` (TRI003).

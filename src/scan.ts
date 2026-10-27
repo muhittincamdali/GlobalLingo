@@ -4,6 +4,7 @@ import { stat } from 'node:fs/promises';
 import { join } from 'node:path';
 import { applyBaseline, type Baseline, fingerprint } from './baseline.js';
 import { type CodeFile, checkSource, codeContext, sourceLanguage } from './code/check-code.js';
+import { collectUsage, emptyUsage, unusedKeys } from './code/usage.js';
 import { CONFIG_FILE, type Config, loadConfig } from './config.js';
 import type { CatalogSummary, Ecosystem, Finding, Report, Severity } from './model.js';
 import { decode } from './parse/decode.js';
@@ -122,6 +123,7 @@ export async function scan(root: string, options: ScanOptions = {}): Promise<Rep
   let sourceFiles = 0;
   if (options.code !== false) {
     const context = codeContext(catalogs);
+    const usage = emptyUsage();
     const sources = tree.files.filter((file) => sourceLanguage(file) !== undefined);
     if (sources.length > MAX_SOURCE_FILES) {
       notes.push(
@@ -136,11 +138,17 @@ export async function scan(root: string, options: ScanOptions = {}): Promise<Rep
       }
       sourceFiles += 1;
       const file: CodeFile = { path, text: decode(read.bytes).text };
+      const language = sourceLanguage(path);
+      if (language) collectUsage(file.text, language, usage);
       for (const draft of checkSource(file, context)) {
         if (draft.key !== undefined && ignoredKey(draft.key)) continue;
         if (drafts.length >= MAX_FINDINGS) truncated = true;
         else drafts.push(draft);
       }
+    }
+    for (const draft of unusedKeys(catalogs, usage, ignoredKey)) {
+      if (drafts.length >= MAX_FINDINGS) truncated = true;
+      else drafts.push(draft);
     }
   }
 

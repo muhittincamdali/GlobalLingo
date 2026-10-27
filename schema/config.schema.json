@@ -92,6 +92,9 @@
         "KEY002": {
           "enum": ["error", "warning", "info", "off"]
         },
+        "KEY003": {
+          "enum": ["error", "warning", "info", "off"]
+        },
         "HCS001": {
           "enum": ["error", "warning", "info", "off"]
         },

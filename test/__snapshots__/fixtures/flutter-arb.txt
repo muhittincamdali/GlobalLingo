@@ -15,6 +15,12 @@ WARNING  FMT002  lib/l10n/app_de.arb:4  Placeholder dropped
          out the number on purpose; this rule does not report those.
          https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#fmt002
 
+INFO     KEY003  lib/l10n/app_en.arb:28  Unused key
+         "syncFailed" is not mentioned in any source file
+         Fix: Delete the message from every ARB file, or ignore it in .globallingo.json if it is
+         used outside lib/.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#key003
+
 WARNING  PLU001  lib/l10n/app_pl.arb:4  Missing plural form
          "booksOnShelf" in Polish (pl) has no plural forms for few (e.g. 2, 3, 4), many (e.g. 0, 5,
          6)
@@ -52,4 +58,4 @@ WARNING  HCS001  lib/main.dart:51  Hard-coded UI text
          AppLocalizations.of(context)!.title.
          https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#hcs001
 
-✗ 2 errors, 5 warnings, 1 info in 1 catalog and 1 source file
+✗ 2 errors, 5 warnings, 2 info in 1 catalog and 1 source file

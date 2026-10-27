@@ -152,7 +152,7 @@ describe('configuration', () => {
   const project = {
     'locales/en.json': '{"a": "A", "debug": {"x": "X"}, "b": "Same text"}',
     'locales/de.json': '{"a": "A2", "b": "Same text"}',
-    'src/App.tsx': "<Text>Hard coded text</Text>\nt('missing.key')",
+    'src/App.tsx': "<Text>Hard coded text</Text>\nt('missing.key')\nt('a')\nt('b')",
     'src/__tests__/App.test.tsx': '<Text>Test text</Text>',
     'vendor-ui/Thing.tsx': '<Text>Vendored text</Text>',
   };
@@ -173,6 +173,7 @@ describe('configuration', () => {
     expect(defaults.findings.map((finding) => `${finding.rule}:${finding.severity} ${finding.file}`)).toEqual([
       'MIS001:error locales/de.json',
       'MIS004:info locales/de.json',
+      'KEY003:info locales/en.json',
       'HCS001:warning src/App.tsx',
       'KEY001:error src/App.tsx',
       'HCS001:warning vendor-ui/Thing.tsx',

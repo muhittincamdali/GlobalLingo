@@ -50,6 +50,12 @@ ERROR    DUP001  src/locales/de.json:13  Duplicate key
          Fix: Keep one of the two entries, with the right translation, and delete the other.
          https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#dup001
 
+INFO     KEY003  src/locales/en.json:5  Unused key
+         "cart.empty" is not mentioned in any source file
+         Fix: Delete the key from every locale, or ignore it in .globallingo.json if the code builds
+         it at run time.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#key003
+
 WARNING  PLU001  src/locales/pl.json:6  Missing plural form
          "cart.items" in Polish (pl) has no plural forms for few (e.g. 2, 3, 4), many (e.g. 0, 5, 6)
          Fix: Add the missing category to this locale: key_few for i18next, a "few" entry for
@@ -73,4 +79,4 @@ WARNING  STA002  src/locales/tr.json:13  Key not in the source language
          Fix: Delete the key from this locale, or add it to the source language if the app uses it.
          https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#sta002
 
-✗ 6 errors, 6 warnings in 1 catalog and 3 source files
+✗ 6 errors, 6 warnings, 1 info in 1 catalog and 3 source files

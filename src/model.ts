@@ -116,6 +116,7 @@ export type RuleId =
   | 'DUP001'
   | 'KEY001'
   | 'KEY002'
+  | 'KEY003'
   | 'HCS001'
   | 'TRI001'
   | 'TRI002'

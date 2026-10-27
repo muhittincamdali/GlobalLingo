@@ -36,6 +36,7 @@ const EXPECTED: Record<string, string[]> = {
   'flutter-arb': [
     'FMT001 lib/l10n/app_de.arb:4 booksOnShelf de',
     'FMT002 lib/l10n/app_de.arb:4 booksOnShelf de',
+    'KEY003 lib/l10n/app_en.arb:28 syncFailed',
     'PLU001 lib/l10n/app_pl.arb:4 booksOnShelf pl',
     'MIS004 lib/l10n/app_pl.arb:6 deleteAll pl',
     'MIS001 lib/l10n/app_tr.arb:0 syncFailed tr',
@@ -52,6 +53,7 @@ const EXPECTED: Record<string, string[]> = {
     'FMT001 src/locales/de.json:2 greeting de',
     'FMT002 src/locales/de.json:2 greeting de',
     'DUP001 src/locales/de.json:13 checkout',
+    'KEY003 src/locales/en.json:5 cart.empty',
     'PLU001 src/locales/pl.json:6 cart.items pl',
     'MIS001 src/locales/tr.json:0 checkout.button tr',
     'MIS002 src/locales/tr.json:5 cart.empty tr',

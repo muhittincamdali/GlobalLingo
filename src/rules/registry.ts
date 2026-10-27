@@ -176,6 +176,20 @@ export const RULES: Record<RuleId, Rule> = {
       js: 'Not used for JavaScript.',
     },
   },
+  KEY003: {
+    id: 'KEY003',
+    severity: 'info',
+    title: 'Unused key',
+    summary:
+      'No source file mentions the key, not even as part of a longer string; it is probably left over and still costs translation.',
+    fix: {
+      apple:
+        'Delete the key from every locale, or ignore it in .globallingo.json if the code builds it in a way GlobalLingo cannot see.',
+      flutter:
+        'Delete the message from every ARB file, or ignore it in .globallingo.json if it is used outside lib/.',
+      js: 'Delete the key from every locale, or ignore it in .globallingo.json if the code builds it at run time.',
+    },
+  },
   HCS001: {
     id: 'HCS001',
     severity: 'warning',
