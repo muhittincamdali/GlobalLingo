@@ -1,0 +1,49 @@
+GlobalLingo 2.0.0 · fixtures/uikit-strings
+
+  Inbox/*.lproj/Localizable  strings table, format specifiers · source en · 4 keys
+    de 100% · ru 100% · tr 75%
+
+ERROR    DUP001  Inbox/de.lproj/Localizable.strings:7  Duplicate key
+         "archive.confirm.message" appears again (first on line 6); only one of the two values is
+         used
+         Fix: Keep one of the two entries, with the right translation, and delete the other.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#dup001
+
+WARNING  HCS001  Inbox/InboxViewController.swift:17  Hard-coded UI text
+         "Archive all" is shown to the user but is not localized
+         Fix: Use String(localized:) or a localized SwiftUI initializer and add the string to the
+         String Catalog.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#hcs001
+
+ERROR    KEY001  Inbox/InboxViewController.swift:37  Unknown key
+         "archive.confirm.ok" is not in the Localizable table
+         Fix: Add the key to the String Catalog or .strings table the lookup names, or correct the
+         key in the code.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#key001
+
+WARNING  PLU001  Inbox/ru.lproj/Localizable.stringsdict:9  Missing plural form
+         "inbox.count" in Russian (ru) has no plural forms for "messages" for few (e.g. 2, 3, 4),
+         many (e.g. 0, 5, 6)
+         Fix: In the String Catalog editor, add the missing plural form for this locale (Vary by
+         Plural shows every category the language uses).
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#plu001
+
+ERROR    MIS001  Inbox/tr.lproj/Localizable.strings  Missing translation
+         "archive.confirm.message" has no Turkish (tr) translation
+         Fix: Translate the key for this locale in Xcode's String Catalog editor, or add it to the
+         locale's .strings file.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis001
+
+WARNING  STA002  Inbox/tr.lproj/Localizable.strings:7  Key not in the source language
+         "inbox.legacy" is in Turkish (tr) but not in the source language English (en)
+         Fix: Delete the key from this locale, or add it to the source language if the app uses it.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#sta002
+
+ERROR    FMT001  Inbox/tr.lproj/Localizable.stringsdict:17  Placeholder mismatch
+         "inbox.count" in Turkish (tr) (messages.other) uses %1$d (a 32-bit integer) for argument 1;
+         the source text has %1$#@messages@ (a 64-bit integer)
+         Fix: Use the same format specifiers as the source text, with positions (%1$@, %2$lld) when
+         the order changes.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#fmt001
+
+✗ 4 errors, 3 warnings in 1 catalog and 2 source files

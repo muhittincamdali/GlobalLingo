@@ -1,0 +1,76 @@
+GlobalLingo 2.0.0 · fixtures/expo-i18next
+
+  src/locales/*.json  JSON, i18next · source en · 6 keys
+    de 83% · pl 100% · tr 66%
+
+WARNING  TRI003  App.tsx:13  Translated text cased without the locale
+         Translated text is changed with toUpperCase(), which ignores the locale; Turkish and
+         Azerbaijani need İ and ı
+         Fix: Use toLocaleUpperCase(language) with the app's current language, e.g. i18n.language.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#tri003
+
+WARNING  TRI001  App.tsx:17  Locale-dependent case change on a key
+         The lookup key goes through toLocaleLowerCase(), which depends on the device locale
+         Fix: Use toLowerCase() or toUpperCase(), which do not depend on the locale, instead of
+         toLocaleLowerCase() and toLocaleUpperCase() without a locale.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#tri001
+
+WARNING  HCS001  App.tsx:18  Hard-coded UI text
+         "Free shipping on orders over 50 euros" is shown to the user but is not localized
+         Fix: Add the text to the translation files and render it through the library, e.g.
+         t('home.title').
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#hcs001
+
+ERROR    KEY001  App.tsx:20  Unknown key
+         "checkout.terms" is not in any translation file
+         Fix: Add the key to the source language file, or correct it in the code (namespaces are
+         written ns:key).
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#key001
+
+ERROR    MIS001  src/locales/de.json  Missing translation
+         "checkout.total" has no German (de) translation
+         Fix: Add the key to this locale's translation file. Until then the library shows the
+         fallback language or the key.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis001
+
+ERROR    FMT001  src/locales/de.json:2  Placeholder mismatch
+         "greeting" in German (de) uses {{username}}, which the source text does not have
+         Fix: Use the placeholder names of the source text exactly; the code passes values under
+         those names only.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#fmt001
+
+WARNING  FMT002  src/locales/de.json:2  Placeholder dropped
+         "greeting" in German (de) leaves out {{name}} of the source text
+         Fix: Add the placeholder to the translation. Plural forms for one or two items may leave
+         out the number on purpose; this rule does not report those.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#fmt002
+
+ERROR    DUP001  src/locales/de.json:13  Duplicate key
+         "checkout" appears again (first on line 9); only one of the two values is used
+         Fix: Keep one of the two entries, with the right translation, and delete the other.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#dup001
+
+WARNING  PLU001  src/locales/pl.json:6  Missing plural form
+         "cart.items" in Polish (pl) has no plural forms for few (e.g. 2, 3, 4), many (e.g. 0, 5, 6)
+         Fix: Add the missing category to this locale: key_few for i18next, a "few" entry for
+         i18n-js, few{…} in ICU messages.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#plu001
+
+ERROR    MIS001  src/locales/tr.json  Missing translation
+         "checkout.button" has no Turkish (tr) translation
+         Fix: Add the key to this locale's translation file. Until then the library shows the
+         fallback language or the key.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis001
+
+ERROR    MIS002  src/locales/tr.json:5  Empty translation
+         "cart.empty" has an empty Turkish (tr) translation
+         Fix: Write the translation, or remove the empty value so the fallback text is used until it
+         is translated.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis002
+
+WARNING  STA002  src/locales/tr.json:13  Key not in the source language
+         "legacy.banner" is in Turkish (tr) but not in the source language English (en)
+         Fix: Delete the key from this locale, or add it to the source language if the app uses it.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#sta002
+
+✗ 6 errors, 6 warnings in 1 catalog and 3 source files

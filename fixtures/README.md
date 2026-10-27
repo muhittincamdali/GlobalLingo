@@ -18,7 +18,7 @@ folders or lockfiles.
 ## What each fixture contains
 
 **swiftui-catalog**: a French translation that swaps the order of `%lld` and `%@` without
-positions (FMT001), Polish without the plural forms for 2–4 and 5+ (PLU001), a missing Polish
+positions and does not vary by plural (FMT001, PLU001), Polish without the plural forms for 2–4 and 5+ (PLU001), a missing Polish
 and an empty Polish translation (MIS001, MIS002), a Turkish translation still in state "new"
 (MIS001), a French one marked for review (MIS003), a stale key (STA001), `sync.retry` looked up
 but not in the catalog (KEY001), `Text("Pull to refresh")` added after the last extraction
