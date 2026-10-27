@@ -1,0 +1,12 @@
+/* Blues from the repository kit palette, on top of TypeDoc's default theme. */
+:root {
+  --light-color-link: #0058d4;
+  --light-color-active-menu-item: #eaf4ff;
+  --light-color-accent: #d0e2f7;
+  --light-color-background-secondary: #f5f9ff;
+  --dark-color-link: #64d2ff;
+  --dark-color-active-menu-item: #0b2e5c;
+  --dark-color-accent: #1c3557;
+  --dark-color-background: #0d1117;
+  --dark-color-background-secondary: #0b1626;
+}

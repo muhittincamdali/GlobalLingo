@@ -19,7 +19,7 @@ export {
   readBaseline,
   writeBaseline,
 } from './baseline.js';
-export { type Config, ConfigError, loadConfig, validateConfig } from './config.js';
+export { type Config, ConfigError, loadConfig, type RuleSetting, validateConfig } from './config.js';
 export type {
   CatalogFormat,
   CatalogSummary,
@@ -31,11 +31,23 @@ export type {
   RuleId,
   Severity,
 } from './model.js';
-export { parseIcu, type IcuParse, type IcuOptions } from './messages/icu.js';
+export {
+  type IcuArgument,
+  type IcuOptions,
+  type IcuParse,
+  type IcuPlural,
+  parseIcu,
+} from './messages/icu.js';
 export { parsePrintf, type FormatSpecifier, type PrintfParse } from './messages/printf.js';
-export { pluralCategories } from './plural.js';
+export { type PluralType, pluralCategories } from './plural.js';
 export { FORMATS, type Format, render } from './report/index.js';
 export type { TtyOptions } from './report/tty.js';
 export { RULE_IDS, RULES, type Rule } from './rules/registry.js';
-export { MAX_SOURCE_FILES, NothingToCheckError, type ScanOptions, scan } from './scan.js';
+export {
+  MAX_FINDINGS,
+  MAX_SOURCE_FILES,
+  NothingToCheckError,
+  type ScanOptions,
+  scan,
+} from './scan.js';
 export { VERSION } from './version.js';
