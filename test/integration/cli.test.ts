@@ -110,6 +110,7 @@ describe('options', () => {
 
   it('colours only for a terminal and respects NO_COLOR and FORCE_COLOR', async () => {
     const root = project();
+    // biome-ignore lint/suspicious/noControlCharactersInRegex: looking for escape sequences is the point.
     const ansi = /\u001b\[/;
     expect((await cli([], root, {}, true)).stdout).toMatch(ansi);
     expect((await cli([], root, { NO_COLOR: '1' }, true)).stdout).not.toMatch(ansi);

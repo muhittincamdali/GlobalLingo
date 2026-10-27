@@ -92,20 +92,11 @@ describe('readXcstrings', () => {
     ]);
   });
 
-  it('ignores an argNum that is not a positive whole number', () => {
-    const odd = readXcstrings(
-      xcstrings({
-        k: {
-          localizations: {
-            en: {
-              stringUnit: unit('%#@n@').stringUnit,
-              substitutions: { n: { argNum: 1e309, formatSpecifier: 'd' } },
-            },
-          },
-        },
-      }),
-      'X.xcstrings',
-    );
+  it.each(['1e309', '-1', '1.5', '"1"', '0'])('ignores the argNum %s, which is not a positive whole number', (argNum) => {
+    const text = `{"sourceLanguage": "en", "strings": {"k": {"localizations": {"en": {
+      "stringUnit": {"state": "translated", "value": "%#@n@"},
+      "substitutions": {"n": {"argNum": ${argNum}, "formatSpecifier": "d"}}}}}}}`;
+    const odd = readXcstrings(text, 'X.xcstrings');
     expect(odd.entries.get('k')?.translations.get('en')?.texts[0]?.substitutions).toEqual({
       n: { argNum: 0, specifier: 'd' },
     });

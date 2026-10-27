@@ -49,6 +49,7 @@ describe('lexer', () => {
     expect(literalValue('Say \\"hi\\"\\n\\u{1F600}', 'swift')).toBe('Say "hi"\n😀');
     expect(literalValue('Hello \\(name)', 'swift')).toBeUndefined();
     expect(literalValue('Hi $name', 'dart')).toBeUndefined();
+    // biome-ignore lint/suspicious/noTemplateCurlyInString: the text of a template literal is the input.
     expect(literalValue('Hi ${a}', 'js')).toBeUndefined();
     expect(literalValue('Price \\$5', 'dart')).toBe('Price $5');
   });
@@ -109,6 +110,7 @@ describe('KEY001 and KEY002', () => {
       "i18n.t('items', { count })",
       "t('common:ok')",
       "t('common:cancel')",
+      // biome-ignore lint/suspicious/noTemplateCurlyInString: source code under test.
       't(`dynamic.${key}`)',
       "t('prefix.' + key)",
       '<Trans i18nKey="missing.trans" />',
