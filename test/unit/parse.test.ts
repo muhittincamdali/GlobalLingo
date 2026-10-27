@@ -39,7 +39,7 @@ describe('parseJson', () => {
   });
 
   it('reads escapes, a byte order mark and numbers like JSON.parse', () => {
-    const text = '﻿{"s": "a\\"b\\\\c\\u00e7\\n", "n": -1.5e3, "t": true, "z": null, "l": []}';
+    const text = '\uFEFF{"s": "a\\"b\\\\c\\u00e7\\n", "n": -1.5e3, "t": true, "z": null, "l": []}';
     const { root } = parseJson(text);
     if (root.type !== 'object') throw new Error('object expected');
     expect(member(root, 's')?.value).toMatchObject({ value: 'a"b\\cç\n' });
@@ -134,7 +134,7 @@ describe('decode', () => {
       text: '"x"',
       encoding: 'utf-16be',
     });
-    expect(decode(new Uint8Array(Buffer.from('﻿"İ"', 'utf8')))).toEqual({
+    expect(decode(new Uint8Array(Buffer.from('\uFEFF"İ"', 'utf8')))).toEqual({
       text: '"İ"',
       encoding: 'utf-8',
     });

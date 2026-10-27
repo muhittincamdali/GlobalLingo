@@ -10,7 +10,7 @@ import type { CatalogFormat, MessageSyntax, Report } from '../model.js';
 export function clean(text: string): string {
   return text.replace(
     // biome-ignore lint/suspicious/noControlCharactersInRegex: matching control characters is the point.
-    /[\u0000-\u0008\u000B-\u001F\u007F-\u009F‪-‮⁦-⁩]/g,
+    /[\u0000-\u0008\u000B-\u001F\u007F-\u009F\u202A-\u202E\u2066-\u2069]/g,
     (char) => `\\u{${(char.codePointAt(0) as number).toString(16).toUpperCase().padStart(4, '0')}}`,
   );
 }

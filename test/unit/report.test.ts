@@ -47,7 +47,7 @@ const report = (findings: Finding[], notes: string[] = []): Report => ({
   },
 });
 
-const hostile = 'key\u001b]8;;https://evil\u0007‮evil\u009B2J';
+const hostile = 'key\u001b]8;;https://evil\u0007\u202Eevil\u009B2J';
 
 describe('text helpers', () => {
   it('makes control and bidirectional characters visible', () => {
@@ -88,7 +88,7 @@ describe('tty', () => {
     });
     expect(colored).toContain('\u001b[31m');
     expect(colored).not.toContain('\u001b]8');
-    expect(colored).not.toContain('‮');
+    expect(colored).not.toContain('\u202E');
   });
 
   it('marks baseline findings and a clean run', () => {
@@ -183,7 +183,7 @@ describe('github', () => {
 describe('json', () => {
   it('is the report itself, with invisible controls escaped', () => {
     const text = render(report([finding({ message: hostile })]), 'json');
-    expect(text).not.toMatch(/[\u0080-\u009F‪-‮]/);
+    expect(text).not.toMatch(/[\u0080-\u009F\u202A-\u202E]/);
     const parsed = JSON.parse(text);
     expect(parsed.findings[0].message).toBe(hostile);
     expect(parsed.schemaVersion).toBe(1);

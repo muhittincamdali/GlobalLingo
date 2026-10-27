@@ -13,7 +13,7 @@ export type Format = (typeof FORMATS)[number];
  */
 const escapeInvisible = (json: string) =>
   json.replace(
-    /[\u007F-\u009F‪-‮⁦-⁩]/g,
+    /[\u007F-\u009F\u202A-\u202E\u2066-\u2069]/g,
     (char) => `\\u${(char.codePointAt(0) as number).toString(16).padStart(4, '0')}`,
   );
 
