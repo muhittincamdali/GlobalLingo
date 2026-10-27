@@ -1,0 +1,44 @@
+{
+  "name": "GlobalLingo",
+  "repository": "muhittincamdali/GlobalLingo",
+  "branch": "master",
+  "tagline": {
+    "en": "Lints iOS, Flutter and React Native localization files and names the fix for each finding."
+  },
+  "tags": {
+    "en": [
+      "String Catalogs",
+      "ARB",
+      "i18next",
+      "CLDR plurals"
+    ]
+  },
+  "motif": "code",
+  "buttons": [
+    "start",
+    "docs",
+    "guides",
+    "examples"
+  ],
+  "links": {
+    "docs": "https://muhittincamdali.github.io/GlobalLingo/",
+    "guides": "docs/guides/",
+    "examples": "examples/"
+  },
+  "languages": [
+    "en",
+    "tr",
+    "zh-CN",
+    "ja",
+    "ko",
+    "es",
+    "de",
+    "fr",
+    "pt-BR",
+    "ru"
+  ],
+  "socialTheme": "dark",
+  "badgeOverrides": {
+    "versionNote": "older Swift package"
+  }
+}
