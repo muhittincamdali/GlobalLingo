@@ -102,7 +102,12 @@ const OPTIONS = {
 
 function readArgs(argv: readonly string[]) {
   try {
-    return parseArgs({ args: [...argv], allowPositionals: true, allowNegative: true, options: OPTIONS });
+    return parseArgs({
+      args: [...argv],
+      allowPositionals: true,
+      allowNegative: true,
+      options: OPTIONS,
+    });
   } catch (error) {
     throw new UsageError((error as Error).message);
   }

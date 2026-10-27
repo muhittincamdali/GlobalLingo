@@ -72,7 +72,11 @@ export function parsePrintf(text: string): PrintfParse {
       if (groups.precision === '*') next += 1;
       const position = explicit ?? next;
       if (explicit === undefined) next += 1;
-      specifiers.push({ position, kind: specifierKind(groups.length ?? '', groups.conversion), raw });
+      specifiers.push({
+        position,
+        kind: specifierKind(groups.length ?? '', groups.conversion),
+        raw,
+      });
     } else if (groups.other !== undefined && /[A-Za-z]/.test(groups.other)) {
       // `%` before a letter that is no conversion, such as `%k`: printf prints garbage or crashes.
       invalid.push(raw);

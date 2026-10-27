@@ -1,22 +1,22 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
-      interval: "monthly"
+      interval: 'monthly'
     commit-message:
-      prefix: "ci"
+      prefix: 'ci'
     groups:
       github-actions:
         patterns:
-          - "*"
-  - package-ecosystem: "npm"
-    directory: "/"
+          - '*'
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "monthly"
+      interval: 'monthly'
     commit-message:
-      prefix: "chore"
+      prefix: 'chore'
     groups:
       npm:
         patterns:
-          - "*"
+          - '*'

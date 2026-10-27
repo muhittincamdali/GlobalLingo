@@ -40,7 +40,10 @@ export function renderMarkdown(report: Report): string {
   }
   const baselined = report.findings.length - active.length;
   if (baselined > 0)
-    lines.push(`${plural(baselined, 'finding')} in the baseline file ${baselined === 1 ? 'is' : 'are'} not listed.`, '');
+    lines.push(
+      `${plural(baselined, 'finding')} in the baseline file ${baselined === 1 ? 'is' : 'are'} not listed.`,
+      '',
+    );
   if (report.notes.length > 0) {
     lines.push('<details><summary>Notes</summary>', '');
     for (const note of report.notes) lines.push(`- ${escapeMarkdown(note)}`);

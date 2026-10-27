@@ -183,6 +183,8 @@ export function globMatcher(patterns: readonly string[]): (path: string) => bool
     for (let index = path.indexOf('/'); index !== -1; index = path.indexOf('/', index + 1)) {
       candidates.push(path.slice(0, index));
     }
-    return compiled.some((tokens) => candidates.some((candidate) => matchTokens(tokens, candidate)));
+    return compiled.some((tokens) =>
+      candidates.some((candidate) => matchTokens(tokens, candidate)),
+    );
   };
 }

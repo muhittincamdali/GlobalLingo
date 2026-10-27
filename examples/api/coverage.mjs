@@ -19,5 +19,6 @@ for (const catalog of report.catalogs) {
 }
 
 const perRule = new Map();
-for (const finding of report.findings) perRule.set(finding.rule, (perRule.get(finding.rule) ?? 0) + 1);
+for (const finding of report.findings)
+  perRule.set(finding.rule, (perRule.get(finding.rule) ?? 0) + 1);
 console.log([...perRule].map(([rule, count]) => `${rule} ${count}`).join(', ') || 'No findings');

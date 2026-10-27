@@ -168,7 +168,9 @@ describe('parsePlist', () => {
     const list = dictValue(root, 'list');
     expect(
       list?.type === 'array' &&
-        list.items.map((item) => (item.type === 'array' || item.type === 'dict' ? item.type : item.value)),
+        list.items.map((item) =>
+          item.type === 'array' || item.type === 'dict' ? item.type : item.value,
+        ),
     ).toEqual(['true', '', '<raw>']);
   });
 

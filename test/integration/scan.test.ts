@@ -170,7 +170,9 @@ describe('configuration', () => {
       report.findings.map((finding) => `${finding.rule}:${finding.severity} ${finding.file}`),
     ).toEqual(['HCS001:error src/App.tsx', 'KEY001:error src/App.tsx']);
     const defaults = await scan(tree(project));
-    expect(defaults.findings.map((finding) => `${finding.rule}:${finding.severity} ${finding.file}`)).toEqual([
+    expect(
+      defaults.findings.map((finding) => `${finding.rule}:${finding.severity} ${finding.file}`),
+    ).toEqual([
       'MIS001:error locales/de.json',
       'MIS004:info locales/de.json',
       'KEY003:info locales/en.json',
@@ -205,7 +207,9 @@ describe('configuration', () => {
   });
 
   it('has a JSON schema with the same fields and rules as the validator', () => {
-    const schema = JSON.parse(readFileSync(new URL('../../schema/config.schema.json', import.meta.url), 'utf8'));
+    const schema = JSON.parse(
+      readFileSync(new URL('../../schema/config.schema.json', import.meta.url), 'utf8'),
+    );
     expect(Object.keys(schema.properties).sort()).toEqual([...CONFIG_FIELDS].sort());
     expect(Object.keys(schema.properties.rules.properties)).toEqual(RULE_IDS);
   });

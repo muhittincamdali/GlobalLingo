@@ -140,13 +140,18 @@ export function literalValue(body: string, language: SourceLanguage): string | u
   if (language === 'swift' && body.includes('\\(')) return undefined;
   if (language === 'dart' && /\$[{A-Za-z_]/.test(body)) return undefined;
   if (language === 'js' && body.includes('${')) return undefined;
-  return body.replace(/\\(u\{[0-9a-fA-F]{1,6}\}|u[0-9a-fA-F]{4}|.)/g, (_match, sequence: string) => {
-    if (sequence.startsWith('u{')) {
-      const code = Number.parseInt(sequence.slice(2, -1), 16);
-      return code <= 0x10ffff ? String.fromCodePoint(code) : '';
-    }
-    if (sequence.length === 5 && sequence.startsWith('u'))
-      return String.fromCharCode(Number.parseInt(sequence.slice(1), 16));
-    return ({ n: '\n', t: '\t', r: '\r', '0': '\0' } as Record<string, string>)[sequence] ?? sequence;
-  });
+  return body.replace(
+    /\\(u\{[0-9a-fA-F]{1,6}\}|u[0-9a-fA-F]{4}|.)/g,
+    (_match, sequence: string) => {
+      if (sequence.startsWith('u{')) {
+        const code = Number.parseInt(sequence.slice(2, -1), 16);
+        return code <= 0x10ffff ? String.fromCodePoint(code) : '';
+      }
+      if (sequence.length === 5 && sequence.startsWith('u'))
+        return String.fromCharCode(Number.parseInt(sequence.slice(1), 16));
+      return (
+        ({ n: '\n', t: '\t', r: '\r', '0': '\0' } as Record<string, string>)[sequence] ?? sequence
+      );
+    },
+  );
 }

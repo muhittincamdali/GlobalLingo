@@ -299,9 +299,13 @@ async function jsonCatalogs(
         : `${group.folder ? `${group.folder}/` : ''}*/${group.namespace}.json`;
     const catalog = readJsonCatalog(id, group.namespace, source, detected, read);
     // Namespaces of one folder share their locales: a locale folder without this file misses it.
-    const siblings = groups.filter((other) => other.folder === group.folder && other.namespace !== basename(group.folder));
+    const siblings = groups.filter(
+      (other) => other.folder === group.folder && other.namespace !== basename(group.folder),
+    );
     if (group.namespace !== basename(group.folder) && siblings.length > 1) {
-      catalog.expectedLocales = [...new Set(siblings.flatMap((other) => other.files.map((file) => file.locale)))];
+      catalog.expectedLocales = [
+        ...new Set(siblings.flatMap((other) => other.files.map((file) => file.locale))),
+      ];
     }
     catalogs.push(catalog);
   }

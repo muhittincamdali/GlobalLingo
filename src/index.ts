@@ -19,7 +19,13 @@ export {
   readBaseline,
   writeBaseline,
 } from './baseline.js';
-export { type Config, ConfigError, loadConfig, type RuleSetting, validateConfig } from './config.js';
+export {
+  type Config,
+  ConfigError,
+  loadConfig,
+  type RuleSetting,
+  validateConfig,
+} from './config.js';
 export type {
   CatalogFormat,
   CatalogSummary,

@@ -5,7 +5,13 @@
 // - i18next: `key_one`, `key_other`, `key_ordinal_one`. https://www.i18next.com/translation-function/plurals
 // - i18n-js: `{ "key": { "one": "…", "other": "…" } }`. https://github.com/fnando/i18n
 import type { Catalog, CatalogEntry, MessageSyntax, MessageText, Translation } from '../model.js';
-import { asObject, type JsonObject, type JsonValue, parseJson, uniqueMembers } from '../parse/json.js';
+import {
+  asObject,
+  type JsonObject,
+  type JsonValue,
+  parseJson,
+  uniqueMembers,
+} from '../parse/json.js';
 import { icuTranslation } from './arb.js';
 
 export interface JsonFile {

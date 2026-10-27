@@ -66,9 +66,12 @@ function stringsPairs(text: string, file: string, catalog: Catalog) {
   if (!/^\s*<(?:\?xml|!DOCTYPE|plist)/.test(text)) return parseStrings(text).pairs;
   const document = parsePlist(text);
   for (const duplicate of document.duplicates) catalog.duplicates.push({ file, ...duplicate });
-  if (document.root.type !== 'dict') throw new Error('The root of a .strings property list is a dictionary');
+  if (document.root.type !== 'dict')
+    throw new Error('The root of a .strings property list is a dictionary');
   return document.root.entries.flatMap((entry) =>
-    entry.value.type === 'string' ? [{ key: entry.key, value: entry.value.value, line: entry.line }] : [],
+    entry.value.type === 'string'
+      ? [{ key: entry.key, value: entry.value.value, line: entry.line }]
+      : [],
   );
 }
 
