@@ -167,7 +167,8 @@ describe('parsePlist', () => {
     expect(dictValue(root, 'a & b')).toMatchObject({ type: 'string', value: 'x < y ı İ' });
     const list = dictValue(root, 'list');
     expect(
-      list?.type === 'array' && list.items.map((item) => item.type === 'array' || item.value),
+      list?.type === 'array' &&
+        list.items.map((item) => (item.type === 'array' || item.type === 'dict' ? item.type : item.value)),
     ).toEqual(['true', '', '<raw>']);
   });
 
