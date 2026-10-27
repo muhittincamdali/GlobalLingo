@@ -109,32 +109,80 @@ export async function readLimited(root: string, path: string, limit: number): Pr
   }
 }
 
-/** Turns a glob (`**`, `*`, `?`) matched against paths from the project root into a test. */
+type GlobToken = { kind: 'char'; char: string } | { kind: 'one' | 'star' | 'any' | 'dirs' };
+
+function tokenize(pattern: string): GlobToken[] {
+  const text = pattern.replace(/^\.\//, '');
+  const tokens: GlobToken[] = [];
+  for (let i = 0; i < text.length; i += 1) {
+    const char = text[i] as string;
+    if (char === '*' && text[i + 1] === '*') {
+      while (text[i + 1] === '*') i += 1;
+      const dirs = text[i + 1] === '/';
+      if (dirs) i += 1;
+      // "**/**/" is "**/": repeated wildcards would only cost time.
+      const previous = tokens[tokens.length - 1];
+      if (!(previous && (previous.kind === 'dirs' || previous.kind === 'any'))) {
+        tokens.push({ kind: dirs ? 'dirs' : 'any' });
+      }
+    } else if (char === '*') {
+      if (tokens[tokens.length - 1]?.kind !== 'star') tokens.push({ kind: 'star' });
+    } else if (char === '?') {
+      tokens.push({ kind: 'one' });
+    } else {
+      tokens.push({ kind: 'char', char });
+    }
+  }
+  return tokens;
+}
+
+/**
+ * Whether the tokens match the whole text. Dynamic programming over (token, position), so the
+ * time is at most tokens × length whatever the pattern: no backtracking for a crafted glob.
+ */
+function matchTokens(tokens: GlobToken[], text: string): boolean {
+  let row = new Uint8Array(text.length + 1);
+  row[0] = 1;
+  for (const token of tokens) {
+    const next = new Uint8Array(text.length + 1);
+    let seen = 0;
+    for (let j = 0; j <= text.length; j += 1) {
+      const before = text[j - 1];
+      switch (token.kind) {
+        case 'char':
+          next[j] = j > 0 && row[j - 1] && before === token.char ? 1 : 0;
+          break;
+        case 'one':
+          next[j] = j > 0 && row[j - 1] && before !== '/' ? 1 : 0;
+          break;
+        case 'star':
+          next[j] = row[j] || (j > 0 && next[j - 1] && before !== '/') ? 1 : 0;
+          break;
+        case 'any':
+          next[j] = row[j] || (j > 0 && next[j - 1]) ? 1 : 0;
+          break;
+        case 'dirs':
+          // Nothing, or anything that ends with a slash.
+          next[j] = row[j] || (seen && before === '/') ? 1 : 0;
+          break;
+      }
+      if (row[j]) seen = 1;
+    }
+    row = next;
+  }
+  return row[text.length] === 1;
+}
+
+/** Turns globs (`**`, `*`, `?`) matched against paths from the project root into a test. */
 export function globMatcher(patterns: readonly string[]): (path: string) => boolean {
   if (patterns.length === 0) return () => false;
-  const expressions = patterns.map((pattern) => {
-    let source = '';
-    const text = pattern.replace(/^\.\//, '');
-    for (let i = 0; i < text.length; i += 1) {
-      const char = text[i] as string;
-      if (char === '*' && text[i + 1] === '*') {
-        if (text[i + 2] === '/') {
-          source += '(?:.*/)?';
-          i += 2;
-        } else {
-          source += '.*';
-          i += 1;
-        }
-      } else if (char === '*') {
-        source += '[^/]*';
-      } else if (char === '?') {
-        source += '[^/]';
-      } else {
-        source += char.replace(/[\\^$.|+()[\]{}]/g, '\\$&');
-      }
-    }
+  const compiled = patterns.map(tokenize);
+  return (path) => {
     // A folder pattern also covers everything below it.
-    return new RegExp(`^${source}(?:/.*)?$`);
-  });
-  return (path) => expressions.some((expression) => expression.test(path));
+    const candidates = [path];
+    for (let index = path.indexOf('/'); index !== -1; index = path.indexOf('/', index + 1)) {
+      candidates.push(path.slice(0, index));
+    }
+    return compiled.some((tokens) => candidates.some((candidate) => matchTokens(tokens, candidate)));
+  };
 }
