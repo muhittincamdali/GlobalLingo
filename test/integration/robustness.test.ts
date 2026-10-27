@@ -1,12 +1,13 @@
 // Inputs a pull request could add to make GlobalLingo crash, hang, run out of memory or write to
 // the terminal: deep nesting, huge counts, crafted globs and source files, odd numbers.
+import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, symlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { checkSource, codeContext } from '../../src/code/check-code.ts';
 import { checkCatalog } from '../../src/rules/catalog-checks.ts';
 import { readJsonCatalog } from '../../src/catalogs/json-catalog.ts';
-import { globMatcher, MAX_DEPTH } from '../../src/project/files.ts';
+import { globMatcher, MAX_DEPTH, readLimited } from '../../src/project/files.ts';
 import { render } from '../../src/report/index.ts';
 import { readBaseline } from '../../src/baseline.ts';
 import { run } from '../../src/cli/run.ts';
@@ -84,6 +85,29 @@ describe('hostile catalogs', () => {
     expect(tty).not.toMatch(/^\| error/m);
     expect(tty).toContain('src/x\\u{000A}| error |');
     expect(tty).toContain('\\u{0009}.js');
+  });
+});
+
+describe('reading a file', () => {
+  it('reads only regular files within the limit, through the opened file', async () => {
+    const outside = tree({ 'secret.txt': 'TOKEN' });
+    const root = tree({ 'a.json': '{"a": 1}', 'big.json': 'x'.repeat(2048), 'dir/x': '' });
+    symlinkSync(join(outside, 'secret.txt'), join(root, 'link.json'));
+    expect(await readLimited(root, 'a.json', 1024)).toEqual({
+      bytes: new TextEncoder().encode('{"a": 1}'),
+    });
+    expect(await readLimited(root, 'link.json', 1024)).toEqual({ problem: 'not a regular file' });
+    expect(await readLimited(root, 'dir', 1024)).toEqual({ problem: 'not a regular file' });
+    expect(await readLimited(root, 'none.json', 1024)).toEqual({ problem: 'ENOENT' });
+    expect(await readLimited(root, 'big.json', 1024)).toEqual({
+      problem: 'larger than 0 MB; not read',
+    });
+  });
+
+  it.skipIf(process.platform === 'win32')('does not wait on a named pipe', async () => {
+    const root = tree({});
+    execFileSync('mkfifo', [join(root, 'pipe.json')]);
+    expect(await readLimited(root, 'pipe.json', 1024)).toEqual({ problem: 'not a regular file' });
   });
 });
 

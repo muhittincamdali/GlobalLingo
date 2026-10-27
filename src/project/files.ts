@@ -3,7 +3,8 @@
 // a huge or looping tree cannot hold up a CI job.
 import type { Dirent } from 'node:fs';
 import { constants } from 'node:fs';
-import { lstat, open, readdir, readFile } from 'node:fs/promises';
+import type { FileHandle } from 'node:fs/promises';
+import { open, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
 /** Folders that hold dependencies, build output or tool state, never an app's own files. */
@@ -111,19 +112,45 @@ export async function writeOwnFile(path: string, text: string): Promise<void> {
 
 export type ReadResult = { bytes: Uint8Array } | { problem: string };
 
-/** Reads a regular file of at most `limit` bytes; anything else gets a reason instead. */
+/**
+ * Reads a regular file of at most `limit` bytes; anything else gets a reason instead. The file is
+ * opened first and checked through the open handle, so a symbolic link or a larger file swapped
+ * in after the check cannot be what is read. O_NONBLOCK keeps a named pipe from blocking the open.
+ */
 export async function readLimited(root: string, path: string, limit: number): Promise<ReadResult> {
+  const flags = constants.O_RDONLY | (constants.O_NOFOLLOW ?? 0) | (constants.O_NONBLOCK ?? 0);
+  let handle: FileHandle;
   try {
-    const info = await lstat(join(root, path));
-    if (!info.isFile()) return { problem: 'not a regular file' };
-    if (info.size > limit) {
-      return { problem: `larger than ${Math.round(limit / 1024 / 1024)} MB; not read` };
+    handle = await open(join(root, path), flags);
+  } catch (error) {
+    const code = (error as NodeJS.ErrnoException).code;
+    // O_NOFOLLOW refuses a link with ELOOP (Linux, macOS) or EMLINK (FreeBSD).
+    if (code === 'ELOOP' || code === 'EMLINK') return { problem: NOT_REGULAR };
+    return { problem: code ?? 'not readable' };
+  }
+  try {
+    const info = await handle.stat();
+    if (!info.isFile()) return { problem: NOT_REGULAR };
+    if (info.size > limit) return { problem: tooLarge(limit) };
+    // One byte more than the size seen, to notice a file that grew since.
+    const bytes = new Uint8Array(info.size + 1);
+    let length = 0;
+    while (length < bytes.length) {
+      const { bytesRead } = await handle.read(bytes, length, bytes.length - length, length);
+      if (bytesRead === 0) break;
+      length += bytesRead;
     }
-    return { bytes: await readFile(join(root, path)) };
+    if (length > info.size) return { problem: 'changed while being read; not read' };
+    return { bytes: bytes.subarray(0, length) };
   } catch (error) {
     return { problem: (error as NodeJS.ErrnoException).code ?? 'not readable' };
+  } finally {
+    await handle.close();
   }
 }
+
+const NOT_REGULAR = 'not a regular file';
+const tooLarge = (limit: number) => `larger than ${Math.round(limit / 1024 / 1024)} MB; not read`;
 
 type GlobToken = { kind: 'char'; char: string } | { kind: 'one' | 'star' | 'any' | 'dirs' };
 
