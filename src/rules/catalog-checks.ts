@@ -251,10 +251,10 @@ const isEmpty = (translation: Translation) =>
   translation.texts.length > 0 && translation.texts.every((text) => text.text.trim() === '');
 
 function targetsOf(catalog: Catalog, options: CatalogCheckOptions): string[] {
-  const own = catalog.locales.filter(
+  const own = [...new Set([...catalog.locales, ...(catalog.expectedLocales ?? [])])].filter(
     (locale) => locale !== catalog.sourceLocale && !isPseudoLocale(locale),
   );
-  if (!options.locales || options.locales.length === 0) return own;
+  if (!options.locales || options.locales.length === 0) return own.sort();
   return options.locales.map(
     (wanted) => own.find((locale) => normalize(locale) === normalize(wanted)) ?? wanted,
   );
@@ -292,7 +292,9 @@ export function checkCatalog(catalog: Catalog, options: CatalogCheckOptions): Ca
       file: sourceFile,
       line: 0,
       locale,
-      message: `${catalog.name} has no ${localeLabel(locale)} file, but .globallingo.json lists the locale`,
+      message: options.locales?.length
+        ? `${catalog.name} has no ${localeLabel(locale)} file, but the configuration lists the locale`
+        : `${catalog.name} has no ${localeLabel(locale)} file, but other files next to it have the locale`,
       subject: 'locale',
     });
   }

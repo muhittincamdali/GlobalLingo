@@ -84,6 +84,8 @@ export interface Catalog {
   sourceLocale: string;
   /** Every locale the catalog has, the source locale first. */
   locales: string[];
+  /** Locales the catalog should have because its sibling files do (JSON namespaces). */
+  expectedLocales?: string[];
   /** The file of each locale (a String Catalog has one file for all of them). */
   files: Map<string, string>;
   entries: Map<string, CatalogEntry>;
