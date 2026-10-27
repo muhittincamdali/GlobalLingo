@@ -2,7 +2,8 @@
 // build folders are skipped, and the walk stops after MAX_ENTRIES entries or MAX_DEPTH levels, so
 // a huge or looping tree cannot hold up a CI job.
 import type { Dirent } from 'node:fs';
-import { lstat, readdir, readFile } from 'node:fs/promises';
+import { constants } from 'node:fs';
+import { lstat, open, readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
 /** Folders that hold dependencies, build output or tool state, never an app's own files. */
@@ -91,6 +92,21 @@ export async function walk(
   };
   await visit('', 0);
   return { files, notes };
+}
+
+/**
+ * Writes a report or baseline without following a symbolic link at the path: a link committed
+ * under the report's name cannot redirect the write to another file.
+ */
+export async function writeOwnFile(path: string, text: string): Promise<void> {
+  const flags =
+    constants.O_WRONLY | constants.O_CREAT | constants.O_TRUNC | (constants.O_NOFOLLOW ?? 0);
+  const handle = await open(path, flags, 0o644);
+  try {
+    await handle.writeFile(text);
+  } finally {
+    await handle.close();
+  }
 }
 
 export type ReadResult = { bytes: Uint8Array } | { problem: string };

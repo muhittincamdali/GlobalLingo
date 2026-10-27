@@ -1,6 +1,6 @@
 // Inputs a pull request could add to make GlobalLingo crash, hang, run out of memory or write to
 // the terminal: deep nesting, huge counts, crafted globs and source files, odd numbers.
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, readFileSync, symlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { checkSource, codeContext } from '../../src/code/check-code.ts';
@@ -8,6 +8,8 @@ import { checkCatalog } from '../../src/rules/catalog-checks.ts';
 import { readJsonCatalog } from '../../src/catalogs/json-catalog.ts';
 import { globMatcher, MAX_DEPTH } from '../../src/project/files.ts';
 import { render } from '../../src/report/index.ts';
+import { readBaseline } from '../../src/baseline.ts';
+import { run } from '../../src/cli/run.ts';
 import { scan } from '../../src/scan.ts';
 import { tree } from '../helpers/tree.ts';
 
@@ -64,6 +66,51 @@ describe('hostile catalogs', () => {
       // biome-ignore lint/suspicious/noControlCharactersInRegex: finding control characters is the point.
       expect(render(report, format), format).not.toMatch(/[\u001b\u0007\u009B\u202E]/);
     }
+  });
+});
+
+describe('settings files that point elsewhere', () => {
+  const secret = 'AKIA-SECRET-VALUE-1234';
+  const project = () => tree({ 'locales/en.json': '{"a": "A"}', 'locales/de.json': '{"a": "B"}' });
+
+  it('refuses a configuration or baseline that is a symbolic link, without reading it', async () => {
+    const outside = tree({ 'secrets.env': `TOKEN=${secret}\n` });
+    const root = project();
+    symlinkSync(join(outside, 'secrets.env'), join(root, '.globallingo.json'));
+    symlinkSync(join(outside, 'secrets.env'), join(root, 'baseline.json'));
+    const config = await scan(root).catch((error: Error) => error.message);
+    expect(config).toMatch(/\.globallingo\.json: not a regular file$/);
+    const baseline = await readBaseline(join(root, 'baseline.json')).catch(
+      (error: Error) => error.message,
+    );
+    expect(baseline).toMatch(/baseline\.json: not a regular file$/);
+  });
+
+  it('does not write a report or baseline through a symbolic link', async () => {
+    const outside = tree({ 'important.txt': 'keep me' });
+    const root = project();
+    symlinkSync(join(outside, 'important.txt'), join(root, 'report.md'));
+    symlinkSync(join(outside, 'important.txt'), join(root, 'baseline.json'));
+    const io = { cwd: root, env: {}, stdout() {}, stderr() {}, stdoutIsTty: false };
+    expect(await run(['--format', 'markdown', '--output', 'report.md'], io)).toBe(2);
+    expect(await run(['--write-baseline', 'baseline.json'], io)).toBe(2);
+    expect(readFileSync(join(outside, 'important.txt'), 'utf8')).toBe('keep me');
+  });
+
+  it('names only the line of a JSON error, never the text', async () => {
+    const root = tree({
+      'locales/en.json': '{}',
+      'locales/de.json': '{}',
+      '.globallingo.json': `{\n"a": 1,\n${secret}\n}`,
+    });
+    const message = await scan(root).catch((error: Error) => error.message);
+    expect(message).toMatch(/not valid JSON \(line 3\)$/);
+    expect(message).not.toContain('SECRET');
+    const baseline = tree({ 'b.json': `[${secret}]` });
+    const baselineMessage = await readBaseline(join(baseline, 'b.json')).catch(
+      (error: Error) => error.message,
+    );
+    expect(baselineMessage).not.toContain('SECRET');
   });
 });
 

@@ -1,8 +1,8 @@
-import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { BaselineError, readBaseline, writeBaseline } from '../baseline.js';
 import { ConfigError } from '../config.js';
+import { writeOwnFile } from '../project/files.js';
 import type { Report, Severity } from '../model.js';
 import { FORMATS, type Format, render } from '../report/index.js';
 import { clean, summaryLine } from '../report/text.js';
@@ -225,7 +225,7 @@ export async function run(argv: readonly string[], environment: CliEnvironment):
       width: reportWidth(io),
     });
     if (options.output) {
-      await writeFile(resolve(io.cwd, options.output), output);
+      await writeOwnFile(resolve(io.cwd, options.output), output);
       io.stderr(`Wrote ${options.output}: ${summaryLine(report)}\n`);
     } else {
       io.stdout(output);
