@@ -37,4 +37,12 @@ final class InboxViewController: UIViewController {
         alert.addAction(UIAlertAction(title: NSLocalizedString("archive.confirm.ok", comment: ""), style: .destructive))
         present(alert, animated: true)
     }
+
+    // scripts/simulator-shots.sh opens the alert at launch, so it can take a screenshot of it.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if ProcessInfo.processInfo.arguments.contains("-ShowArchiveAlert"), presentedViewController == nil {
+            archive()
+        }
+    }
 }

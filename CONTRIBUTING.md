@@ -22,14 +22,15 @@ CI runs `npm run lint`, `npm run typecheck`, `npm test` and `npm run build` on N
 if they pass locally they pass on your pull request. Tests read only files in the repository and
 temporary folders; they need neither the network nor Xcode or Flutter.
 
-| Command             | What it does                                                                            |
-| ------------------- | --------------------------------------------------------------------------------------- |
-| `npm run lint`      | Biome (code) and Prettier (formatting); `npm run format` fixes formatting               |
-| `npm run typecheck` | TypeScript in strict mode over `src/`, `test/` and `scripts/`                           |
-| `npm test`          | Unit, integration, snapshot and robustness tests                                        |
-| `npm run demo`      | Records the terminal SVGs in `docs/media/` from the CLI                                 |
-| `npm run docs`      | Builds the documentation site into `site/` (run `npm ci --prefix docs/site` once first) |
-| `npm run smoke`     | Packs the package, installs the tarball and runs it                                     |
+| Command                      | What it does                                                                                          |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `npm run lint`               | Biome (code) and Prettier (formatting); `npm run format` fixes formatting                             |
+| `npm run typecheck`          | TypeScript in strict mode over `src/`, `test/` and `scripts/`                                         |
+| `npm test`                   | Unit, integration, snapshot and robustness tests                                                      |
+| `npm run demo`               | Records the terminal SVGs in `docs/media/` from the CLI                                               |
+| `npm run docs`               | Builds the documentation site into `site/` (run `npm ci --prefix docs/site` once first)               |
+| `npm run smoke`              | Packs the package, installs the tarball and runs it                                                   |
+| `scripts/simulator-shots.sh` | Mac with Xcode 27 and XcodeGen: builds the UIKit fixture and takes the README's simulator screenshots |
 
 ## Where things live
 

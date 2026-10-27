@@ -29,7 +29,8 @@ upper-cased with `uppercased()` in an app that ships Turkish (TRI003).
 (DUP001), a Turkish plural form that reads the 64-bit count with `%1$d` (FMT001), Russian without
 the forms for 2–4 and 5+ (PLU001), a key missing in Turkish (MIS001), a Turkish key the source
 does not have (STA002), `archive.confirm.ok` looked up but in no table (KEY001), and a button
-title set from a literal (HCS001).
+title set from a literal (HCS001). With the launch argument `-ShowArchiveAlert` it opens the archive
+alert at launch, which `scripts/simulator-shots.sh` uses for the README's screenshots.
 
 **flutter-arb**: the German message renames the `{shelf}` placeholder to `{regal}` (FMT001,
 FMT002). `flutter gen-l10n` accepts it and adds a third parameter, `Object regal`, to

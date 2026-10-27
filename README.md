@@ -222,6 +222,15 @@ kept its load average above 40: three sets of 100 runs of `node dist/cli/main.js
 fixtures, Node.js start-up included. The medians of the three sets were 0.12, 0.13 and 0.14
 seconds; the slowest run took 0.54 seconds.
 
+### What users see
+
+The UIKit fixture in the iOS 27.0 simulator (iPhone 17, built with Xcode 27.1), English on the
+left and Turkish on the right. Foundation shows the key itself where a translation is missing
+(`archive.confirm.message` in Turkish, MIS001) and where no table has the key at all
+(`archive.confirm.ok`, KEY001). `scripts/simulator-shots.sh` takes both screenshots.
+
+<p align="center"><img src="docs/media/simulator/inbox-en.png" width="300" alt="The Inbox app in English: the alert asks 'Archive all messages?' with the message text, and the button shows the raw key archive.confirm.ok"> <img src="docs/media/simulator/inbox-tr.png" width="300" alt="The Inbox app in Turkish: the alert title is translated, but the message shows the raw key archive.confirm.message and the button the raw key archive.confirm.ok"></p>
+
 ## Status
 
 | Feature                                                                                                                    | Status  |
