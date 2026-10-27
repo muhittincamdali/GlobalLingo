@@ -1,0 +1,8 @@
+{
+  "@@locale": "de",
+  "appTitle": "Bücherregal",
+  "booksOnShelf": "{count, plural, =0{Keine Bücher auf {regal}} one{Ein Buch auf {regal}} other{{count} Bücher auf {regal}}}",
+  "pickupCity": "Abholung in {city}",
+  "deleteAll": "Alle löschen",
+  "syncFailed": "Synchronisierung fehlgeschlagen. Prüfe deine Verbindung."
+}

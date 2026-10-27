@@ -1,0 +1,13 @@
+{
+  "greeting": "Cześć {{name}}",
+  "cart": {
+    "title": "Twój koszyk",
+    "empty": "Twój koszyk jest pusty",
+    "items_one": "{{count}} produkt",
+    "items_other": "{{count}} produktu"
+  },
+  "checkout": {
+    "button": "Do kasy",
+    "total": "Razem: {{amount}}"
+  }
+}

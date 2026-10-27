@@ -1,0 +1,25 @@
+name: Inbox
+options:
+  bundleIdPrefix: dev.globallingo.fixtures
+  deploymentTarget:
+    iOS: '17.0'
+  developmentLanguage: en
+targets:
+  Inbox:
+    type: application
+    platform: iOS
+    sources: [Inbox]
+    info:
+      path: Inbox/Info.plist
+      properties:
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+          UISceneConfigurations:
+            UIWindowSceneSessionRoleApplication:
+              - UISceneConfigurationName: Default Configuration
+                UISceneDelegateClassName: $(PRODUCT_MODULE_NAME).SceneDelegate
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: NO
+        SWIFT_VERSION: '6.0'

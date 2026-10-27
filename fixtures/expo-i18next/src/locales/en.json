@@ -1,0 +1,13 @@
+{
+  "greeting": "Hello {{name}}",
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty",
+    "items_one": "{{count}} item",
+    "items_other": "{{count}} items"
+  },
+  "checkout": {
+    "button": "Check out",
+    "total": "Total: {{amount}}"
+  }
+}

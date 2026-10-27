@@ -14,7 +14,7 @@ docs/site/node_modules/
 # Local scratch space
 _work/
 
-# Build output of the fixture projects, in case one is built locally
+# Build output and tool state of the fixture projects, in case one is built locally
 .build/
 .dart_tool/
 xcuserdata/
@@ -24,3 +24,4 @@ Pods/
 
 # macOS
 .DS_Store
+.swiftpm/

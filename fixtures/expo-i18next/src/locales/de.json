@@ -1,0 +1,16 @@
+{
+  "greeting": "Hallo {{username}}",
+  "cart": {
+    "title": "Dein Warenkorb",
+    "empty": "Dein Warenkorb ist leer",
+    "items_one": "{{count}} Artikel",
+    "items_other": "{{count}} Artikel"
+  },
+  "checkout": {
+    "button": "Zur Kasse",
+    "total": "Summe: {{amount}}"
+  },
+  "checkout": {
+    "button": "Bezahlen"
+  }
+}

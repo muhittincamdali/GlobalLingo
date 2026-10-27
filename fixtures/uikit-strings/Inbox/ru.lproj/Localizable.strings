@@ -1,0 +1,6 @@
+/* Navigation title of the inbox */
+"inbox.title" = "Входящие";
+
+/* Alert before archiving */
+"archive.confirm.title" = "Архивировать все сообщения?";
+"archive.confirm.message" = "Их можно будет найти в архиве.";

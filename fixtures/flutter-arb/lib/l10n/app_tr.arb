@@ -1,0 +1,7 @@
+{
+  "@@locale": "tr",
+  "appTitle": "Kitaplık",
+  "booksOnShelf": "{count, plural, =0{{shelf} rafında kitap yok} one{{shelf} rafında bir kitap} other{{shelf} rafında {count} kitap}}",
+  "pickupCity": "{city} teslim alma",
+  "deleteAll": "Tümünü sil"
+}
