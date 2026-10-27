@@ -1,0 +1,67 @@
+# Copy to .github/workflows/globallingo.yml in an app repository. On every pull request that
+# changes localization files or source code, GlobalLingo:
+#
+# - annotates the changed lines with its findings (--format github),
+# - adds the coverage per locale and the findings with fixes to the job summary (--format markdown),
+# - uploads SARIF for GitHub code scanning (needs security-events: write; on a private repository
+#   also GitHub Advanced Security; without it, delete the last step and security-events: write),
+#
+# and fails the job when there is an error. Add `--fail-on warning` to the first step to fail on
+# warnings too, or `--baseline .globallingo-baseline.json` to fail only on new findings.
+#
+# The job runs the latest 2.x release of the npm package @mcamdali/globallingo (the command is
+# globallingo).
+name: Localization
+
+on:
+  pull_request:
+    paths:
+      - '**/*.xcstrings'
+      - '**/*.strings'
+      - '**/*.stringsdict'
+      - '**/*.arb'
+      - '**/l10n.yaml'
+      - '**/*.json'
+      - '**/*.swift'
+      - '**/*.m'
+      - '**/*.dart'
+      - '**/*.ts'
+      - '**/*.tsx'
+      - '**/*.js'
+      - '**/*.jsx'
+      - '.globallingo.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+
+      - name: Check the localization
+        run: |
+          status=0
+          npx --yes @mcamdali/globallingo@2 --format github || status=$?
+          # Exit code 2 (bad settings or no localization files) has no findings to report.
+          npx --yes @mcamdali/globallingo@2 --format markdown --fail-on none >> "$GITHUB_STEP_SUMMARY" || true
+          npx --yes @mcamdali/globallingo@2 --format sarif --fail-on none --output globallingo.sarif || true
+          exit "$status"
+
+      - uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
+        if: always() && hashFiles('globallingo.sarif') != ''
+        with:
+          sarif_file: globallingo.sarif
+          category: globallingo

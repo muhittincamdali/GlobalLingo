@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schema/config.schema.json",
+  "locales": ["de", "pl", "tr"],
+  "ignore": {
+    "paths": ["**/__tests__/**"],
+    "keys": ["legacy.*"]
+  },
+  "rules": {
+    "HCS001": "error",
+    "MIS004": "off"
+  }
+}
