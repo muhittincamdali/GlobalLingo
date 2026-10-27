@@ -1,8 +1,9 @@
 // .globallingo.json: optional settings at the root of the checked folder. Every field is optional,
 // and so is the file. Unknown fields and wrong types are errors, so a typo cannot quietly turn a
 // check off. schema/config.schema.json describes the same shape for editors.
-import { readFile } from 'node:fs/promises';
 import type { MessageSyntax, RuleId, Severity } from './model.js';
+import { JsonSyntaxError, parseJson } from './parse/json.js';
+import { readLimited } from './project/files.js';
 import { RULE_IDS } from './rules/registry.js';
 
 export type RuleSetting = Severity | 'off';
@@ -27,6 +28,8 @@ export interface Config {
 }
 
 export const CONFIG_FILE = '.globallingo.json';
+
+const MAX_CONFIG_BYTES = 1024 * 1024;
 
 export class ConfigError extends Error {}
 
@@ -118,21 +121,42 @@ export function validateConfig(value: unknown, file = CONFIG_FILE): Config {
   return config;
 }
 
-/** Reads the configuration file; a missing file is an empty configuration unless it was named. */
+/**
+ * Parses JSON from a settings or baseline file. The error names the line only: a message that
+ * quoted the text could carry the content of a file the path was made to point at into a CI log.
+ */
+export function parseSettingsJson(
+  text: string,
+  path: string,
+  fail: (message: string) => Error,
+): unknown {
+  try {
+    return JSON.parse(text);
+  } catch {
+    let line = 1;
+    try {
+      parseJson(text);
+    } catch (error) {
+      if (error instanceof JsonSyntaxError) line = error.line;
+    }
+    throw fail(`${path}: not valid JSON (line ${line})`);
+  }
+}
+
+/**
+ * Reads the configuration file; a missing file is an error only when it was named. The file must
+ * be a regular file: a symbolic link (for example to a file with secrets, added in a pull request)
+ * is refused, so its content cannot end up in an error message.
+ */
 export async function loadConfig(path: string, required: boolean): Promise<Config> {
-  let text: string;
-  try {
-    text = await readFile(path, 'utf8');
-  } catch (error) {
-    if (!required && (error as NodeJS.ErrnoException).code === 'ENOENT') return {};
-    throw new ConfigError(`${path}: ${(error as NodeJS.ErrnoException).code ?? 'not readable'}`);
+  const read = await readLimited('', path, MAX_CONFIG_BYTES);
+  if ('problem' in read) {
+    if (!required && read.problem === 'ENOENT') return {};
+    throw new ConfigError(`${path}: ${read.problem}`);
   }
-  if (text.length > 1024 * 1024) throw new ConfigError(`${path}: larger than 1 MB`);
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(text);
-  } catch (error) {
-    throw new ConfigError(`${path}: not valid JSON (${(error as Error).message})`);
-  }
-  return validateConfig(parsed, path);
+  const text = new TextDecoder().decode(read.bytes);
+  return validateConfig(
+    parseSettingsJson(text, path, (message) => new ConfigError(message)),
+    path,
+  );
 }

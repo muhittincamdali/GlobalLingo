@@ -2,8 +2,9 @@
 // It stores fingerprints (rule, file, key, locale and subject, hashed), not line numbers, so
 // findings keep matching when lines move.
 import { createHash } from 'node:crypto';
-import { readFile, writeFile } from 'node:fs/promises';
+import { parseSettingsJson } from './config.js';
 import type { Finding } from './model.js';
+import { readLimited, writeOwnFile } from './project/files.js';
 import { VERSION } from './version.js';
 
 export interface Baseline {
@@ -14,6 +15,8 @@ export interface Baseline {
 }
 
 export class BaselineError extends Error {}
+
+const MAX_BASELINE_BYTES = 64 * 1024 * 1024;
 
 export function fingerprint(parts: {
   rule: string;
@@ -50,16 +53,14 @@ export function createBaseline(findings: Finding[]): Baseline {
 }
 
 export async function readBaseline(path: string): Promise<Baseline> {
-  let parsed: unknown;
-  try {
-    const text = await readFile(path, 'utf8');
-    if (text.length > 64 * 1024 * 1024) throw new BaselineError(`${path}: larger than 64 MB`);
-    parsed = JSON.parse(text);
-  } catch (error) {
-    if (error instanceof BaselineError) throw error;
-    const code = (error as NodeJS.ErrnoException).code;
-    throw new BaselineError(`${path}: ${code ?? `not valid JSON (${(error as Error).message})`}`);
-  }
+  // A regular file only, like the configuration: a link could point at a file with secrets.
+  const read = await readLimited('', path, MAX_BASELINE_BYTES);
+  if ('problem' in read) throw new BaselineError(`${path}: ${read.problem}`);
+  const parsed = parseSettingsJson(
+    new TextDecoder().decode(read.bytes),
+    path,
+    (message) => new BaselineError(message),
+  );
   const value = parsed as Partial<Baseline> | null;
   if (
     value?.tool !== 'globallingo' ||
@@ -77,5 +78,5 @@ export async function readBaseline(path: string): Promise<Baseline> {
 export async function writeBaseline(path: string, findings: Finding[]): Promise<void> {
   const baseline = createBaseline(findings);
   const body = JSON.stringify({ ...baseline, toolVersion: VERSION }, null, 2);
-  await writeFile(path, `${body}\n`);
+  await writeOwnFile(path, `${body}\n`);
 }
