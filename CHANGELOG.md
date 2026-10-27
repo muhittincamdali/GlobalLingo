@@ -28,7 +28,8 @@ the 1.0.0 API remains.
   files (`--write-baseline`, `--baseline`) that fail a run only on new findings.
 - Limits for crafted repositories: no symbolic links, nesting limits in every reader, bounded
   patterns, file size and count limits, at most 100,000 findings, and control and bidirectional
-  characters escaped in every output.
+  characters escaped in every output, including line breaks and tabs in file names and messages
+  of the terminal and Markdown reports.
 - Four fixture apps (SwiftUI with a String Catalog, UIKit with `.strings`, Flutter with ARB, Expo
   with i18next) with their expected findings, terminal demos recorded from the CLI, examples for
   GitHub Actions, shell, the API, a pre-commit hook and a configuration, an API reference and

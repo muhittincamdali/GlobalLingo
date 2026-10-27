@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { Finding, Report } from '../../src/model.ts';
 import { render } from '../../src/report/index.ts';
 import { escapeMarkdown } from '../../src/report/markdown.ts';
-import { clean, summaryLine, wrap } from '../../src/report/text.ts';
+import { clean, cleanLine, summaryLine, wrap } from '../../src/report/text.ts';
 import { RULE_IDS } from '../../src/rules/registry.ts';
 
 const finding = (overrides: Partial<Finding> = {}): Finding => ({
@@ -55,6 +55,13 @@ describe('text helpers', () => {
     expect(clean('Tab\there\nnew line, مرحبا')).toBe('Tab\there\nnew line, مرحبا');
   });
 
+  it('keeps one-line text on one line', () => {
+    expect(cleanLine('a\tb\nc\r\nd\u2028e')).toBe(
+      'a\\u{0009}b\\u{000A}c\\u{000D}\\u{000A}d\\u{2028}e',
+    );
+    expect(cleanLine(hostile)).toBe(clean(hostile));
+  });
+
   it('wraps on spaces and summarises a report', () => {
     expect(wrap('one two three four', 9)).toEqual(['one two', 'three', 'four']);
     expect(
@@ -81,6 +88,14 @@ describe('tty', () => {
     expect(text).not.toContain('\u001b');
   });
 
+  it('keeps a file name with a line break on the finding line', () => {
+    const file = 'src/x\nERROR    MIS001  forged.json:1\t.js';
+    const text = render(report([finding({ file, message: 'm\nforged' })]), 'tty');
+    expect(text).toContain('src/x\\u{000A}ERROR    MIS001  forged.json:1\\u{0009}.js:3');
+    expect(text).toContain('m\\u{000A}forged');
+    expect(text.split('\n').filter((line) => line.startsWith('ERROR'))).toHaveLength(1);
+  });
+
   it('colours only when asked and never passes project text through raw', () => {
     const colored = render(report([finding({ message: hostile })]), 'tty', {
       color: true,
@@ -100,7 +115,7 @@ describe('tty', () => {
 describe('markdown', () => {
   it('escapes table cells so file content cannot add markup', () => {
     expect(escapeMarkdown('a | b `c` <img src=x> [l](u)\nnext')).toBe(
-      'a \\| b \\`c\\` \\<img src=x\\> \\[l\\]\\(u\\) next',
+      'a \\| b \\`c\\` \\<img src=x\\> \\[l\\]\\(u\\)\\\\u\\{000A\\}next',
     );
     const text = render(
       report([finding({ message: 'pipe | and <b>' }), finding({ baselined: true })]),
@@ -113,6 +128,15 @@ describe('markdown', () => {
       '[MIS001](https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis001)',
     );
     expect(text).toContain('1 finding in the baseline file is not listed.');
+  });
+
+  it('keeps a file name with a line break inside its table row', () => {
+    const file = 'x\n| error | [PWN](javascript:alert%281%29) | injected | row |\n.js';
+    const text = render(report([finding({ file })]), 'markdown');
+    const rows = text.split('\n').filter((line) => line.startsWith('| error |'));
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toContain('`x\\u{000A}\\| error \\| [PWN](javascript:alert%281%29) \\|');
+    expect(text).not.toMatch(/^\| injected/m);
   });
 });
 

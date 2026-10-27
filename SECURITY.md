@@ -49,7 +49,8 @@ and a JSON error in either names the line, never the text; reports and baselines
 through a link; JSON, property list and ICU readers stop at a nesting limit; source patterns and ignore
 globs run in time linear in the input; catalogs over 16 MB, source files over 2 MB, more than
 200,000 files, 24 folder levels or 100,000 findings are not read or kept; and control characters
-and bidirectional overrides from the project are escaped in every output format.
+and bidirectional overrides from the project are escaped in every output format, line breaks and
+tabs included wherever a file name or message has to stay on one line.
 
 Reports that fit this policy include, for example: a crafted file or configuration that makes
 GlobalLingo write outside the file you named, follow a link out of the folder, run code, hang,

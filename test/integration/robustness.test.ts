@@ -67,6 +67,24 @@ describe('hostile catalogs', () => {
       expect(render(report, format), format).not.toMatch(/[\u001b\u0007\u009B\u202E]/);
     }
   });
+
+  it('keeps a file name with a line break or tab on one report line', async () => {
+    const name = 'x\n| error | [PWN](javascript:alert%281%29) | injected | row |\t.js';
+    const root = tree({
+      'locales/en.json': '{"hello": "Hello"}',
+      'locales/de.json': '{"hello": "Hallo"}',
+      [`src/${name}`]: 'const a = t("missing.key");\n',
+    });
+    const report = await scan(root);
+    expect(report.findings.some((finding) => finding.file === `src/${name}`)).toBe(true);
+    const markdown = render(report, 'markdown');
+    expect(markdown).not.toMatch(/^\| error \| \[PWN\]/m);
+    expect(markdown).toContain('src/x\\u{000A}\\| error');
+    const tty = render(report, 'tty');
+    expect(tty).not.toMatch(/^\| error/m);
+    expect(tty).toContain('src/x\\u{000A}| error |');
+    expect(tty).toContain('\\u{0009}.js');
+  });
 });
 
 describe('settings files that point elsewhere', () => {

@@ -1,13 +1,11 @@
 // The Markdown report, for a pull request comment or a CI job summary.
 import type { Report } from '../model.js';
 import { RULES } from '../rules/registry.js';
-import { clean, FORMAT_LABELS, percent, plural, summaryLine } from './text.js';
+import { cleanLine, FORMAT_LABELS, percent, plural, summaryLine } from './text.js';
 
-/** Escapes text for a Markdown table cell or paragraph, so file content cannot add markup. */
+/** Escapes text for a Markdown table cell or paragraph, so file content cannot add markup or lines. */
 export function escapeMarkdown(text: string): string {
-  return clean(text)
-    .replace(/[\\`*_{}[\]()#+!|<>~]/g, '\\$&')
-    .replace(/\r?\n/g, ' ');
+  return cleanLine(text).replace(/[\\`*_{}[\]()#+!|<>~]/g, '\\$&');
 }
 
 export function renderMarkdown(report: Report): string {
@@ -33,7 +31,7 @@ export function renderMarkdown(report: Report): string {
     for (const finding of active) {
       const where = finding.line > 0 ? `${finding.file}:${finding.line}` : finding.file;
       lines.push(
-        `| ${finding.severity} | [${finding.rule}](${finding.docs}) ${escapeMarkdown(RULES[finding.rule].title)} | \`${clean(where).replace(/`/g, "'").replace(/\|/g, '\\|')}\` | ${escapeMarkdown(finding.message)} | ${escapeMarkdown(finding.fix)} |`,
+        `| ${finding.severity} | [${finding.rule}](${finding.docs}) ${escapeMarkdown(RULES[finding.rule].title)} | \`${cleanLine(where).replace(/`/g, "'").replace(/\|/g, '\\|')}\` | ${escapeMarkdown(finding.message)} | ${escapeMarkdown(finding.fix)} |`,
       );
     }
     lines.push('');

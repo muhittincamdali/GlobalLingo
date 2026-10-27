@@ -11,9 +11,21 @@ export function clean(text: string): string {
   return text.replace(
     // biome-ignore lint/suspicious/noControlCharactersInRegex: matching control characters is the point.
     /[\u0000-\u0008\u000B-\u001F\u007F-\u009F\u202A-\u202E\u2066-\u2069]/g,
-    (char) => `\\u{${(char.codePointAt(0) as number).toString(16).toUpperCase().padStart(4, '0')}}`,
+    escapeChar,
   );
 }
+
+/**
+ * clean() for text that has to stay on one line: a file name, key or message in a terminal line or
+ * a Markdown table cell. Tabs, line feeds and the line and paragraph separators are escaped too,
+ * so a file named "a\n| row |" cannot start a line of its own.
+ */
+export function cleanLine(text: string): string {
+  return clean(text).replace(/[\t\n\u2028\u2029]/g, escapeChar);
+}
+
+const escapeChar = (char: string) =>
+  `\\u{${(char.codePointAt(0) as number).toString(16).toUpperCase().padStart(4, '0')}}`;
 
 /** A copy of a value with every string passed through clean(). */
 export function cleaned<T>(value: T): T {

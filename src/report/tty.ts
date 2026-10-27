@@ -2,7 +2,15 @@
 // and documentation link, then the totals. Colour is optional and only marks severity.
 import type { Finding, Report, Severity } from '../model.js';
 import { RULES } from '../rules/registry.js';
-import { clean, FORMAT_LABELS, percent, plural, SYNTAX_LABELS, summaryLine, wrap } from './text.js';
+import {
+  cleanLine,
+  FORMAT_LABELS,
+  percent,
+  plural,
+  SYNTAX_LABELS,
+  summaryLine,
+  wrap,
+} from './text.js';
 
 export interface TtyOptions {
   color: boolean;
@@ -29,17 +37,17 @@ export function renderTty(report: Report, options: TtyOptions): string {
   const width = Math.max(40, options.width);
   const lines: string[] = [];
   lines.push(
-    `${paint('bold', `GlobalLingo ${report.tool.version}`)} ${paint('dim', '·')} ${clean(report.path)}`,
+    `${paint('bold', `GlobalLingo ${report.tool.version}`)} ${paint('dim', '·')} ${cleanLine(report.path)}`,
   );
   lines.push('');
   for (const catalog of report.catalogs) {
     const kind = `${FORMAT_LABELS[catalog.format]}, ${SYNTAX_LABELS[catalog.syntax]}`;
     lines.push(
-      `  ${paint('bold', clean(catalog.id))}  ${paint('dim', `${kind} · source ${clean(catalog.sourceLocale)} · ${plural(catalog.keys, 'key')}`)}`,
+      `  ${paint('bold', cleanLine(catalog.id))}  ${paint('dim', `${kind} · source ${cleanLine(catalog.sourceLocale)} · ${plural(catalog.keys, 'key')}`)}`,
     );
     if (catalog.coverage.length > 0) {
       const cells = catalog.coverage.map(
-        (item) => `${clean(item.locale)} ${percent(item.translated, item.total)}`,
+        (item) => `${cleanLine(item.locale)} ${percent(item.translated, item.total)}`,
       );
       for (const line of wrap(cells.join(' · '), width - 4)) lines.push(`    ${line}`);
     }
@@ -50,7 +58,7 @@ export function renderTty(report: Report, options: TtyOptions): string {
     if (report.findings.length === 0) lines.push('');
     lines.push(paint('bold', 'Notes'));
     for (const note of report.notes) {
-      const [first = '', ...rest] = wrap(clean(note), width - 4);
+      const [first = '', ...rest] = wrap(cleanLine(note), width - 4);
       lines.push(`  - ${first}`, ...rest.map((line) => `    ${line}`));
     }
     lines.push('');
@@ -71,11 +79,11 @@ function renderFinding(
   const label = finding.baselined ? 'BASELINE' : LABELS[finding.severity];
   const style: Style = finding.baselined ? 'dim' : STYLES[finding.severity];
   const where = finding.line > 0 ? `${finding.file}:${finding.line}` : finding.file;
-  const head = `${paint(style, paint('bold', label.padEnd(8)))} ${paint('bold', finding.rule)}  ${clean(where)}  ${paint('dim', RULES[finding.rule].title)}`;
-  const body = wrap(clean(finding.message), width - INDENT.length).map(
+  const head = `${paint(style, paint('bold', label.padEnd(8)))} ${paint('bold', finding.rule)}  ${cleanLine(where)}  ${paint('dim', RULES[finding.rule].title)}`;
+  const body = wrap(cleanLine(finding.message), width - INDENT.length).map(
     (line) => `${INDENT}${line}`,
   );
-  const fix = wrap(`Fix: ${clean(finding.fix)}`, width - INDENT.length).map(
+  const fix = wrap(`Fix: ${cleanLine(finding.fix)}`, width - INDENT.length).map(
     (line) => `${INDENT}${paint('dim', line)}`,
   );
   return [head, ...body, ...fix, `${INDENT}${paint('dim', finding.docs)}`];
