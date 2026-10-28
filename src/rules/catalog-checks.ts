@@ -45,17 +45,39 @@ export function localeLabel(locale: string): string {
 
 const normalize = (locale: string) => (toLanguageTag(locale) ?? locale).toLowerCase();
 
+interface SourceTexts {
+  /** The first text of each variant path. */
+  byPath: Map<string, MessageText>;
+  /** The first text of an "other" variant, at any depth. */
+  anyOther: MessageText | undefined;
+}
+
+// Built once per source translation: searching its texts for every translated text would make a
+// catalog with many variants quadratic.
+const sourceTexts = new WeakMap<Translation, SourceTexts>();
+
+function textsOf(source: Translation): SourceTexts {
+  let found = sourceTexts.get(source);
+  if (!found) {
+    const byPath = new Map<string, MessageText>();
+    for (const text of source.texts) if (!byPath.has(text.path)) byPath.set(text.path, text);
+    const anyOther = source.texts.find((text) => text.path.endsWith('.other'));
+    found = { byPath, anyOther };
+    sourceTexts.set(source, found);
+  }
+  return found;
+}
+
 /** The source text a translated text is compared with: same variant, else "other", else the first. */
 function counterpart(source: Translation, path: string): MessageText | undefined {
-  const exact = source.texts.find((text) => text.path === path);
+  const { byPath, anyOther } = textsOf(source);
+  const exact = byPath.get(path);
   if (exact) return exact;
-  const other = path.replace(/[^.]+$/, 'other');
-  return (
-    source.texts.find((text) => text.path === other) ??
-    source.texts.find((text) => text.path === '') ??
-    source.texts.find((text) => text.path.endsWith('.other')) ??
-    source.texts[0]
-  );
+  // The last segment replaced by "other". Not /[^.]+$/: on a long segment ending in "." it
+  // rescans the segment from every position.
+  const dot = path.lastIndexOf('.');
+  const other = dot === path.length - 1 ? path : `${path.slice(0, dot + 1)}other`;
+  return byPath.get(other) ?? byPath.get('') ?? anyOther ?? source.texts[0];
 }
 
 /** Plural forms that leave out the number on purpose ("one file", "two files" as words). */
@@ -210,8 +232,9 @@ class Checker {
       );
     }
     // The source varies by plural but this translation does not.
+    const own = new Set(translation.plurals.map((forms) => forms.name));
     for (const forms of source && source !== translation ? source.plurals : []) {
-      if (translation.plurals.some((own) => own.name === forms.name)) continue;
+      if (own.has(forms.name)) continue;
       // Apple formats name plural variables freely; any plural in the translation answers this.
       if (this.catalog.syntax === 'printf' && translation.plurals.length > 0) continue;
       this.missingCategories(

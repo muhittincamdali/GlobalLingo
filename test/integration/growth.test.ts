@@ -168,6 +168,27 @@ describe('catalogs and their checks', () => {
     expect(growth(make, CATALOG_SIZE)).toBeLessThan(MAX_GROWTH);
   });
 
+  it('compares many variants with the same text in linear time', () => {
+    const make = (size: number) => {
+      const variants = { variations: { device: many(size, 40, (i) => [`d${i}`, unit('Same')]) } };
+      const catalog = readXcstrings(xcstrings({ k: { localizations: pair(variants) } }), 'L');
+      return () => check(catalog);
+    };
+    // Only the checks are timed, on the full 2 MB: reading would hide how they grow.
+    expect(growth(make)).toBeLessThan(MAX_GROWTH);
+  });
+
+  it('compares a variant with a long name in linear time', () => {
+    const make = (size: number) => {
+      const variant = (name: string) => ({ variations: { device: { [name]: unit('%d') } } });
+      const text = xcstrings({
+        k: { localizations: { en: variant('a'), de: variant(`${'b'.repeat(size)}.`) } },
+      });
+      return () => check(readXcstrings(text, 'L.xcstrings'));
+    };
+    expect(growth(make, CATALOG_SIZE)).toBeLessThan(MAX_GROWTH);
+  });
+
   it('reads ARB files with many messages in linear time', () => {
     const make = (size: number) => {
       const text = JSON.stringify({
@@ -182,6 +203,27 @@ describe('catalogs and their checks', () => {
       return () => check(readArb('lib/l10n', 'app', settings, files));
     };
     expect(growth(make, CATALOG_SIZE)).toBeLessThan(MAX_GROWTH);
+  });
+
+  it('matches many plural arguments in another order in linear time', () => {
+    const make = (size: number) => {
+      const plurals = Array.from(
+        { length: Math.floor(size / 24) },
+        (_, i) => `{a${i}, plural, other{x}}`,
+      );
+      const files = [
+        { locale: 'en', file: 'app_en.arb', text: JSON.stringify({ k: plurals.join(' ') }) },
+        {
+          locale: 'de',
+          file: 'app_de.arb',
+          text: JSON.stringify({ k: plurals.reverse().join(' ') }),
+        },
+      ];
+      const settings = { sourceLocale: 'en', useEscaping: false, outputClass: 'AppLocalizations' };
+      const catalog = readArb('lib/l10n', 'app', settings, files);
+      return () => check(catalog);
+    };
+    expect(growth(make)).toBeLessThan(MAX_GROWTH);
   });
 
   it('reads .strings tables with many pairs in linear time', () => {
