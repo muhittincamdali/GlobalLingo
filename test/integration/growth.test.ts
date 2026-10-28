@@ -300,4 +300,9 @@ describe('ignore globs', () => {
     const match = globMatcher(['**/**/**/**/**/**/**/**/a*a*a*a*a*a*a*a*a*a*b']);
     expect(growth((size) => () => match('a'.repeat(size)))).toBeLessThan(MAX_GROWTH);
   });
+
+  it('matches a glob against a key with many slashes in linear time', () => {
+    const match = globMatcher(['b*', 'a/**/c']);
+    expect(growth((size) => () => match(fill('a/', size)))).toBeLessThan(MAX_GROWTH);
+  });
 });

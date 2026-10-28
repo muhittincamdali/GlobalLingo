@@ -180,10 +180,11 @@ function tokenize(pattern: string): GlobToken[] {
 }
 
 /**
- * Whether the tokens match the whole text. Dynamic programming over (token, position), so the
- * time is at most tokens × length whatever the pattern: no backtracking for a crafted glob.
+ * Which starts of the text the tokens match: entry j is 1 when they match the first j characters.
+ * Dynamic programming over (token, position), so the time is at most tokens × length whatever the
+ * pattern: no backtracking for a crafted glob.
  */
-function matchTokens(tokens: GlobToken[], text: string): boolean {
+function matchTokens(tokens: GlobToken[], text: string): Uint8Array {
   let row = new Uint8Array(text.length + 1);
   row[0] = 1;
   for (const token of tokens) {
@@ -213,21 +214,22 @@ function matchTokens(tokens: GlobToken[], text: string): boolean {
     }
     row = next;
   }
-  return row[text.length] === 1;
+  return row;
 }
 
 /** Turns globs (`**`, `*`, `?`) matched against paths from the project root into a test. */
 export function globMatcher(patterns: readonly string[]): (path: string) => boolean {
   if (patterns.length === 0) return () => false;
   const compiled = patterns.map(tokenize);
-  return (path) => {
-    // A folder pattern also covers everything below it.
-    const candidates = [path];
-    for (let index = path.indexOf('/'); index !== -1; index = path.indexOf('/', index + 1)) {
-      candidates.push(path.slice(0, index));
-    }
-    return compiled.some((tokens) =>
-      candidates.some((candidate) => matchTokens(tokens, candidate)),
-    );
-  };
+  return (path) =>
+    compiled.some((tokens) => {
+      const row = matchTokens(tokens, path);
+      if (row[path.length]) return true;
+      // A folder pattern also covers everything below it. The row already says whether the
+      // pattern matches each folder of the path; matching every folder again would be quadratic.
+      for (let index = path.indexOf('/'); index !== -1; index = path.indexOf('/', index + 1)) {
+        if (row[index]) return true;
+      }
+      return false;
+    });
 }

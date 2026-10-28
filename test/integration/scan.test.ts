@@ -253,6 +253,20 @@ describe('configuration', () => {
         'a/build.json',
       ].map(match),
     ).toEqual([true, true, true, true, false, false]);
+    // A pattern that matches a folder covers the files below it, at any folder of the path.
+    const folders = globMatcher(['App/*', 'a?c', 'x/**/z', 'home.*']);
+    expect(
+      [
+        'App/One/x.swift',
+        'abc/d/e',
+        'x/y/z/w',
+        'home.title/sub',
+        'App',
+        'ab/c',
+        'x/y',
+        'b/abc/d',
+      ].map(folders),
+    ).toEqual([true, true, true, true, false, false, false, false]);
   });
 });
 
