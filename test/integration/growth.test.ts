@@ -11,6 +11,7 @@ import { i18nextNesting, i18nJsPlaceholders } from '../../src/messages/interpola
 import { parsePrintf } from '../../src/messages/printf.ts';
 import type { Catalog } from '../../src/model.ts';
 import { parseJson } from '../../src/parse/json.ts';
+import { parsePlist } from '../../src/parse/plist.ts';
 import { parseStrings } from '../../src/parse/strings.ts';
 import { globMatcher } from '../../src/project/files.ts';
 import { checkCatalog } from '../../src/rules/catalog-checks.ts';
@@ -103,6 +104,15 @@ describe('catalog readers', () => {
     ['nesting', (size: number) => i18nextNesting(`$t(${' '.repeat(size)}`)],
   ])('reads %s placeholders in linear time', (_name, read) => {
     expect(growth((size) => () => read(size))).toBeLessThan(MAX_GROWTH);
+  });
+});
+
+describe('property lists', () => {
+  it.each([
+    ['a long tag', (size: number) => `<plist><dict${'a'.repeat(size)}/x>`],
+    ['long tags', (size: number) => `<plist><array>${fill('<true    />', size)}</array></plist>`],
+  ])('reads %s in linear time', (_name, make) => {
+    expect(growth((size) => () => parsePlist(make(size)))).toBeLessThan(MAX_GROWTH);
   });
 });
 

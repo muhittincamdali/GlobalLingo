@@ -7,7 +7,13 @@ import {
   parseJson,
   uniqueMembers,
 } from '../../src/parse/json.ts';
-import { dictValue, MAX_PLIST_DEPTH, PlistSyntaxError, parsePlist } from '../../src/parse/plist.ts';
+import {
+  dictValue,
+  MAX_PLIST_DEPTH,
+  MAX_TAG_LENGTH,
+  PlistSyntaxError,
+  parsePlist,
+} from '../../src/parse/plist.ts';
 import { StringsSyntaxError, parseStrings } from '../../src/parse/strings.ts';
 
 describe('parseJson', () => {
@@ -174,6 +180,19 @@ describe('parsePlist', () => {
     ).toEqual(['true', '', '<raw>']);
   });
 
+  it('reads tags with attributes, spaces and a closing slash', () => {
+    const { root } = parsePlist(
+      plist(
+        '<dict  >\n<key>a</key><array\t/>\n<key>b</key><true / >\n<key>c</key><string x="1"></string></dict >',
+      ),
+    );
+    expect(root.type === 'dict' && root.entries.map((entry) => entry.value)).toMatchObject([
+      { type: 'array', items: [] },
+      { type: 'boolean', value: 'true' },
+      { type: 'string', value: '' },
+    ]);
+  });
+
   it('records duplicate keys and keeps the last value', () => {
     const { root, duplicates } = parsePlist(
       plist('<dict>\n<key>k</key><string>1</string>\n<key>k</key><string>2</string>\n</dict>'),
@@ -189,6 +208,10 @@ describe('parsePlist', () => {
     ['<dict><key>a</key><string>&bogus;</string></dict>', /Unknown entity/],
     ['<dict><key>a</key><string>&#x110000;</string></dict>', /Invalid character reference/],
     ['<dict><key>a</key><unknown/></dict>', /Unexpected <unknown>/],
+    ['<dict/x>', /Unreadable tag <dict\/x>/],
+    ['<dict a="1/2"></dict>', /Unreadable tag/],
+    ['<1dict/>', /Unreadable tag/],
+    [`<dict${' '.repeat(MAX_TAG_LENGTH)}/>`, /Tag longer than 1024 characters/],
     ['', /no property list value/],
   ])('rejects %j', (body, message) => {
     expect(() => parsePlist(plist(body))).toThrow(message);

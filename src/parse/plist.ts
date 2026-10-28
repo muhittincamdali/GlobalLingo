@@ -37,6 +37,8 @@ export class PlistSyntaxError extends Error {
 }
 
 export const MAX_PLIST_DEPTH = 64;
+/** Far longer than `<plist version="1.0">`; a longer tag is a crafted file, not a property list. */
+export const MAX_TAG_LENGTH = 1024;
 
 const ENTITIES: Record<string, string> = { lt: '<', gt: '>', amp: '&', quot: '"', apos: "'" };
 
@@ -59,6 +61,25 @@ interface Tag {
   closing: boolean;
   selfClosing: boolean;
   line: number;
+}
+
+const isLetter = (code: number) => (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
+
+/**
+ * Reads the text between `<` and `>`: an optional `/`, the name, attributes without a `/`, and an
+ * optional `/` before trailing space. One pass; a pattern for this backtracks on a long tag.
+ */
+function readTag(body: string, line: number): Tag | undefined {
+  const closing = body.startsWith('/');
+  let end = closing ? 1 : 0;
+  while (end < body.length && isLetter(body.charCodeAt(end))) end += 1;
+  const name = body.slice(closing ? 1 : 0, end);
+  if (!name) return undefined;
+  let rest = body.slice(end).trimEnd();
+  const selfClosing = rest.endsWith('/');
+  if (selfClosing) rest = rest.slice(0, -1);
+  if (rest.includes('/')) return undefined;
+  return { name, closing, selfClosing, line };
 }
 
 export function parsePlist(text: string): PlistDocument {
@@ -96,13 +117,11 @@ export function parsePlist(text: string): PlistDocument {
       }
       const end = text.indexOf('>', index);
       if (end === -1) fail('Unterminated tag');
+      if (end - index - 1 > MAX_TAG_LENGTH) fail(`Tag longer than ${MAX_TAG_LENGTH} characters`);
       const tagLine = line;
       const body = text.slice(index + 1, end);
       advanceTo(end + 1);
-      const match = /^(\/?)([A-Za-z]+)[^/]*?(\/?)\s*$/.exec(body);
-      if (!match) fail(`Unreadable tag <${body.slice(0, 40)}>`);
-      const [, slash, name, selfClose] = match as unknown as [string, string, string, string];
-      return { name, closing: slash === '/', selfClosing: selfClose === '/', line: tagLine };
+      return readTag(body, tagLine) ?? fail(`Unreadable tag <${body.slice(0, 40)}>`);
     }
   };
 
