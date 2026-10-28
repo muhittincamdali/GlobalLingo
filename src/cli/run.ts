@@ -45,7 +45,7 @@ Options:
       --baseline <file>      findings in this file are reported but do not fail the run
       --write-baseline <file>  write every finding of this run to a baseline file
       --no-code              check the localization files only, not the source code
-      --no-color             plain text even in a terminal (NO_COLOR is respected)
+      --no-color             plain text even in a terminal (NO_COLOR and FORCE_COLOR are respected)
   -h, --help                 show this help
   -v, --version              show the version
 
