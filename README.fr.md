@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
+<!-- i18n-source: README.md@c32cc2ce311b4ffeda8e8efb2155f9b2654cfba5 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -240,7 +240,7 @@ GlobalLingo lit les quatre formats en une seule exécution et ajoute les types d
 | --------------- | ---------------- |
 | Node.js         | 22.12            |
 
-GlobalLingo n’a besoin ni de Xcode, ni de Flutter, ni de React Native : il lit des fichiers, il fonctionne donc aussi sous Linux. La CI exécute les tests sur Node.js 22 et 24 (Linux) ; en local, les 192 passent sur Node.js 22.23, 24.22 et 26.12 sur un Mac (Apple silicon).
+GlobalLingo n’a besoin ni de Xcode, ni de Flutter, ni de React Native : il lit des fichiers, il fonctionne donc aussi sous Linux. La CI exécute les tests sur Node.js 22 et 24 (Linux) ; en local, les 256 passent sur Node.js 22.23, 24.22 et 26.12 sur un Mac (Apple silicon).
 
 ## Architecture
 

@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
+<!-- i18n-source: README.md@c32cc2ce311b4ffeda8e8efb2155f9b2654cfba5 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -313,7 +313,7 @@ kod denetimlerini ve Türkçe I kurallarını ekler. Yukarıdaki açıklamalar, 
 
 GlobalLingo'nun Xcode, Flutter veya React Native'e ihtiyacı yoktur: dosya okur, bu yüzden Linux'ta
 da çalışır. CI testleri Node.js 22 ve 24 ile (Linux) çalıştırır; yerelde, bir Mac'te (Apple
-silicon) Node.js 22.23, 24.22 ve 26.12 ile 192 testin tamamı geçer.
+silicon) Node.js 22.23, 24.22 ve 26.12 ile 256 testin tamamı geçer.
 
 ## Mimari
 

@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
+<!-- i18n-source: README.md@c32cc2ce311b4ffeda8e8efb2155f9b2654cfba5 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -240,7 +240,7 @@ GlobalLingo는 네 가지 형식을 한 번에 읽고, 플레이스홀더 타입
 | ------- | --------- |
 | Node.js | 22.12     |
 
-GlobalLingo에는 Xcode, Flutter, React Native가 필요하지 않습니다. 파일을 읽기만 하므로 Linux에서도 실행됩니다. CI는 Node.js 22와 24(Linux)에서 테스트를 실행하며, 로컬에서는 Mac(Apple silicon)의 Node.js 22.23, 24.22, 26.12에서 192개 테스트가 모두 통과합니다.
+GlobalLingo에는 Xcode, Flutter, React Native가 필요하지 않습니다. 파일을 읽기만 하므로 Linux에서도 실행됩니다. CI는 Node.js 22와 24(Linux)에서 테스트를 실행하며, 로컬에서는 Mac(Apple silicon)의 Node.js 22.23, 24.22, 26.12에서 256개 테스트가 모두 통과합니다.
 
 ## 아키텍처
 
