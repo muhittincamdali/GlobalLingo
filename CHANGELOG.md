@@ -6,6 +6,8 @@ All notable changes to GlobalLingo are listed here. The format follows
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-10-28
+
 GlobalLingo 2.0.0 replaces the Swift translation framework of 1.0.0 with a localization linter for
 mobile apps, published on npm as `@mcamdali/globallingo` with the command `globallingo`. Nothing of
 the 1.0.0 API remains.
@@ -57,5 +59,6 @@ the 1.0.0 API remains.
 
 The Swift translation framework, withdrawn in 2.0.0.
 
-[Unreleased]: https://github.com/muhittincamdali/GlobalLingo/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/muhittincamdali/GlobalLingo/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/muhittincamdali/GlobalLingo/compare/v1.0.0...v2.0.0
 [1.0.0]: https://github.com/muhittincamdali/GlobalLingo/releases/tag/v1.0.0
