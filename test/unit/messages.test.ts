@@ -11,6 +11,13 @@ describe('parsePrintf', () => {
   const kinds = (text: string) =>
     parsePrintf(text).specifiers.map((item) => [item.position, item.kind, item.raw]);
 
+  it('reads zero flags before a width, with or without a position', () => {
+    expect(
+      parsePrintf('%05d %-05d %00d %010.2f %1$05lld %0%').specifiers.map((item) => item.raw),
+    ).toEqual(['%05d', '%-05d', '%00d', '%010.2f', '%1$05lld']);
+    expect(parsePrintf('%0000x %1$00').invalid).toEqual([]);
+  });
+
   it('numbers specifiers in order and honours explicit positions', () => {
     expect(kinds('%@ has %lld files')).toEqual([
       [1, 'object', '%@'],
@@ -155,6 +162,12 @@ describe('interpolation placeholders', () => {
     expect(
       i18nextPlaceholders('{{count}} items for {{ name }} on {{date, datetime}} {{- html}}'),
     ).toEqual(['count', 'name', 'date', 'html']);
+    expect(i18nextPlaceholders('{{ -  name }} {{-x}} {{ - }} {{ -, f}} {{  }}')).toEqual([
+      'name',
+      'x',
+      '-',
+      '-',
+    ]);
     expect(i18nextNesting('See $t(common.ok) and $t(help, { "x": 1 })')).toEqual([
       'common.ok',
       'help',

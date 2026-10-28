@@ -3,10 +3,13 @@
 //   https://www.i18next.com/translation-function/interpolation
 // - i18n-js: `%{name}` and `{{name}}`. https://github.com/fnando/i18n
 
-/** Names of the `{{…}}` placeholders in an i18next value, in order of appearance. */
+/**
+ * Names of the `{{…}}` placeholders in an i18next value, in order of appearance. The space after
+ * `-` is matched only after a `-`: `\s*-?\s*` could split a long run of spaces in every way.
+ */
 export function i18nextPlaceholders(text: string): string[] {
   const names: string[] = [];
-  for (const match of text.matchAll(/\{\{\s*-?\s*([^{}\s,]+)\s*(?:,[^{}]*)?\}\}/g)) {
+  for (const match of text.matchAll(/\{\{\s*(?:-\s*)?([^{}\s,]+)\s*(?:,[^{}]*)?\}\}/g)) {
     names.push(match[1] as string);
   }
   return names;

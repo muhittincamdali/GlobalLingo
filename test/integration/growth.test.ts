@@ -7,7 +7,11 @@ import { readJsonCatalog } from '../../src/catalogs/json-catalog.ts';
 import { readXcstrings } from '../../src/catalogs/xcstrings.ts';
 import { checkSource, codeContext } from '../../src/code/check-code.ts';
 import { parseIcu } from '../../src/messages/icu.ts';
-import { i18nextNesting, i18nJsPlaceholders } from '../../src/messages/interpolation.ts';
+import {
+  i18nextNesting,
+  i18nextPlaceholders,
+  i18nJsPlaceholders,
+} from '../../src/messages/interpolation.ts';
 import { parsePrintf } from '../../src/messages/printf.ts';
 import type { Catalog } from '../../src/model.ts';
 import { parseJson } from '../../src/parse/json.ts';
@@ -96,6 +100,8 @@ describe('catalog readers', () => {
     ['specifiers', (size: number) => fill('%1$@ %lld %.2f ', size)],
     ['digits', (size: number) => `%${'1'.repeat(size)}`],
     ['a reference', (size: number) => `%#@${'a'.repeat(size)}`],
+    ['zeros', (size: number) => `%${'0'.repeat(size)}`],
+    ['a position and zeros', (size: number) => `%1$${'0'.repeat(size)}`],
   ])('reads printf with %s in linear time', (_name, make) => {
     expect(growth((size) => () => parsePrintf(make(size)))).toBeLessThan(MAX_GROWTH);
   });
@@ -103,6 +109,8 @@ describe('catalog readers', () => {
   it.each([
     ['i18n-js', (size: number) => i18nJsPlaceholders(`%{${' '.repeat(size)}`)],
     ['nesting', (size: number) => i18nextNesting(`$t(${' '.repeat(size)}`)],
+    ['i18next', (size: number) => i18nextPlaceholders(`{{${' '.repeat(size)}`)],
+    ['i18next formatted', (size: number) => i18nextPlaceholders(`{{a,${' '.repeat(size)}`)],
   ])('reads %s placeholders in linear time', (_name, read) => {
     expect(growth((size) => () => read(size))).toBeLessThan(MAX_GROWTH);
   });

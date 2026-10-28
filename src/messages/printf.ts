@@ -21,9 +21,10 @@ export interface PrintfParse {
 
 // %[position$][flags][width][.precision][length]conversion; '*' width/precision take an argument.
 // The space flag is left out on purpose: "50 % de remise" is a percent sign in French typography,
-// not `% d`.
+// not `% d`. A width cannot start with 0 (that is the flag): with `\d+` there, a long run of zeros
+// could be split between flags and width in every possible way before the match fails.
 const SPECIFIER =
-  /%(?:(?<refPosition>\d+)\$)?#@(?<reference>[^@\s]+)@|%(?:(?<position>\d+)\$)?[-+#0]*(?<width>\*|\d+)?(?:\.(?<precision>\*|\d+))?(?<length>hh|h|ll|l|q|L|z|t|j)?(?<conversion>[@dDiuUxXoOfFeEgGaAcCsSp%])|%(?<other>\S)?/g;
+  /%(?:(?<refPosition>\d+)\$)?#@(?<reference>[^@\s]+)@|%(?:(?<position>\d+)\$)?[-+#0]*(?<width>\*|[1-9]\d*)?(?:\.(?<precision>\*|\d+))?(?<length>hh|h|ll|l|q|L|z|t|j)?(?<conversion>[@dDiuUxXoOfFeEgGaAcCsSp%])|%(?<other>\S)?/g;
 
 const INT_CONVERSIONS = new Set(['d', 'D', 'i', 'u', 'U', 'x', 'X', 'o', 'O']);
 const FLOAT_CONVERSIONS = new Set(['f', 'F', 'e', 'E', 'g', 'G', 'a', 'A']);
