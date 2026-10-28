@@ -111,6 +111,18 @@ describe('property lists', () => {
   it.each([
     ['a long tag', (size: number) => `<plist><dict${'a'.repeat(size)}/x>`],
     ['long tags', (size: number) => `<plist><array>${fill('<true    />', size)}</array></plist>`],
+    [
+      'CDATA sections',
+      (size: number) => `<plist><string>${fill('<![CDATA[x]]>', size)}</string></plist>`,
+    ],
+    [
+      'many strings',
+      (size: number) => `<plist><array>${fill('<string>a</string>', size)}</array></plist>`,
+    ],
+    [
+      'entities',
+      (size: number) => `<plist><string>${fill('&amp;&#x131;&a', size)}</string></plist>`,
+    ],
   ])('reads %s in linear time', (_name, make) => {
     expect(growth((size) => () => parsePlist(make(size)))).toBeLessThan(MAX_GROWTH);
   });
@@ -172,6 +184,21 @@ describe('catalogs and their checks', () => {
         locale,
         file: `${locale}.lproj/Localizable.strings`,
         kind: 'strings' as const,
+        text,
+      }));
+      return () => check(readAppleTable('Localizable', 'Localizable', 'en', files));
+    };
+    expect(growth(make, CATALOG_SIZE)).toBeLessThan(MAX_GROWTH);
+  });
+
+  it('reads .stringsdict tables with many plural forms in linear time', () => {
+    const make = (size: number) => {
+      const forms = fill('<key>few</key><string>%d x</string>', size);
+      const text = `<plist><dict><key>k</key><dict><key>NSStringLocalizedFormatKey</key><string>%#@v@</string><key>v</key><dict><key>NSStringFormatSpecTypeKey</key><string>NSStringPluralRuleType</string><key>NSStringFormatValueTypeKey</key><string>d</string>${forms}<key>other</key><string>%d</string></dict></dict></dict></plist>`;
+      const files = (['en', 'de'] as const).map((locale) => ({
+        locale,
+        file: `${locale}.lproj/Localizable.stringsdict`,
+        kind: 'stringsdict' as const,
         text,
       }));
       return () => check(readAppleTable('Localizable', 'Localizable', 'en', files));

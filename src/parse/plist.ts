@@ -40,6 +40,9 @@ export const MAX_PLIST_DEPTH = 64;
 /** Far longer than `<plist version="1.0">`; a longer tag is a crafted file, not a property list. */
 export const MAX_TAG_LENGTH = 1024;
 
+const CDATA_OPEN = '<![CDATA[';
+const CDATA_CLOSE = ']]>';
+
 const ENTITIES: Record<string, string> = { lt: '<', gt: '>', amp: '&', quot: '"', apos: "'" };
 
 function decodeEntities(text: string, fail: (message: string) => never): string {
@@ -125,25 +128,35 @@ export function parsePlist(text: string): PlistDocument {
     }
   };
 
+  // The next CDATA section at or after `index`, searched again only once `index` has passed it:
+  // searching from every string to the end of the file would make the reader quadratic.
+  let cdataAt = -2;
+  const nextCdata = () => {
+    if (cdataAt !== -1 && cdataAt < index) cdataAt = text.indexOf(CDATA_OPEN, index);
+    return cdataAt;
+  };
+
   /** Text up to `</name>`, entities decoded; CDATA sections are kept as they are. */
   const readText = (name: string): string => {
+    const closeTag = `</${name}>`;
+    let close = text.indexOf(closeTag, index);
     let result = '';
     for (;;) {
-      const cdata = text.indexOf('<![CDATA[', index);
-      const close = text.indexOf(`</${name}>`, index);
-      if (close === -1) fail(`Missing </${name}>`);
-      if (cdata !== -1 && cdata < close) {
-        result += decodeEntities(text.slice(index, cdata), fail);
-        const end = text.indexOf(']]>', cdata);
-        if (end === -1) fail('Unterminated CDATA section');
-        result += text.slice(cdata + 9, end);
-        advanceTo(end + 3);
-        continue;
-      }
-      result += decodeEntities(text.slice(index, close), fail);
-      advanceTo(close + name.length + 3);
-      return result;
+      if (close === -1) fail(`Missing ${closeTag}`);
+      const cdata = nextCdata();
+      if (cdata === -1 || cdata > close) break;
+      result += decodeEntities(text.slice(index, cdata), fail);
+      const start = cdata + CDATA_OPEN.length;
+      const end = text.indexOf(CDATA_CLOSE, start);
+      if (end === -1) fail('Unterminated CDATA section');
+      result += text.slice(start, end);
+      advanceTo(end + CDATA_CLOSE.length);
+      // A closing tag inside the section was text; look for the real one after it.
+      if (close < index) close = text.indexOf(closeTag, index);
     }
+    result += decodeEntities(text.slice(index, close), fail);
+    advanceTo(close + closeTag.length);
+    return result;
   };
 
   const readValue = (tag: Tag, depth: number): PlistValue => {

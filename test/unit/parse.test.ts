@@ -193,6 +193,21 @@ describe('parsePlist', () => {
     ]);
   });
 
+  it('reads CDATA sections that hold a closing tag, and strings after them', () => {
+    const { root } = parsePlist(
+      plist(
+        '<array><string>a<![CDATA[</string>]]>b<![CDATA[&lt;]]>&lt;</string><string>c</string><string><![CDATA[]]></string></array>',
+      ),
+    );
+    expect(
+      root.type === 'array' && root.items.map((item) => item.type === 'string' && item.value),
+    ).toEqual(['a</string>b&lt;<', 'c', '']);
+    expect(() => parsePlist(plist('<string><![CDATA[x]]>'))).toThrow(/Missing <\/string>/);
+    expect(() => parsePlist(plist('<string><![CDATA[x</string>'))).toThrow(
+      /Unterminated CDATA section/,
+    );
+  });
+
   it('records duplicate keys and keeps the last value', () => {
     const { root, duplicates } = parsePlist(
       plist('<dict>\n<key>k</key><string>1</string>\n<key>k</key><string>2</string>\n</dict>'),
