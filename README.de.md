@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
+<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - Jeder Fund besteht aus einer Regel-ID, einem Schweregrad (dem Standard der Regel oder dem aus der Konfiguration), einer Datei und Zeile, einer Meldung, der Lösung der Regel für das Ökosystem des Fundes, einem Link zur Dokumentation und einem Fingerabdruck für Baselines.
-- Jeder Reader bricht bei einer Verschachtelungsgrenze ab, und jedes Muster ist begrenzt, sodass präparierte Dateien weder den Stack noch die Zeit erschöpfen können; die Tests füttern ihn mit JSON aus 100,000 Ebenen und 2 MB großen Quelldateien.
+- Jeder Reader bricht bei einer Verschachtelungsgrenze ab und braucht Zeit im gleichen Maß wie seine Eingabe, sodass präparierte Dateien weder den Stack noch die Zeit erschöpfen können; die Tests füttern ihn mit JSON aus 100,000 Ebenen und messen, wie die Zeit für präparierte Kataloge, Einstellungen und Quelldateien von 128 KB bis 2 MB wächst.
 - Die CLI (`src/cli/`) parst nur Argumente, wählt Farben und Breiten und setzt den Exit-Code.
 
 ## Roadmap

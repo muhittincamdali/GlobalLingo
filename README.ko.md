@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
+<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - 각 결과는 규칙 ID, 심각도(규칙의 기본값 또는 설정에서 지정한 값), 파일과 줄, 메시지, 해당 결과의 생태계에 맞는 규칙의 해결 방법, 문서 링크, baseline용 핑거프린트로 구성됩니다.
-- 모든 리더는 중첩 한도에서 멈추고 모든 패턴에는 한도가 있어, 악의적으로 만든 파일이 스택이나 시간을 소진시킬 수 없습니다. 테스트에서는 100,000단계 깊이의 JSON과 2 MB 소스 파일을 입력으로 줍니다.
+- 모든 리더는 중첩 한도에서 멈추고 입력 크기에 비례하는 시간 안에 처리하므로, 악의적으로 만든 파일이 스택이나 시간을 소진시킬 수 없습니다. 테스트에서는 100,000단계 깊이의 JSON을 입력으로 주고, 악의적으로 만든 카탈로그, 설정 파일, 소스 파일을 128 KB에서 2 MB로 키울 때 시간이 어떻게 늘어나는지 측정합니다.
 - CLI(`src/cli/`)는 인수를 파싱하고, 색상과 너비를 고르고, 종료 코드를 설정하는 일만 합니다.
 
 ## 로드맵

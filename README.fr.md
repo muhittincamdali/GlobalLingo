@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
+<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - Chaque résultat se compose d’un identifiant de règle, d’une gravité (celle par défaut de la règle, ou celle de la configuration), d’un fichier et d’une ligne, d’un message, du correctif de la règle pour l’écosystème du résultat, d’un lien vers la documentation et d’une empreinte pour les baselines.
-- Chaque lecteur s’arrête à une limite d’imbrication et chaque motif est borné ; des fichiers piégés ne peuvent donc pas épuiser la pile ni le temps. Les tests lui fournissent du JSON sur 100,000 niveaux et des fichiers source de 2 Mo.
+- Chaque lecteur s’arrête à une limite d’imbrication et prend un temps proportionnel à son entrée ; des fichiers piégés ne peuvent donc pas épuiser la pile ni le temps. Les tests lui fournissent du JSON sur 100,000 niveaux et mesurent comment le temps de catalogues, réglages et fichiers source piégés augmente de 128 Ko à 2 Mo.
 - La CLI (`src/cli/`) se contente d’analyser les arguments, de choisir les couleurs et les largeurs et de définir le code de sortie.
 
 ## Feuille de route

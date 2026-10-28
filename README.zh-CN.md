@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
+<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -298,8 +298,8 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 
 - 每条结果包含规则 ID、严重程度（规则的默认值，或配置中指定的值）、文件和行号、消息、规则针对该结果所属生态系统的修复方法、文档链接，
   以及用于 baseline 的指纹。
-- 每个读取器都在嵌套深度上限处停止，每个匹配模式也都有界限，因此精心构造的文件无法耗尽栈或时间；测试会输入 100,000
-  层的 JSON 和 2 MB 的源文件。
+- 每个读取器都在嵌套深度上限处停止，耗时与输入大小成正比，因此精心构造的文件无法耗尽栈或时间；测试会输入 100,000
+  层的 JSON，并测量精心构造的目录、设置文件和源文件从 128 KB 增长到 2 MB 时耗时如何增长。
 - CLI（`src/cli/`）只负责解析参数、选择颜色和宽度，并设置退出码。
 
 ## 路线图

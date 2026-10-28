@@ -30,6 +30,14 @@ the 1.0.0 API remains.
   patterns, file size and count limits, at most 100,000 findings, and control and bidirectional
   characters escaped in every output, including line breaks and tabs in file names and messages
   of the terminal and Markdown reports.
+- Time that grows in step with the input on crafted files, measured by tests as a ratio (an
+  input grown 16 times to 2 MB must not take more than 100 times as long; quadratic work takes
+  256 times): property list tags are read in one pass and refused over 1024 characters, closing
+  tags and CDATA sections are searched once, placeholder syntax detection and `l10n.yaml` lines
+  are read without backtracking patterns, the printf width and the i18next `{{- name}}` patterns
+  no longer split a long run of zeros or spaces in every way, variant and plural comparisons use
+  maps, ignore globs match the folders of a path in the same pass, and KEY003 looks up code
+  prefixes in a tree.
 - Four fixture apps (SwiftUI with a String Catalog, UIKit with `.strings`, Flutter with ARB, Expo
   with i18next) with their expected findings, terminal demos recorded from the CLI, examples for
   GitHub Actions, shell, the API, a pre-commit hook and a configuration, an API reference and

@@ -43,11 +43,15 @@ Its reports quote the project's own keys, translations, file names and code lite
 nothing else from your machine. A CI log that shows the report shows those quotes.
 
 What it guards against, with tests in
-[test/integration/robustness.test.ts](test/integration/robustness.test.ts): symbolic links are not
+[test/integration/robustness.test.ts](test/integration/robustness.test.ts) and
+[test/integration/growth.test.ts](test/integration/growth.test.ts): symbolic links are not
 followed while reading the folder; a `.globallingo.json` or baseline that is a link is refused unread,
 and a JSON error in either names the line, never the text; reports and baselines are not written
-through a link; JSON, property list and ICU readers stop at a nesting limit; source patterns and ignore
-globs run in time linear in the input; catalogs over 16 MB, source files over 2 MB, more than
+through a link; JSON, property list and ICU readers stop at a nesting limit, and property list tags
+over 1024 characters are refused; every reader (String Catalog, `.strings`, `.stringsdict`, ARB,
+JSON, `l10n.yaml`, printf, ICU and i18next placeholders), the catalog checks, the source patterns
+and the ignore globs take time that grows in step with the input, which the tests measure as a
+ratio on crafted inputs grown 16 times to 2 MB; catalogs over 16 MB, source files over 2 MB, more than
 200,000 files, 24 folder levels or 100,000 findings are not read or kept; and control characters
 and bidirectional overrides from the project are escaped in every output format, line breaks and
 tabs included wherever a file name or message has to stay on one line.

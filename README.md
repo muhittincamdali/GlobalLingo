@@ -320,8 +320,9 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 - Each finding is a rule ID, a severity (the rule's default, or the configuration's), a file and
   line, a message, the rule's fix for the finding's ecosystem, a documentation link and a
   fingerprint for baselines.
-- Every reader stops at a nesting limit and every pattern is bounded, so crafted files cannot
-  exhaust the stack or the time; the tests feed it 100,000 levels of JSON and 2 MB source files.
+- Every reader stops at a nesting limit and takes time in step with its input, so crafted files
+  cannot exhaust the stack or the time; the tests feed it 100,000 levels of JSON and measure how
+  the time of crafted catalogs, settings and source files grows from 128 KB to 2 MB.
 - The CLI (`src/cli/`) only parses arguments, picks colours and widths, and sets the exit code.
 
 ## Roadmap

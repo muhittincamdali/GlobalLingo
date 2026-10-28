@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
+<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - Cada achado é um ID de regra, uma gravidade (o padrão da regra ou o da configuração), um arquivo e uma linha, uma mensagem, a correção da regra para o ecossistema do achado, um link para a documentação e uma impressão digital para os baselines.
-- Cada leitor para em um limite de aninhamento e cada padrão é limitado, de modo que arquivos forjados não consigam esgotar a pilha nem o tempo; os testes alimentam o leitor com 100,000 níveis de JSON e arquivos de código-fonte de 2 MB.
+- Cada leitor para em um limite de aninhamento e leva um tempo proporcional à entrada, de modo que arquivos forjados não consigam esgotar a pilha nem o tempo; os testes alimentam o leitor com 100,000 níveis de JSON e medem como cresce o tempo de catálogos, configurações e arquivos de código-fonte forjados de 128 KB a 2 MB.
 - A CLI (`src/cli/`) apenas analisa os argumentos, escolhe cores e larguras e define o código de saída.
 
 ## Roteiro

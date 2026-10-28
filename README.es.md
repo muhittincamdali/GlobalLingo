@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
+<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - Cada hallazgo es un ID de regla, una gravedad (la predeterminada de la regla o la de la configuración), un archivo y una línea, un mensaje, la corrección de la regla para el ecosistema del hallazgo, un enlace a la documentación y una huella para los baselines.
-- Cada lector se detiene en un límite de anidamiento y cada patrón está acotado, de modo que archivos manipulados no pueden agotar la pila ni el tiempo; las pruebas le dan 100,000 niveles de JSON y archivos de código de 2 MB.
+- Cada lector se detiene en un límite de anidamiento y tarda en proporción a su entrada, de modo que archivos manipulados no pueden agotar la pila ni el tiempo; las pruebas le dan 100,000 niveles de JSON y miden cómo crece el tiempo de catálogos, ajustes y archivos de código manipulados de 128 KB a 2 MB.
 - La CLI (`src/cli/`) solo analiza los argumentos, elige colores y anchos y establece el código de salida.
 
 ## Hoja de ruta

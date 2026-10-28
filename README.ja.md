@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
+<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - 各検出結果は、ルール ID、重大度（ルールのデフォルト、または設定で指定した値）、ファイルと行、メッセージ、その検出結果のエコシステムに対するルールの修正方法、ドキュメントへのリンク、baseline 用のフィンガープリントで構成されます。
-- すべてのリーダーはネストの上限で停止し、すべてのパターンには上限があるため、細工されたファイルでスタックや時間を使い果たすことはできません。テストでは、100,000 階層の JSON と 2 MB のソースファイルを与えています。
+- すべてのリーダーはネストの上限で停止し、入力の大きさに比例した時間で処理するため、細工されたファイルでスタックや時間を使い果たすことはできません。テストでは、100,000 階層の JSON を与え、細工したカタログ、設定ファイル、ソースファイルを 128 KB から 2 MB に増やしたときの処理時間の伸びを測っています。
 - CLI（`src/cli/`）は、引数の解析、色と幅の選択、終了コードの設定だけを行います。
 
 ## ロードマップ

@@ -56,7 +56,10 @@ temporary folders; they need neither the network nor Xcode or Flutter.
   `test/__snapshots__/fixtures`; after a deliberate change run `npm test -- -u`, read the diff,
   and run `npm run demo` if the terminal output changed.
 - Anything that reads files or matches patterns gets a case in
-  `test/integration/robustness.test.ts`: deep nesting, huge inputs, links, control characters.
+  `test/integration/robustness.test.ts` (deep nesting, huge counts, links, control characters)
+  and a crafted input in `test/integration/growth.test.ts`, which checks that the time grows
+  about 16 times, not 256, when the input grows 16 times to 2 MB. `GROWTH_BASE_KB=8 npm test`
+  runs those cases on small inputs, to watch a slow pattern fail in seconds.
 
 ## Adding a rule
 

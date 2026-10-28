@@ -1,4 +1,4 @@
-<!-- i18n-source: README.md@84f1e7dbc06d5e1ea738f083ad2b3be786b6aef2 status=reviewed -->
+<!-- i18n-source: README.md@0c55770dc8c04ee1fabfd61d1e4bb1e66b9e8190 status=reviewed -->
 <!-- brand:start -->
 
 <p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - Каждая находка — это идентификатор правила, серьёзность (по умолчанию из правила или из конфигурации), файл и строка, сообщение, исправление правила для экосистемы находки, ссылка на документацию и отпечаток для baseline.
-- Каждый парсер останавливается на пределе вложенности, и каждый шаблон ограничен, поэтому специально подготовленные файлы не могут исчерпать стек или время; тесты подают ему JSON в 100,000 уровней вложенности и исходные файлы по 2 МБ.
+- Каждый парсер останавливается на пределе вложенности и работает время, пропорциональное размеру входных данных, поэтому специально подготовленные файлы не могут исчерпать стек или время; тесты подают ему JSON в 100,000 уровней вложенности и измеряют, как растёт время на специально подготовленных каталогах, настройках и исходных файлах от 128 КБ до 2 МБ.
 - CLI (`src/cli/`) только разбирает аргументы, выбирает цвета и ширину и задаёт код выхода.
 
 ## План развития
