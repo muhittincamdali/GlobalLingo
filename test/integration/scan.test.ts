@@ -6,7 +6,8 @@ import { readFileSync } from 'node:fs';
 import { CONFIG_FIELDS, ConfigError, validateConfig } from '../../src/config.ts';
 import { RULE_IDS } from '../../src/rules/registry.ts';
 import { isLocaleName, jsonGroups } from '../../src/project/discover.ts';
-import { globMatcher, MAX_CATALOG_BYTES } from '../../src/project/files.ts';
+import { MAX_CATALOG_BYTES } from '../../src/project/files.ts';
+import { globMatcher } from '../../src/project/glob.ts';
 import {
   readFlutterSettings,
   syntaxFromContent,
@@ -267,6 +268,17 @@ describe('configuration', () => {
         'b/abc/d',
       ].map(folders),
     ).toEqual([true, true, true, true, false, false, false, false]);
+  });
+
+  it('matches globs on paths longer than one 32-position word of the matcher', () => {
+    const path = `${'a'.repeat(31)}/${'b'.repeat(40)}/c`;
+    const results = (patterns: string[]) => patterns.map((pattern) => globMatcher([pattern])(path));
+    expect(
+      results(['a*/b*/c', '**/c', `${'?'.repeat(31)}/**`, `*/${'b'.repeat(40)}`, '**b/c']),
+    ).toEqual([true, true, true, true, true]);
+    expect(
+      results(['a*/c', `${'?'.repeat(32)}/**`, '*/*/c/*', `**/${'b'.repeat(41)}`, '*c']),
+    ).toEqual([false, false, false, false, false]);
   });
 });
 

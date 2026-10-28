@@ -18,7 +18,7 @@ import type { Catalog } from '../../src/model.ts';
 import { parseJson } from '../../src/parse/json.ts';
 import { parsePlist } from '../../src/parse/plist.ts';
 import { parseStrings } from '../../src/parse/strings.ts';
-import { globMatcher } from '../../src/project/files.ts';
+import { globMatcher } from '../../src/project/glob.ts';
 import { readFlutterSettings, syntaxFromContent } from '../../src/project/settings.ts';
 import { checkCatalog } from '../../src/rules/catalog-checks.ts';
 import { BASE_SIZE, fill, growth, MAX_GROWTH } from '../helpers/growth.ts';
