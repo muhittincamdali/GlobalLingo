@@ -6,6 +6,7 @@ import { readArb } from '../../src/catalogs/arb.ts';
 import { readJsonCatalog } from '../../src/catalogs/json-catalog.ts';
 import { readXcstrings } from '../../src/catalogs/xcstrings.ts';
 import { checkSource, codeContext } from '../../src/code/check-code.ts';
+import { collectUsage, emptyUsage, unusedKeys } from '../../src/code/usage.ts';
 import { parseIcu } from '../../src/messages/icu.ts';
 import {
   i18nextNesting,
@@ -295,7 +296,7 @@ describe('project settings', () => {
   });
 });
 
-describe('ignore globs', () => {
+describe('ignore globs and unused keys', () => {
   it('matches a pathological glob in linear time', () => {
     const match = globMatcher(['**/**/**/**/**/**/**/**/a*a*a*a*a*a*a*a*a*a*b']);
     expect(growth((size) => () => match('a'.repeat(size)))).toBeLessThan(MAX_GROWTH);
@@ -304,5 +305,25 @@ describe('ignore globs', () => {
   it('matches a glob against a key with many slashes in linear time', () => {
     const match = globMatcher(['b*', 'a/**/c']);
     expect(growth((size) => () => match(fill('a/', size)))).toBeLessThan(MAX_GROWTH);
+  });
+
+  it('looks for many keys among many prefixes in the code in linear time', () => {
+    const make = (size: number) => {
+      const count = Math.floor(size / 12);
+      const code = Array.from({ length: count }, (_, i) => `t("p${i}.");`).join('\n');
+      const keys = Object.fromEntries(Array.from({ length: count }, (_, i) => [`k${i}`, 'v']));
+      const text = JSON.stringify(keys);
+      const files = [
+        { locale: 'en', file: 'locales/en.json', text },
+        { locale: 'de', file: 'locales/de.json', text },
+      ];
+      const catalog = readJsonCatalog('locales', 'locales', 'en', 'i18next', files);
+      return () => {
+        const usage = emptyUsage();
+        collectUsage(code, 'js', usage);
+        unusedKeys([catalog], usage, () => false);
+      };
+    };
+    expect(growth(make, CATALOG_SIZE)).toBeLessThan(MAX_GROWTH);
   });
 });

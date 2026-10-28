@@ -62,6 +62,43 @@ export function collectUsage(text: string, language: SourceLanguage, usage: Usag
   }
 }
 
+interface PrefixNode {
+  end: boolean;
+  next: Map<string, PrefixNode>;
+}
+
+/**
+ * A test for "starts with one of the prefixes" that walks the text once through a tree of the
+ * prefixes' characters. Calling startsWith for every prefix on every key would multiply the
+ * number of literals in the code by the number of keys.
+ */
+function startsWithAny(prefixes: Iterable<string>): (text: string) => boolean {
+  const root: PrefixNode = { end: false, next: new Map() };
+  for (const prefix of prefixes) {
+    let node = root;
+    // UTF-16 units, as startsWith compares them.
+    for (const char of prefix.split('')) {
+      let child = node.next.get(char);
+      if (!child) {
+        child = { end: false, next: new Map() };
+        node.next.set(char, child);
+      }
+      node = child;
+    }
+    node.end = true;
+  }
+  return (text) => {
+    let node: PrefixNode | undefined = root;
+    if (node.end) return true;
+    for (let index = 0; index < text.length; index += 1) {
+      node = node.next.get(text[index] as string);
+      if (!node) return false;
+      if (node.end) return true;
+    }
+    return false;
+  };
+}
+
 /** Tables whose keys the code does not name: Info.plist keys, and generated or storyboard ones. */
 const NOT_LOOKED_UP = /^(?:InfoPlist|AppShortcuts|Root|Main|LaunchScreen)$/;
 
@@ -71,7 +108,7 @@ export function unusedKeys(
   ignoreKey: (key: string) => boolean,
 ): Draft[] {
   const drafts: Draft[] = [];
-  const prefixes = [...usage.prefixes];
+  const startsWithPrefix = startsWithAny(usage.prefixes);
   for (const catalog of catalogs) {
     if (!usage.ecosystems.has(catalog.ecosystem) || catalog.format === 'xcstrings') continue;
     if (catalog.format === 'strings' && NOT_LOOKED_UP.test(catalog.name)) continue;
@@ -95,9 +132,8 @@ export function unusedKeys(
           ? usage.dartMembers.has(key)
           : usage.literals.has(key) ||
             usage.literals.has(`${catalog.name}:${key}`) ||
-            prefixes.some(
-              (prefix) => key.startsWith(prefix) || `${catalog.name}:${key}`.startsWith(prefix),
-            );
+            startsWithPrefix(key) ||
+            startsWithPrefix(`${catalog.name}:${key}`);
       const used = mentioned || nested.has(entry.key);
       if (used) continue;
       drafts.push({

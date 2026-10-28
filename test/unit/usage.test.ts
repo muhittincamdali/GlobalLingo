@@ -52,6 +52,14 @@ describe('KEY003', () => {
     expect(unused([json], [[code, 'js']])).toEqual(['home.unused:4']);
   });
 
+  it('counts a prefix with the namespace, and not one longer than the key', () => {
+    const namespaced = readJsonCatalog('l/*.json', 'common', 'en', 'i18next', [
+      { locale: 'en', file: 'l/en.json', text: '{"menu": {"open": "O", "close": "C"}, "me": "M"}' },
+    ]);
+    const code = ["t('common:menu.' + action)", "t('me.and.more.')"].join('\n');
+    expect(unused([namespaced], [[code, 'js']])).toEqual(['me:1']);
+  });
+
   it('does nothing for an ecosystem without source files', () => {
     expect(unused([json], [['let a = 1', 'swift']])).toEqual([]);
   });
