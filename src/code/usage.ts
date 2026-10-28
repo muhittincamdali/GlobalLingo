@@ -62,40 +62,36 @@ export function collectUsage(text: string, language: SourceLanguage, usage: Usag
   }
 }
 
-interface PrefixNode {
-  end: boolean;
-  next: Map<string, PrefixNode>;
-}
-
 /**
- * A test for "starts with one of the prefixes" that walks the text once through a tree of the
- * prefixes' characters. Calling startsWith for every prefix on every key would multiply the
- * number of literals in the code by the number of keys.
+ * A test for "starts with one of the prefixes". A prefix that starts with a shorter one adds
+ * nothing, so it is dropped; of the rest, only the last one that sorts at or before a text can
+ * begin it, and a binary search finds that one. Calling startsWith for every prefix on every key
+ * would multiply the number of prefixes in the code by the number of keys, and a tree of the
+ * prefixes' characters would keep an object per character: gigabytes for a few files of long
+ * prefixes.
  */
 function startsWithAny(prefixes: Iterable<string>): (text: string) => boolean {
-  const root: PrefixNode = { end: false, next: new Map() };
-  for (const prefix of prefixes) {
-    let node = root;
-    // UTF-16 units, as startsWith compares them.
-    for (const char of prefix.split('')) {
-      let child = node.next.get(char);
-      if (!child) {
-        child = { end: false, next: new Map() };
-        node.next.set(char, child);
-      }
-      node = child;
-    }
-    node.end = true;
+  // Sorting, < and startsWith all compare UTF-16 units.
+  const kept: string[] = [];
+  for (const prefix of [...prefixes].sort()) {
+    const last = kept[kept.length - 1];
+    if (last === undefined || !prefix.startsWith(last)) kept.push(prefix);
   }
   return (text) => {
-    let node: PrefixNode | undefined = root;
-    if (node.end) return true;
-    for (let index = 0; index < text.length; index += 1) {
-      node = node.next.get(text[index] as string);
-      if (!node) return false;
-      if (node.end) return true;
+    let low = 0;
+    let high = kept.length - 1;
+    let candidate: string | undefined;
+    while (low <= high) {
+      const middle = (low + high) >>> 1;
+      const prefix = kept[middle] as string;
+      if (prefix <= text) {
+        candidate = prefix;
+        low = middle + 1;
+      } else {
+        high = middle - 1;
+      }
     }
-    return false;
+    return candidate !== undefined && text.startsWith(candidate);
   };
 }
 

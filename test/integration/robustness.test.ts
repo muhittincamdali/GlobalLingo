@@ -1,13 +1,14 @@
 // Inputs a pull request could add to make GlobalLingo crash, run out of memory, read or write
 // through a link or write to the terminal: deep nesting, huge counts, odd names. Inputs that could
 // make it hang are in growth.test.ts.
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdirSync, readFileSync, symlinkSync } from 'node:fs';
 import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { checkCatalog } from '../../src/rules/catalog-checks.ts';
 import { readJsonCatalog } from '../../src/catalogs/json-catalog.ts';
-import { MAX_DEPTH, readLimited } from '../../src/project/files.ts';
+import { MAX_DEPTH, MAX_SOURCE_BYTES, readLimited } from '../../src/project/files.ts';
 import { render } from '../../src/report/index.ts';
 import { readBaseline } from '../../src/baseline.ts';
 import { run } from '../../src/cli/run.ts';
@@ -79,6 +80,37 @@ describe('hostile catalogs', () => {
     expect(tty).not.toMatch(/^\| error/m);
     expect(tty).toContain('src/x\\u{000A}| error |');
     expect(tty).toContain('\\u{0009}.js');
+  });
+});
+
+describe('memory', () => {
+  it('keeps many long prefixes from the code in a bounded heap', () => {
+    // Four source files at the size limit, each full of distinct 289-character prefixes. A tree of
+    // the prefixes' characters needed over a gigabyte for these; the scan runs with 128 MB.
+    const files: Record<string, string> = {
+      'package.json': JSON.stringify({ dependencies: { i18next: '1' } }),
+      'locales/en.json': '{"a": "A"}',
+      'locales/de.json': '{"a": "A"}',
+    };
+    let id = 0;
+    for (let file = 0; file < 4; file += 1) {
+      const lines: string[] = [];
+      for (let size = 0; size < MAX_SOURCE_BYTES - 300; size += 293) {
+        lines.push(`'${(id++).toString(36).padStart(8, 'z')}${'q'.repeat(280)}.';`);
+      }
+      files[`src/f${file}.ts`] = lines.join('\n');
+    }
+    const root = tree(files);
+    const dist = new URL('../../dist/index.js', import.meta.url).href;
+    const script = `const { scan } = await import(${JSON.stringify(dist)});
+await scan(${JSON.stringify(root)});`;
+    const result = spawnSync(
+      process.execPath,
+      ['--max-old-space-size=128', '--input-type=module', '--eval', script],
+      { encoding: 'utf8', cwd: fileURLToPath(new URL('../../', import.meta.url)) },
+    );
+    expect(result.stderr).toBe('');
+    expect(result.status).toBe(0);
   });
 });
 

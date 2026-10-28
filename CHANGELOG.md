@@ -37,7 +37,8 @@ the 1.0.0 API remains.
   are read without backtracking patterns, the printf width and the i18next `{{- name}}` patterns
   no longer split a long run of zeros or spaces in every way, variant and plural comparisons use
   maps, ignore globs match the folders of a path in the same pass, and KEY003 looks up code
-  prefixes in a tree.
+  prefixes with a binary search in a sorted list, which also keeps their memory to the prefixes
+  themselves.
 - Four fixture apps (SwiftUI with a String Catalog, UIKit with `.strings`, Flutter with ARB, Expo
   with i18next) with their expected findings, terminal demos recorded from the CLI, examples for
   GitHub Actions, shell, the API, a pre-commit hook and a configuration, an API reference and
