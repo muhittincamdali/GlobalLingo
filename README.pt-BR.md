@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - Cada achado é um ID de regra, uma gravidade (o padrão da regra ou o da configuração), um arquivo e uma linha, uma mensagem, a correção da regra para o ecossistema do achado, um link para a documentação e uma impressão digital para os baselines.
-- Cada leitor para em um limite de aninhamento e leva um tempo proporcional à entrada, de modo que arquivos forjados não consigam esgotar a pilha nem o tempo; os testes alimentam o leitor com 100,000 níveis de JSON e medem como cresce o tempo de catálogos, configurações e arquivos de código-fonte forjados de 128 KB a 2 MB.
+- Cada leitor para em um limite de aninhamento e leva um tempo proporcional à entrada, de modo que arquivos forjados não consigam esgotar a pilha nem o tempo; os testes alimentam o leitor com 100.000 níveis de JSON e medem como cresce o tempo de catálogos, configurações e arquivos de código-fonte forjados de 128 KB a 2 MB.
 - A CLI (`src/cli/`) apenas analisa os argumentos, escolhe cores e larguras e define o código de saída.
 
 ## Roteiro

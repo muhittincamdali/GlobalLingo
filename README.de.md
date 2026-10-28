@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - Jeder Fund besteht aus einer Regel-ID, einem Schweregrad (dem Standard der Regel oder dem aus der Konfiguration), einer Datei und Zeile, einer Meldung, der Lösung der Regel für das Ökosystem des Fundes, einem Link zur Dokumentation und einem Fingerabdruck für Baselines.
-- Jeder Reader bricht bei einer Verschachtelungsgrenze ab und braucht Zeit im gleichen Maß wie seine Eingabe, sodass präparierte Dateien weder den Stack noch die Zeit erschöpfen können; die Tests füttern ihn mit JSON aus 100,000 Ebenen und messen, wie die Zeit für präparierte Kataloge, Einstellungen und Quelldateien von 128 KB bis 2 MB wächst.
+- Jeder Reader bricht bei einer Verschachtelungsgrenze ab und braucht Zeit im gleichen Maß wie seine Eingabe, sodass präparierte Dateien weder den Stack noch die Zeit erschöpfen können; die Tests füttern ihn mit JSON aus 100.000 Ebenen und messen, wie die Zeit für präparierte Kataloge, Einstellungen und Quelldateien von 128 KB bis 2 MB wächst.
 - Die CLI (`src/cli/`) parst nur Argumente, wählt Farben und Breiten und setzt den Exit-Code.
 
 ## Roadmap

@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - Cada hallazgo es un ID de regla, una gravedad (la predeterminada de la regla o la de la configuración), un archivo y una línea, un mensaje, la corrección de la regla para el ecosistema del hallazgo, un enlace a la documentación y una huella para los baselines.
-- Cada lector se detiene en un límite de anidamiento y tarda en proporción a su entrada, de modo que archivos manipulados no pueden agotar la pila ni el tiempo; las pruebas le dan 100,000 niveles de JSON y miden cómo crece el tiempo de catálogos, ajustes y archivos de código manipulados de 128 KB a 2 MB.
+- Cada lector se detiene en un límite de anidamiento y tarda en proporción a su entrada, de modo que archivos manipulados no pueden agotar la pila ni el tiempo; las pruebas le dan 100.000 niveles de JSON y miden cómo crece el tiempo de catálogos, ajustes y archivos de código manipulados de 128 KB a 2 MB.
 - La CLI (`src/cli/`) solo analiza los argumentos, elige colores y anchos y establece el código de salida.
 
 ## Hoja de ruta

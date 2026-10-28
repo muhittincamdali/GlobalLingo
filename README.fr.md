@@ -257,7 +257,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
 ```
 
 - Chaque résultat se compose d’un identifiant de règle, d’une gravité (celle par défaut de la règle, ou celle de la configuration), d’un fichier et d’une ligne, d’un message, du correctif de la règle pour l’écosystème du résultat, d’un lien vers la documentation et d’une empreinte pour les baselines.
-- Chaque lecteur s’arrête à une limite d’imbrication et prend un temps proportionnel à son entrée ; des fichiers piégés ne peuvent donc pas épuiser la pile ni le temps. Les tests lui fournissent du JSON sur 100,000 niveaux et mesurent comment le temps de catalogues, réglages et fichiers source piégés augmente de 128 Ko à 2 Mo.
+- Chaque lecteur s’arrête à une limite d’imbrication et prend un temps proportionnel à son entrée ; des fichiers piégés ne peuvent donc pas épuiser la pile ni le temps. Les tests lui fournissent du JSON sur 100 000 niveaux et mesurent comment le temps de catalogues, réglages et fichiers source piégés augmente de 128 Ko à 2 Mo.
 - La CLI (`src/cli/`) se contente d’analyser les arguments, de choisir les couleurs et les largeurs et de définir le code de sortie.
 
 ## Feuille de route

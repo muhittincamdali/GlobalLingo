@@ -333,7 +333,7 @@ path ─► walk                 files of the folder (no symbolic links, no depe
   bir dosya ve satır, bir mesaj, bulgunun ekosistemi için kuralın çözümü, bir dokümantasyon
   bağlantısı ve baseline'lar için bir parmak izinden oluşur.
 - Her okuyucu bir iç içe geçme sınırında durur ve girdisiyle orantılı sürede çalışır; bu yüzden
-  özel hazırlanmış dosyalar yığını ya da zamanı tüketemez. Testler 100,000 düzeyli JSON verir ve
+  özel hazırlanmış dosyalar yığını ya da zamanı tüketemez. Testler 100.000 düzeyli JSON verir ve
   özel hazırlanmış kataloglar, ayarlar ve kaynak dosyalar 128 KB'tan 2 MB'a büyürken sürenin nasıl
   arttığını ölçer.
 - CLI (`src/cli/`) yalnızca argümanları ayrıştırır, renkleri ve genişlikleri seçer ve çıkış kodunu
