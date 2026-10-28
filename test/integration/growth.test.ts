@@ -18,7 +18,7 @@ import type { Catalog } from '../../src/model.ts';
 import { parseJson } from '../../src/parse/json.ts';
 import { parsePlist } from '../../src/parse/plist.ts';
 import { parseStrings } from '../../src/parse/strings.ts';
-import { globMatcher } from '../../src/project/glob.ts';
+import { globMatcher, MAX_GLOB_CHARACTERS, MAX_GLOB_LENGTH } from '../../src/project/glob.ts';
 import { readFlutterSettings, syntaxFromContent } from '../../src/project/settings.ts';
 import { checkCatalog } from '../../src/rules/catalog-checks.ts';
 import { BASE_SIZE, fill, growth, MAX_GROWTH } from '../helpers/growth.ts';
@@ -305,6 +305,52 @@ describe('ignore globs and unused keys', () => {
   it('matches a glob against a key with many slashes in linear time', () => {
     const match = globMatcher(['b*', 'a/**/c']);
     expect(growth((size) => () => match(fill('a/', size)))).toBeLessThan(MAX_GROWTH);
+  });
+
+  // The slowest globs the configuration accepts: every `**a` keeps every position alive, and they
+  // differ only at the end, so none is matched once for all.
+  const slowGlobs = (count: number) =>
+    Array.from(
+      { length: count },
+      (_, i) =>
+        '**a'.repeat(MAX_GLOB_LENGTH).slice(0, MAX_GLOB_LENGTH - 6) +
+        `Z${String(i).padStart(5, '0')}`,
+    );
+  const fullList = slowGlobs(Math.floor(MAX_GLOB_CHARACTERS / MAX_GLOB_LENGTH));
+
+  it('matches a full ignore.keys list against many keys in linear time', () => {
+    const match = globMatcher(fullList);
+    const make = (size: number) => {
+      const keys = Array.from(
+        { length: Math.floor(size / 48) },
+        (_, i) => `k${'a'.repeat(40)}${i}`,
+      );
+      return () => keys.filter(match);
+    };
+    expect(growth(make, CATALOG_SIZE)).toBeLessThan(MAX_GROWTH);
+  });
+
+  it('matches a full ignore.paths list against many paths in linear time', () => {
+    const match = globMatcher(fullList);
+    const make = (size: number) => {
+      const paths = Array.from(
+        { length: Math.floor(size / 100) },
+        (_, i) => `${'a'.repeat(30)}/${'a'.repeat(30)}/${'a'.repeat(30)}/${i}`,
+      );
+      return () => paths.filter(match);
+    };
+    expect(growth(make, CATALOG_SIZE)).toBeLessThan(MAX_GROWTH);
+  });
+
+  it('takes time in step with the number of globs, up to the configuration limit', () => {
+    expect(fullList.join('')).toHaveLength(MAX_GLOB_CHARACTERS);
+    const keys = Array.from({ length: 4000 }, (_, i) => `k${'a'.repeat(40)}${i}`);
+    // From one glob to the 16 that fill a list; the keys stay the same.
+    const make = (count: number) => {
+      const match = globMatcher(slowGlobs(count));
+      return () => keys.filter(match);
+    };
+    expect(growth(make, 1)).toBeLessThan(MAX_GROWTH);
   });
 
   it('looks for many keys among many prefixes in the code in linear time', () => {
