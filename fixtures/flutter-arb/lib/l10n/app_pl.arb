@@ -1,0 +1,8 @@
+{
+  "@@locale": "pl",
+  "appTitle": "Półka",
+  "booksOnShelf": "{count, plural, one{Jedna książka na {shelf}} other{{count} książki na {shelf}}}",
+  "pickupCity": "Odbiór w {city}",
+  "deleteAll": "Delete all",
+  "syncFailed": "Synchronizacja nie powiodła się. Sprawdź połączenie."
+}

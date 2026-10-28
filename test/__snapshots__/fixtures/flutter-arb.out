@@ -1,0 +1,61 @@
+GlobalLingo 2.0.0 · fixtures/flutter-arb
+
+  lib/l10n/*.arb  ARB, ICU · source en · 5 keys
+    de 100% · pl 100% · tr 80%
+
+ERROR    FMT001  lib/l10n/app_de.arb:4  Placeholder mismatch
+         "booksOnShelf" in German (de) uses {regal}, which the source text does not have
+         Fix: Use the placeholder names of the template message; every placeholder needs a
+         declaration in the template's "@key" metadata.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#fmt001
+
+WARNING  FMT002  lib/l10n/app_de.arb:4  Placeholder dropped
+         "booksOnShelf" in German (de) leaves out {shelf} of the source text
+         Fix: Add the placeholder to the translation. Plural forms for one or two items may leave
+         out the number on purpose; this rule does not report those.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#fmt002
+
+INFO     KEY003  lib/l10n/app_en.arb:28  Unused key
+         "syncFailed" is not mentioned in any source file
+         Fix: Delete the message from every ARB file, or ignore it in .globallingo.json if it is
+         used outside lib/.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#key003
+
+WARNING  PLU001  lib/l10n/app_pl.arb:4  Missing plural form
+         "booksOnShelf" in Polish (pl) has no plural forms for few (e.g. 2, 3, 4), many (e.g. 0, 5,
+         6)
+         Fix: Add the missing category to the plural in this locale's message, e.g. few{…}.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#plu001
+
+INFO     MIS004  lib/l10n/app_pl.arb:6  Same as the source
+         The Polish (pl) translation of "deleteAll" is the same as the source text
+         Fix: Translate it, or ignore the key in .globallingo.json when the text is the same in both
+         languages (brand names, "OK").
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis004
+
+ERROR    MIS001  lib/l10n/app_tr.arb  Missing translation
+         "syncFailed" has no Turkish (tr) translation
+         Fix: Add the key to this locale's ARB file. Until then gen_l10n uses the template's message
+         for it.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis001
+
+WARNING  HCS001  lib/main.dart:16  Hard-coded UI text
+         "Bookshelf" is shown to the user but is not localized
+         Fix: Add the text to the template ARB file and read it through the generated class, e.g.
+         AppLocalizations.of(context)!.title.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#hcs001
+
+WARNING  TRI003  lib/main.dart:49  Translated text cased without the locale
+         Translated text is changed with toUpperCase(), which ignores the locale; Turkish and
+         Azerbaijani need İ and ı
+         Fix: Dart's toUpperCase() ignores the locale. Put the upper-case text in the ARB file as
+         its own message, so the Turkish translator writes İ.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#tri003
+
+WARNING  HCS001  lib/main.dart:51  Hard-coded UI text
+         "Pull to refresh" is shown to the user but is not localized
+         Fix: Add the text to the template ARB file and read it through the generated class, e.g.
+         AppLocalizations.of(context)!.title.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#hcs001
+
+✗ 2 errors, 5 warnings, 2 info in 1 catalog and 1 source file

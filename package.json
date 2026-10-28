@@ -1,0 +1,71 @@
+{
+  "name": "@mcamdali/globallingo",
+  "version": "2.0.0",
+  "description": "Lints the localization files of iOS, Flutter and React Native/Expo apps: missing and stale keys, placeholder and plural mismatches across languages, Turkish dotted and dotless I traps and hard-coded UI strings, with a fix for each finding.",
+  "keywords": [
+    "localization",
+    "i18n",
+    "l10n",
+    "lint",
+    "xcstrings",
+    "string-catalog",
+    "stringsdict",
+    "arb",
+    "flutter",
+    "react-native",
+    "expo",
+    "i18next",
+    "cldr",
+    "cli"
+  ],
+  "homepage": "https://github.com/muhittincamdali/GlobalLingo#readme",
+  "bugs": "https://github.com/muhittincamdali/GlobalLingo/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/muhittincamdali/GlobalLingo.git"
+  },
+  "license": "MIT",
+  "author": "Muhittin Camdali",
+  "type": "module",
+  "bin": {
+    "globallingo": "dist/cli/main.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "schema/*.json",
+    "!dist/**/*.map"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "biome lint --error-on-warnings . && prettier --check .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "build": "tsc -p tsconfig.build.json",
+    "prepack": "npm run build",
+    "demo": "npm run build && node scripts/demo.ts",
+    "docs": "npm --prefix docs/site run build",
+    "smoke": "node scripts/smoke-pack.ts"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@types/node": "24.19.2",
+    "@vitest/coverage-v8": "5.0.4",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
+    "vitest": "5.0.4"
+  }
+}

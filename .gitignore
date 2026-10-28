@@ -1,45 +1,27 @@
-# Xcode
-*.xcodeproj/*
-!*.xcodeproj/project.pbxproj
-!*.xcodeproj/xcshareddata/
-!*.xcworkspace/contents.xcworkspacedata
-/*.gcno
-**/xcshareddata/WorkspaceSettings.xcsettings
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+*.tgz
 
-# Build
-build/
-DerivedData/
-*.moved-aside
-*.ipa
-*.dSYM.zip
-*.dSYM
+# Documentation site build
+/site/
+docs/site/node_modules/
 
-# Swift Package Manager
+# lychee link checker cache (local runs of the links job)
+.lycheecache
+
+# Local scratch space
+_work/
+
+# Build output and tool state of the fixture projects, in case one is built locally
 .build/
-.swiftpm/
-Packages/
-Package.resolved
-
-# CocoaPods
+.dart_tool/
+xcuserdata/
+DerivedData/
+build/
 Pods/
-
-# Carthage
-Carthage/Build/
-
-# fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
 
 # macOS
 .DS_Store
-*.swp
-*~.nib
-*.pbxuser
-!default.pbxuser
-
-# IDE
-*.xcuserstate
-*.xcscmblueprint
-*.idea/
+.swiftpm/

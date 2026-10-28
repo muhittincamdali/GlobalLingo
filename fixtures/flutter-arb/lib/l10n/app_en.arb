@@ -1,0 +1,29 @@
+{
+  "@@locale": "en",
+  "appTitle": "Bookshelf",
+  "@appTitle": {
+    "description": "Title of the app"
+  },
+  "booksOnShelf": "{count, plural, =0{No books on {shelf}} one{One book on {shelf}} other{{count} books on {shelf}}}",
+  "@booksOnShelf": {
+    "description": "How many books a shelf holds",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "shelf": {
+        "type": "String"
+      }
+    }
+  },
+  "pickupCity": "Pickup in {city}",
+  "@pickupCity": {
+    "placeholders": {
+      "city": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteAll": "Delete all",
+  "syncFailed": "Sync failed. Check your connection."
+}

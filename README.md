@@ -1,370 +1,359 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/Swift-6.0-FA7343?style=for-the-badge&logo=swift&logoColor=white" alt="Swift 6.0"/>
-  <img src="https://img.shields.io/badge/Platform-iOS%20|%20macOS%20|%20visionOS-007AFF?style=for-the-badge&logo=apple&logoColor=white" alt="Platform"/>
-  <img src="https://img.shields.io/badge/Standard-Unified%20Core-5856D6?style=for-the-badge" alt="Standard"/>
-</p>
+<!-- brand:start -->
 
----
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/banner-light.svg" alt="GlobalLingo: Lints iOS, Flutter and React Native localization files and names the fix for each finding."></picture></p>
 
-> **🛡️ PART OF THE 2026 UNIFIED CORE**
-> This repository is a verified component of 'The Endless March' initiative. Purified for Swift 6, zero-dependency, and engineered for maximum hardware saturation.
-> 
-> *Flagship Engines:* [SwiftNetwork](https://github.com/muhittincamdali/SwiftNetwork) | [SwiftAI](https://github.com/muhittincamdali/SwiftAI) | [LiquidGlassKit](https://github.com/muhittincamdali/LiquidGlassKit)
-
----
-
-<h1 align="center">GlobalLingo</h1>
-
-## 🚀 Killer Feature: On-Device AI Translation
-Why pay for Google Translate API calls? GlobalLingo integrates Apple's native `NaturalLanguage` and `CoreML` frameworks to provide 100% offline, zero-latency text detection and translation directly on the device.
-
+<!-- lang-selector:start -->
+<p align="center"><a href="README.md">English</a> · <a href="README.tr.md">Türkçe</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a> · <a href="README.de.md">Deutsch</a> · <a href="README.fr.md">Français</a> · <a href="README.pt-BR.md">Português (Brasil)</a> · <a href="README.ru.md">Русский</a></p>
+<!-- lang-selector:end -->
 
 <p align="center">
-  <strong>🌍 Powerful localization and internationalization framework for iOS</strong>
+<a href="https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml"><img src="https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+<a href="https://github.com/muhittincamdali/GlobalLingo/releases"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/badge-version-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/badge-version-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/badge-version-light.svg" alt="Latest version: v2.0.0"></picture></a>
+<a href="https://github.com/muhittincamdali/GlobalLingo/blob/master/package.json"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/badge-language-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/badge-language-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/badge-language-light.svg" alt="Language version: Node.js 22.12+"></picture></a>
+<a href="https://github.com/muhittincamdali/GlobalLingo/blob/master/LICENSE"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/badge-license-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/badge-license-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/badge-license-light.svg" alt="License: MIT"></picture></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml">
-    <img src="https://github.com/muhittincamdali/GlobalLingo/actions/workflows/ci.yml/badge.svg" alt="CI Status"/>
-  </a>
-  <img src="https://img.shields.io/badge/Swift-6.0-FA7343?style=flat-square&logo=swift&logoColor=white" alt="Swift 6.0"/>
-  <img src="https://img.shields.io/badge/iOS-17.0+-000000?style=flat-square&logo=apple&logoColor=white" alt="iOS 17.0+"/>
-  <img src="https://img.shields.io/badge/SPM-Compatible-FA7343?style=flat-square&logo=swift&logoColor=white" alt="SPM"/>
-  <a href="https://cocoapods.org/pods/GlobalLingo">
-    <img src="https://img.shields.io/badge/CocoaPods-Compatible-EE3322?style=flat-square&logo=cocoapods&logoColor=white" alt="CocoaPods"/>
-  </a>
-  <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License"/>
+<a href="#quick-start"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-start-en-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-start-en-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-start-en-light.svg" alt="Get started"></picture></a>
+<a href="https://muhittincamdali.github.io/GlobalLingo/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-docs-en-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-docs-en-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-docs-en-light.svg" alt="Documentation"></picture></a>
+<a href="https://github.com/muhittincamdali/GlobalLingo/tree/master/docs/guides"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-guides-en-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-guides-en-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-guides-en-light.svg" alt="Guides"></picture></a>
+<a href="https://github.com/muhittincamdali/GlobalLingo/tree/master/examples"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-examples-en-dark.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-examples-en-light.svg"><img src="https://raw.githubusercontent.com/muhittincamdali/GlobalLingo/master/.github/brand/button-examples-en-light.svg" alt="Examples"></picture></a>
 </p>
 
-<p align="center">
-  <a href="#features">Features</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#quick-start">Quick Start</a> •
-  <a href="#documentation">Documentation</a>
-</p>
+<!-- brand:end -->
+GlobalLingo checks the localization files of an iOS, Flutter or React Native/Expo app before they
+ship: Xcode String Catalogs, `.strings` and `.stringsdict` files, Flutter ARB files and JSON
+translation files. It finds missing, empty and stale translations, placeholders and plural forms
+that do not match across languages, duplicate keys, keys the code looks up but no file defines,
+hard-coded UI text, and Turkish dotted and dotless I traps, and names the fix for each finding.
+It reads files only and needs nothing but Node.js.
 
----
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/media/demo-flutter-dark.svg"><source media="(prefers-color-scheme: light)" srcset="docs/media/demo-flutter-light.svg"><img src="docs/media/demo-flutter-light.svg" alt="GlobalLingo run on a Flutter app: a renamed placeholder in the German ARB file (FMT001, FMT002), Polish without the plural forms for 2 to 4 and 5 or more (PLU001), an unused and a missing message, hard-coded text and toUpperCase on Turkish text, each with its fix"></picture>
 
-## 📋 Table of Contents
+<sub>Recorded from the real CLI on the <a href="fixtures/flutter-arb">flutter-arb fixture</a>, a
+Flutter 3.47.5 app (<code>npm run demo</code>). <code>flutter gen-l10n</code> accepts the German
+file and then breaks the build; see <a href="docs/guides/placeholders-and-plurals.md">the
+guide</a>.</sub>
 
-- [Why GlobalLingo?](#why-globallingo)
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Documentation](#documentation)
-- [Contributing](#contributing)
-- [License](#license)
-- [Star History](#-star-history)
+## Highlights
 
----
+- **Four formats, one report.** String Catalogs, `.strings`/`.stringsdict`, ARB and JSON (i18next,
+  i18n-js, react-intl/FormatJS) are read into the same model and checked with the same 19 rules,
+  so a monorepo with a native app, a Flutter app and an Expo app gets one report.
+- **Placeholders the way each runtime reads them.** Format specifiers by position and type
+  (`%@` against `%lld`, `%d` against `%lld`, `%#@name@` substitutions), ICU and i18next
+  placeholders by name, per plural form.
+- **Plural forms from CLDR.** Each locale is checked for the categories its language uses (Polish
+  `few` and `many`, Arabic all six), with example numbers in the message.
+- **The code, too.** Keys the code looks up but no catalog defines, keys no code mentions,
+  SwiftUI literals missing from the String Catalog, hard-coded text in UIKit, Flutter and React
+  Native, and case changes that break on Turkish and Azerbaijani devices.
+- **Made for CI.** Exit codes 0/1/2, `--fail-on`, a baseline file so only new findings fail, and
+  output as text, Markdown, JSON, SARIF (code scanning) or GitHub annotations.
+- **Bounded on any repository.** No runtime dependencies, no network, symbolic links not followed,
+  limits on file sizes, depth and findings, and text from the project never reaches the terminal
+  with control characters in it.
 
-## Why GlobalLingo?
+## Quick start
 
-Localizing iOS apps is tedious. Managing `.strings` files, handling plurals, formatting dates/numbers for different locales—it's a mess. **GlobalLingo** simplifies everything with a modern, type-safe API.
+You need [Node.js](https://nodejs.org/) 22.12 or later (`node --version` prints it; on a Mac,
+`brew install node` installs it). Nothing else: no Xcode, Flutter or React Native toolchain.
 
-```swift
-// Before: Scattered, error-prone
-let text = NSLocalizedString("welcome_message", comment: "")
-let formatted = String(format: NSLocalizedString("items_count", comment: ""), count)
+**1. Open a terminal in your app's folder**, the one with the `.xcodeproj`, `pubspec.yaml` or
+`package.json`:
 
-// After: Clean, type-safe
-let text = L10n.welcomeMessage
-let formatted = L10n.itemsCount(count)
+```sh
+cd path/to/YourApp
 ```
 
-## Features
+**2. Run GlobalLingo:**
 
-| Feature | Description |
-|---------|-------------|
-| 🔤 **Type-Safe Strings** | Generated Swift code, no typos |
-| 📊 **Smart Plurals** | ICU MessageFormat support |
-| 🗓️ **Date/Time Formatting** | Locale-aware formatting |
-| 💰 **Currency & Numbers** | Proper decimal/currency formatting |
-| 🔄 **Runtime Language Switch** | Change language without restart |
-| 📦 **Remote Strings** | Update translations OTA |
-| 🤖 **Auto Translation** | ML-powered translation suggestions |
-| 📱 **SwiftUI Native** | @Environment integration |
+```sh
+npx @mcamdali/globallingo
+```
+
+The npm package is `@mcamdali/globallingo`; the command it installs is `globallingo`.
+
+**3. Read the findings.** Each one names its rule, the file and line, what is wrong and how to fix
+it, with a link to the rule's documentation. **ERROR** findings make the exit code 1; the last
+line counts them. To fail on warnings too, add `--fail-on warning`.
+
+## What GlobalLingo checks
+
+| Rule   | Severity | Finding                                                                                        |
+| ------ | -------- | ---------------------------------------------------------------------------------------------- |
+| MIS001 | error    | A translation is missing (or a String Catalog entry is still in state "new")                   |
+| MIS002 | error    | A translation is empty                                                                         |
+| MIS003 | warning  | A String Catalog translation needs review                                                      |
+| MIS004 | info     | A translation is the same as the source text                                                   |
+| STA001 | warning  | Xcode marks the key as stale                                                                   |
+| STA002 | warning  | A translation has a key the source language does not                                           |
+| FMT001 | error    | A placeholder the source does not have, or of another type                                     |
+| FMT002 | warning  | A placeholder of the source is left out                                                        |
+| FMT003 | error    | A file or message does not parse (JSON, `.strings`, plist, ICU, `%` sequences)                 |
+| PLU001 | warning  | A plural form the language needs (CLDR) is missing                                             |
+| PLU002 | error    | A plural has no `other` form                                                                   |
+| DUP001 | error    | A key appears twice in one file                                                                |
+| KEY001 | error    | The code looks up a key no catalog defines                                                     |
+| KEY002 | warning  | A SwiftUI literal is not in the String Catalog                                                 |
+| KEY003 | info     | No source file mentions the key                                                                |
+| HCS001 | warning  | Text shown to the user is hard-coded                                                           |
+| TRI001 | warning  | A lookup key is case-changed with the device locale                                            |
+| TRI002 | warning  | A key contains `İ` or `ı`                                                                      |
+| TRI003 | warning  | Translated text is case-changed without the locale in an app that ships Turkish or Azerbaijani |
+
+[docs/rules.md](docs/rules.md) describes each rule with examples, the fix per ecosystem and the
+Apple, Flutter, Unicode, ICU and library documents it rests on.
 
 ## Installation
 
-### Swift Package Manager
+Run it without installing, as above, or install the `globallingo` command:
 
-```swift
-dependencies: [
-    .package(url: "https://github.com/muhittincamdali/GlobalLingo.git", from: "1.0.0")
-]
+```sh
+npm i -g @mcamdali/globallingo
+globallingo
 ```
 
-## Quick Start
+In a JavaScript project, `npm install --save-dev @mcamdali/globallingo` pins a version and
+`npx globallingo` runs that copy. Each
+[GitHub release](https://github.com/muhittincamdali/GlobalLingo/releases) also carries the package
+as `globallingo-<version>.tgz` with a `SHA256SUMS` file, and the release workflow opens a Homebrew
+formula for `brew install muhittincamdali/tap/globallingo`.
 
-### 1. Define Your Strings
+From a clone:
 
-Create `Localizable.strings`:
-
-```
-"welcome" = "Welcome to %@!";
-"items_count" = "%d items";
-"greeting" = "Hello, {name}!";
-```
-
-### 2. Generate Type-Safe Code
-
-```bash
-swift run globalingo generate
+```sh
+git clone https://github.com/muhittincamdali/GlobalLingo.git
+cd GlobalLingo && npm ci && npm run build
+node dist/cli/main.js path/to/YourApp
 ```
 
-This creates `L10n.swift`:
+## Usage
 
-```swift
-enum L10n {
-    static func welcome(_ p1: String) -> String
-    static func itemsCount(_ p1: Int) -> String
-    static func greeting(name: String) -> String
+```text
+globallingo [path] [options]
+```
+
+| Option                    | What it does                                                               |
+| ------------------------- | -------------------------------------------------------------------------- |
+| `path`                    | The app's folder; default is the current folder                            |
+| `-f, --format <format>`   | `tty` (default), `markdown`, `json`, `sarif` or `github`                   |
+| `-o, --output <file>`     | Write the report to a file instead of the terminal                         |
+| `--fail-on <severity>`    | `error` (default), `warning`, `info` or `none`: what makes the exit code 1 |
+| `-c, --config <file>`     | Settings file; default is `<path>/.globallingo.json` when it exists        |
+| `--source <locale>`       | The source language, when the files do not say                             |
+| `--locales <list>`        | Check only these locales, e.g. `de,tr,pl`                                  |
+| `--baseline <file>`       | Findings in this file are reported but do not fail the run                 |
+| `--write-baseline <file>` | Write every finding of this run to a baseline file                         |
+| `--no-code`               | Check the localization files only, not the source code                     |
+| `--no-color`              | Plain text even in a terminal (`NO_COLOR` and `FORCE_COLOR` are respected) |
+
+Exit codes: `0` no findings at or above `--fail-on`, `1` findings at or above it, `2` bad
+arguments or settings, no localization files found, or an unexpected error. With
+`--write-baseline` the exit code is `0` once the file is written. A folder without
+localization files is an error, so a wrong path in CI does not pass quietly.
+
+### Run it in CI
+
+[examples/github-actions/globallingo.yml](examples/github-actions/globallingo.yml) annotates the
+pull request, writes the coverage and findings to the job summary, uploads SARIF for code scanning
+and fails the job on errors. [Run GlobalLingo in CI](docs/guides/ci.md) explains each part.
+
+### Start with a baseline
+
+```sh
+npx @mcamdali/globallingo --write-baseline .globallingo-baseline.json
+npx @mcamdali/globallingo --baseline .globallingo-baseline.json
+```
+
+The first command accepts today's findings and exits 0; the second fails only on new ones. Fingerprints do
+not include line numbers, so moving code does not invalidate the file.
+
+### Configure
+
+A `.globallingo.json` in the app's folder sets the source language, the required locales, ignored
+paths and keys, and a severity (or `off`) per rule:
+
+```json
+{
+  "locales": ["de", "pl", "tr"],
+  "ignore": { "paths": ["**/__tests__/**"], "keys": ["legacy.*"] },
+  "rules": { "HCS001": "error", "MIS004": "off" }
 }
 ```
 
-### 3. Use in Your Code
+[docs/configuration.md](docs/configuration.md) lists every field, what GlobalLingo finds on its
+own, and the limits. In code, a line ending in `// globallingo-ignore` is not reported.
 
-```swift
-import GlobalLingo
+### Use the JSON report or the API
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Text(L10n.welcome("App"))
-            Text(L10n.itemsCount(5))
-            Text(L10n.greeting(name: "John"))
-        }
-    }
-}
+```sh
+npx @mcamdali/globallingo --format json > globallingo.json
 ```
 
-## Pluralization
+The report has the catalogs with coverage per locale, and each finding's `rule`, `severity`,
+`file`, `line`, `key`, `locale`, `message`, `fix`, `docs` and `fingerprint` (`schemaVersion` 1).
+[examples/shell/errors-by-locale.sh](examples/shell/errors-by-locale.sh) counts errors per locale
+with `jq`. The same checks run from JavaScript:
 
-GlobalLingo uses ICU MessageFormat for complex plurals:
+```js
+import { render, scan } from '@mcamdali/globallingo';
 
-```
-"messages_count" = "{count, plural, =0 {No messages} one {# message} other {# messages}}";
-```
-
-```swift
-L10n.messagesCount(0)  // "No messages"
-L10n.messagesCount(1)  // "1 message"
-L10n.messagesCount(5)  // "5 messages"
-```
-
-### Gender Support
-
-```
-"profile_updated" = "{gender, select, male {He updated his profile} female {She updated her profile} other {They updated their profile}}";
+const report = await scan('path/to/app', { locales: ['de', 'tr'] });
+console.log(report.summary);
+console.log(render(report, 'markdown'));
 ```
 
-## Date & Time Formatting
+[examples/api/coverage.mjs](examples/api/coverage.mjs) prints the coverage of every catalog.
 
-```swift
-let date = Date()
+## Demo
 
-// Locale-aware formatting
-Lingo.format(date, style: .medium)  // "Feb 4, 2026"
-Lingo.format(date, style: .full)    // "Wednesday, February 4, 2026"
+The terminal recordings come from the CLI on the [fixtures](fixtures/README.md), small apps made
+with each toolchain:
 
-// Relative formatting
-Lingo.relative(date)  // "2 hours ago"
+| Project                                                        | Recording                                                                             |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Flutter 3.47.5 app with ARB files                              | top of this page                                                                      |
+| Expo SDK 58 app with i18next                                   | [light](docs/media/demo-expo-light.svg) · [dark](docs/media/demo-expo-dark.svg)       |
+| SwiftUI package whose String Catalog keys Xcode 27.1 extracted | [light](docs/media/demo-swiftui-light.svg) · [dark](docs/media/demo-swiftui-dark.svg) |
+| UIKit app with `.strings` and `.stringsdict` (XcodeGen)        | [light](docs/media/demo-uikit-light.svg) · [dark](docs/media/demo-uikit-dark.svg)     |
 
-// Custom format
-Lingo.format(date, pattern: "EEEE, MMMM d")  // "Wednesday, February 4"
+Measured on 28 October 2026 on a Mac (Apple silicon, M5 Max) with Node.js 26.12 while other jobs
+kept its load average above 40: three sets of 100 runs of `node dist/cli/main.js` on the four
+fixtures, Node.js start-up included. The medians of the three sets were 0.12, 0.13 and 0.14
+seconds; the slowest run took 0.54 seconds.
+
+### What users see
+
+The UIKit fixture in the iOS 27.0 simulator (iPhone 17, built with Xcode 27.1), English on the
+left and Turkish on the right. Foundation shows the key itself where a translation is missing
+(`archive.confirm.message` in Turkish, MIS001) and where no table has the key at all
+(`archive.confirm.ok`, KEY001). `scripts/simulator-shots.sh` takes both screenshots.
+
+<p align="center"><img src="docs/media/simulator/inbox-en.png" width="300" alt="The Inbox app in English: the alert asks 'Archive all messages?' with the message text, and the button shows the raw key archive.confirm.ok"> <img src="docs/media/simulator/inbox-tr.png" width="300" alt="The Inbox app in Turkish: the alert title is translated, but the message shows the raw key archive.confirm.message and the button the raw key archive.confirm.ok"></p>
+
+## Status
+
+| Feature                                                                                                                    | Status  |
+| -------------------------------------------------------------------------------------------------------------------------- | ------- |
+| String Catalogs, `.strings` (UTF-8, UTF-16, XML) and `.stringsdict`, ARB with l10n.yaml, i18next, i18n-js and ICU JSON     | works   |
+| 19 rules: translations, stale and orphan keys, placeholders, plurals, duplicates, keys in code, hard-coded text, Turkish I | works   |
+| Terminal, Markdown, JSON, SARIF and GitHub annotation output; `--fail-on`; baselines; `.globallingo.json`                  | works   |
+| Programmatic API with type declarations                                                                                    | works   |
+| YAML translation files (Rails-style i18n, i18next YAML)                                                                    | planned |
+| Android `strings.xml` for native Android and the Android side of cross-platform apps                                       | planned |
+| A GitHub Action wrapper (`uses: muhittincamdali/GlobalLingo@v2`) and pull request comments                                 | planned |
+| Translator comments: report keys without a comment or `@key` description                                                   | planned |
+
+## Limits
+
+- **Patterns, not a compiler.** The code rules read Swift, Objective-C, Dart and
+  JavaScript/TypeScript with comments blanked and look for the common ways each ecosystem looks up
+  and shows text. Keys built at run time, wrappers around the lookup functions and text set
+  through variables are not seen.
+- **Literal keys only.** KEY001 checks keys written as literals. KEY003 counts any literal,
+  prefix or Dart member with the key's name as a use and still reports a key whose use it cannot
+  see, which is why it is an info finding.
+- **SwiftUI interpolation.** Xcode turns `Text("\(count) books")` into the key `%lld books` using
+  the compiler's type information. GlobalLingo does not have it, so KEY002 skips literals with
+  interpolation or `%`.
+- **CLDR version.** Plural categories come from the CLDR data of the Node.js that runs
+  GlobalLingo (CLDR 49 in Node.js 26.12). A newer CLDR can add a category to a language.
+- **Files only.** GlobalLingo does not build, run or change anything; it writes only the report or
+  baseline you ask for.
+
+## Documentation
+
+API reference, rules, configuration and guides:
+[muhittincamdali.github.io/GlobalLingo](https://muhittincamdali.github.io/GlobalLingo/).
+
+## Guides
+
+- [Run GlobalLingo in CI](docs/guides/ci.md)
+- [Placeholders and plurals across Apple, Flutter and JavaScript](docs/guides/placeholders-and-plurals.md)
+- [The Turkish I](docs/guides/turkish-i.md)
+- Reference: [rules](docs/rules.md) and [configuration](docs/configuration.md)
+
+## Related tools
+
+Other projects check some of the same files; which one fits depends on what you use:
+
+- [xcstrings-lint](https://github.com/thatswiftguy/xcstrings-lint) is a GitHub Action for String
+  Catalogs and `.strings` files, with a ratchet mode that blocks only the problems a pull request
+  introduces and a pull request comment.
+- [i18n-check](https://github.com/lingualdev/i18n-check) validates JSON and YAML translation files
+  of JavaScript apps (ICU and i18next), including unused and undefined keys through i18next-parser.
+- [BartyCrouch](https://github.com/FlineDev/BartyCrouch) keeps `.strings` files in sync with Swift
+  code and storyboards, can translate through an API, and lints duplicate keys and empty values.
+- [StringsLint](https://github.com/dral3x/StringsLint) reports missing and unused `.strings` keys
+  in Swift and Objective-C projects.
+- Xcode's String Catalog editor shows the translation progress of each language, and Flutter's
+  `gen-l10n` lists untranslated messages with `untranslated-messages-file`.
+
+GlobalLingo reads all four formats in one run and adds placeholder types, CLDR plural forms,
+the code checks and the Turkish I rules. The descriptions above are from each project's README
+on 28 October 2026.
+
+## Requirements
+
+| Toolchain | Minimum version |
+| --------- | --------------- |
+| Node.js   | 22.12           |
+
+GlobalLingo does not need Xcode, Flutter or React Native: it reads files, so it also runs on Linux. CI runs the tests on Node.js 22 and 24 (Linux); locally
+all 256 pass on Node.js 22.23, 24.22 and 26.12 on a Mac (Apple silicon).
+
+## Architecture
+
+```text
+path ─► walk                 files of the folder (no symbolic links, no dependency folders, limits)
+     ─► discoverCatalogs     String Catalogs, .lproj tables, ARB folders (l10n.yaml), JSON locale folders
+          parse/             JSON, .strings, plist readers with line numbers and duplicate keys
+          catalogs/          one model: catalog → key → translation per locale (texts, plurals, state)
+     ─► checkCatalog         MIS, STA, FMT, PLU, DUP, TRI002 rules
+          messages/          printf, ICU, i18next and i18n-js placeholder parsers; CLDR via Intl
+     ─► checkSource          KEY001, KEY002, HCS001, TRI001, TRI003 on comment-blanked source code
+     ─► unusedKeys           KEY003 from the literals and members of all source files
+     ─► render               tty | markdown | json | sarif | github
 ```
 
-## Number & Currency Formatting
+- Each finding is a rule ID, a severity (the rule's default, or the configuration's), a file and
+  line, a message, the rule's fix for the finding's ecosystem, a documentation link and a
+  fingerprint for baselines.
+- Every reader stops at a nesting limit and takes time in step with its input, so crafted files
+  cannot exhaust the stack or the time; the tests feed it 100,000 levels of JSON and measure how
+  the time of crafted catalogs, settings and source files grows from 128 KB to 2 MB.
+- The CLI (`src/cli/`) only parses arguments, picks colours and widths, and sets the exit code.
 
-```swift
-// Numbers
-Lingo.format(1234567.89)  // "1,234,567.89" (US)
-                          // "1.234.567,89" (Germany)
+## Roadmap
 
-// Currency
-Lingo.currency(99.99, code: "USD")  // "$99.99"
-Lingo.currency(99.99, code: "EUR")  // "€99,99"
+See the [Status](#status) table: YAML files, Android `strings.xml`, a GitHub Action wrapper and
+translator comments are planned. [CHANGELOG.md](CHANGELOG.md) lists what each release changed.
 
-// Percentages
-Lingo.percent(0.75)  // "75%"
-```
+## FAQ
 
-## Runtime Language Switching
+**Does GlobalLingo change my files?** No. It reads them and writes only the report or baseline you
+ask for.
 
-```swift
-// Change language at runtime
-Lingo.setLanguage(.german)
+**Why does Polish need four forms when English has two?** Polish uses one form for 1, another
+for 2–4 (and 22–24, 32–34…), another for 0 and 5–21 (and 25–31…), and a fourth for fractions.
+CLDR records these rules per language; [the plural guide](docs/guides/placeholders-and-plurals.md)
+has the table.
 
-// SwiftUI updates automatically
-struct SettingsView: View {
-    @Environment(\.locale) var locale
-    
-    var body: some View {
-        Picker("Language", selection: $selectedLanguage) {
-            ForEach(Lingo.supportedLanguages) { lang in
-                Text(lang.displayName)
-            }
-        }
-    }
-}
-```
+**My app has no Turkish translation. Can TRI001 still matter?** Yes. It is about the device's
+language, not the app's: a key lower-cased with `toLocaleLowerCase()` turns `I` into `ı` on any
+Turkish device. [The Turkish I](docs/guides/turkish-i.md) shows it.
 
-## Remote Strings (OTA Updates)
-
-Update translations without app store release:
-
-```swift
-// Configure remote source
-Lingo.configure {
-    $0.remoteURL = URL(string: "https://api.myapp.com/strings")
-    $0.refreshInterval = .hours(24)
-    $0.fallbackToBundle = true
-}
-
-// Fetch updates
-await Lingo.refresh()
-```
-
-## Auto Translation
-
-ML-powered translation suggestions during development:
-
-```swift
-// In DEBUG builds
-Lingo.suggestTranslations(for: .german)
-// Outputs: "welcome" → "Willkommen bei %@!"
-```
-
-## SwiftUI Integration
-
-```swift
-struct ContentView: View {
-    @Localized("welcome") var welcomeText
-    @LocalizedFormat("greeting", "John") var greeting
-    
-    var body: some View {
-        VStack {
-            Text(welcomeText)
-            Text(greeting)
-        }
-    }
-}
-```
-
-### Environment
-
-```swift
-ContentView()
-    .environment(\.locale, Locale(identifier: "de"))
-```
-
-## String Catalog Support
-
-GlobalLingo works with Xcode 15+ String Catalogs (`.xcstrings`):
-
-```swift
-Lingo.configure {
-    $0.source = .stringCatalog
-}
-```
-
-## CLI Tool
-
-```bash
-# Generate Swift code
-globalingo generate --input Localizable.strings --output Sources/L10n.swift
-
-# Validate translations
-globalingo validate --report missing
-
-# Export for translators
-globalingo export --format xliff --output translations/
-
-# Import translations
-globalingo import --file translations/de.xliff
-
-# Auto-translate (requires API key)
-globalingo translate --to de,fr,es --engine deepl
-```
-
-## Best Practices
-
-### Project Structure
-
-```
-Localization/
-├── en.lproj/
-│   └── Localizable.strings
-├── de.lproj/
-│   └── Localizable.strings
-├── Generated/
-│   └── L10n.swift
-└── globalingo.yml
-```
-
-### Configuration File
-
-```yaml
-# globalingo.yml
-input:
-  - Localization/en.lproj/Localizable.strings
-
-output:
-  path: Localization/Generated/L10n.swift
-  enum: L10n
-
-languages:
-  - en
-  - de
-  - fr
-  - es
-  - ja
-
-remote:
-  url: https://api.myapp.com/strings
-  apiKey: ${GLOBALINGO_API_KEY}
-```
-
-## Migration Guide
-
-### From NSLocalizedString
-
-```swift
-// Before
-NSLocalizedString("key", comment: "")
-
-// After
-L10n.key
-```
-
-### From SwiftGen
-
-GlobalLingo is a drop-in replacement with additional features.
+**A finding is wrong for my project. What do I do?** Turn the rule down or off in
+`.globallingo.json`, ignore the key or path, or mark the line with `globallingo-ignore`, and
+please open an issue with the smallest example that shows it.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+Contributions are welcome: read [CONTRIBUTING.md](CONTRIBUTING.md) and the
+[code of conduct](https://github.com/muhittincamdali/.github/blob/main/CODE_OF_CONDUCT.md) before
+opening a pull request, and report security issues as described in [SECURITY.md](SECURITY.md).
 
 ## License
 
-MIT License - see [LICENSE](LICENSE).
-
----
-
-<p align="center">
-  <sub>Built with ❤️ for the global iOS community</sub>
-</p>
-
----
-
-## 📈 Star History
-
-<a href="https://star-history.com/#muhittincamdali/GlobalLingo&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=muhittincamdali/GlobalLingo&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=muhittincamdali/GlobalLingo&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=muhittincamdali/GlobalLingo&type=Date" />
- </picture>
-</a>
+Released under the MIT license. See [LICENSE](LICENSE).

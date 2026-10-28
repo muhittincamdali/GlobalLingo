@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GlobalLingo settings (.globallingo.json)",
+  "description": "Every field is optional, and so is the file. See docs/configuration.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "sourceLanguage": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The language the others are translated from, when the files do not say (e.g. en)."
+    },
+    "locales": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "maxItems": 1000,
+      "description": "Only these locales are checked, and each must exist."
+    },
+    "ignore": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "maxItems": 1000,
+          "description": "Globs matched against paths from the checked folder, e.g. **/Tests/**. At most 256 characters each and 4096 in all."
+        },
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "maxItems": 1000,
+          "description": "Globs matched against keys, e.g. debug.*. At most 256 characters each and 4096 in all."
+        }
+      }
+    },
+    "rules": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MIS001": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "MIS002": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "MIS003": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "MIS004": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "STA001": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "STA002": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "FMT001": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "FMT002": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "FMT003": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "PLU001": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "PLU002": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "DUP001": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "KEY001": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "KEY002": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "KEY003": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "HCS001": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "TRI001": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "TRI002": {
+          "enum": ["error", "warning", "info", "off"]
+        },
+        "TRI003": {
+          "enum": ["error", "warning", "info", "off"]
+        }
+      },
+      "description": "A different severity for a rule, or off."
+    },
+    "jsonSyntax": {
+      "enum": ["i18next", "icu", "i18n-js"],
+      "description": "Placeholder syntax of JSON translation files, when package.json does not tell."
+    },
+    "catalogDirs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "maxItems": 1000,
+      "description": "Folders with JSON translation files that are not found on their own."
+    }
+  }
+}

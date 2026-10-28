@@ -1,0 +1,13 @@
+#!/bin/sh
+# Git pre-commit hook: runs GlobalLingo when a localization file is staged, and stops the commit
+# when it reports an error. Copy to .git/hooks/pre-commit and make it executable, or call it from
+# your hook manager. `git commit --no-verify` skips it.
+set -eu
+
+pattern='\.(xcstrings|strings|stringsdict|arb|json)$|(^|/)l10n\.yaml$|(^|/)\.globallingo\.json$'
+if ! git diff --cached --name-only --diff-filter=ACMR | grep -Eq "$pattern"; then
+  exit 0
+fi
+
+# --no-code: a commit that changes translations is checked for the translations only.
+exec npx --yes @mcamdali/globallingo@2 --no-code --fail-on error

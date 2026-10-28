@@ -1,0 +1,90 @@
+GlobalLingo 2.0.0 · fixtures/swiftui-catalog
+
+  Sources/Shelf/Resources/Localizable.xcstrings  String Catalog, format specifiers · source en · 6 keys
+    de 100% · fr 100% · pl 66% · tr 83%
+
+ERROR    KEY001  Sources/Shelf/Messages.swift:10  Unknown key
+         "sync.retry" is not in the Localizable table
+         Fix: Add the key to the String Catalog or .strings table the lookup names, or correct the
+         key in the code.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#key001
+
+WARNING  TRI001  Sources/Shelf/Messages.swift:15  Locale-dependent case change on a key
+         The lookup key goes through localizedLowercase, which depends on the device locale
+         Fix: Use lowercased() or uppercased(), which do not depend on the locale, or no case change
+         at all; keep keys in one case in the catalog.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#tri001
+
+WARNING  PLU001  Sources/Shelf/Resources/Localizable.xcstrings:42  Missing plural form
+         "%lld books on %@" in French (fr) has no plural forms for one (e.g. 0, 1), many (e.g.
+         1000000)
+         Fix: In the String Catalog editor, add the missing plural form for this locale (Vary by
+         Plural shows every category the language uses).
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#plu001
+
+ERROR    FMT001  Sources/Shelf/Resources/Localizable.xcstrings:45  Placeholder mismatch
+         "%lld books on %@" in French (fr) uses %@ (an object) for argument 1; the source text has
+         %1$lld (a 64-bit integer)
+         Fix: Use the same format specifiers as the source text, with positions (%1$@, %2$lld) when
+         the order changes.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#fmt001
+
+ERROR    FMT001  Sources/Shelf/Resources/Localizable.xcstrings:45  Placeholder mismatch
+         "%lld books on %@" in French (fr) uses %lld (a 64-bit integer) for argument 2; the source
+         text has %2$@ (an object)
+         Fix: Use the same format specifiers as the source text, with positions (%1$@, %2$lld) when
+         the order changes.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#fmt001
+
+WARNING  PLU001  Sources/Shelf/Resources/Localizable.xcstrings:50  Missing plural form
+         "%lld books on %@" in Polish (pl) has no plural forms for few (e.g. 2, 3, 4), many (e.g. 0,
+         5, 6)
+         Fix: In the String Catalog editor, add the missing plural form for this locale (Vary by
+         Plural shows every category the language uses).
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#plu001
+
+ERROR    MIS001  Sources/Shelf/Resources/Localizable.xcstrings:114  Missing translation
+         "Delete all" has no Polish (pl) translation
+         Fix: Translate the key for this locale in Xcode's String Catalog editor, or add it to the
+         locale's .strings file.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis001
+
+WARNING  MIS003  Sources/Shelf/Resources/Localizable.xcstrings:122  Needs review
+         The French (fr) translation of "Delete all" is marked as needing review
+         Fix: Check the translation against the current source text, correct it if needed, and mark
+         it as reviewed in the String Catalog editor.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis003
+
+WARNING  STA001  Sources/Shelf/Resources/Localizable.xcstrings:136  Stale key
+         "Old banner" is stale: Xcode no longer finds it in the source code
+         Fix: Delete the key in the String Catalog editor (Remove Stale Strings), or mark it as
+         manually managed if the code builds it at run time.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#sta001
+
+ERROR    MIS001  Sources/Shelf/Resources/Localizable.xcstrings:213  Missing translation
+         "Shelf" is not translated into Turkish (tr) yet (state "new")
+         Fix: Translate the key for this locale in Xcode's String Catalog editor, or add it to the
+         locale's .strings file.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis001
+
+ERROR    MIS002  Sources/Shelf/Resources/Localizable.xcstrings:243  Empty translation
+         "sync.failed" has an empty Polish (pl) translation
+         Fix: Write the translation, or remove the empty value so the fallback text is used until it
+         is translated.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis002
+
+WARNING  KEY002  Sources/Shelf/ShelfView.swift:21  SwiftUI text not in the String Catalog
+         "Pull to refresh" is shown by SwiftUI but is not in the Localizable String Catalog
+         Fix: Build the target once so Xcode adds the string to the catalog (with "Use Compiler to
+         Extract Swift Strings"), translate it, and commit the catalog. Use Text(verbatim:) for text
+         that must not be translated.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#key002
+
+WARNING  TRI003  Sources/Shelf/ShelfView.swift:29  Translated text cased without the locale
+         Translated text is changed with uppercased(), which ignores the locale; Turkish and
+         Azerbaijani need İ and ı
+         Fix: Use uppercased(with:) with the locale the text is in, e.g. uppercased(with:
+         Locale(identifier: "tr")), or localizedUppercase when that is the device locale.
+         https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#tri003
+
+✗ 6 errors, 7 warnings in 1 catalog and 3 source files

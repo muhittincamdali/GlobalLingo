@@ -1,0 +1,16 @@
+# Generated or recorded files: kept exactly as produced.
+dist/
+coverage/
+site/
+fixtures/
+test/__snapshots__/
+test/data/
+.github/brand/
+_work/
+# Written by the repository kit (apply.mjs); reformatting them would make every re-run a change.
+.github/workflows/ci.yml
+.github/workflows/quality.yml
+docs/media/
+package-lock.json
+CHANGELOG.md
+/README*.md

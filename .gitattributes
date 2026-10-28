@@ -1,1 +1,4 @@
 * text=auto eol=lf
+
+# UTF-16 on purpose: GlobalLingo reads .strings files in the encoding Xcode wrote them in.
+fixtures/uikit-strings/Inbox/en.lproj/Localizable.strings -text

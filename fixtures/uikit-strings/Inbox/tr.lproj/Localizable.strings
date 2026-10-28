@@ -1,0 +1,7 @@
+/* Navigation title of the inbox */
+"inbox.title" = "Gelen Kutusu";
+
+/* Alert before archiving */
+"archive.confirm.title" = "Tüm iletiler arşivlensin mi?";
+
+"inbox.legacy" = "Eski gelen kutusu";

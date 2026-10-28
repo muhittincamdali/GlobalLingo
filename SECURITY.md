@@ -1,53 +1,65 @@
-# Security Policy
+# Security policy
 
-## Supported Versions
+## Supported versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.x.x   | :white_check_mark: |
-| < 1.0   | :x:                |
+Security fixes are made for the latest release of each project. If you are on an older version,
+the fix will be in a new release and the upgrade notes will say if anything changes for you.
 
-## Reporting a Vulnerability
+## Reporting a vulnerability
 
-We take the security of SwiftRouter seriously. If you have discovered a security vulnerability, we appreciate your help in disclosing it to us in a responsible manner.
+Please report vulnerabilities privately, not in a public issue, pull request or discussion.
 
-### How to Report
+1. **Preferred:** open the repository's **Security** tab and choose
+   **Report a vulnerability** ([how private reporting works](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately)).
+2. **Or** email [muhittincamdali@gmail.com](mailto:muhittincamdali@gmail.com) with
+   "Security" in the subject.
 
-**Please do not report security vulnerabilities through public GitHub issues.**
+Include what you can of the following:
 
-Instead, please report them via email to the repository owner. You can find contact information on the GitHub profile.
+- the affected repository and version (tag or commit),
+- what an attacker can do and under which conditions,
+- steps or a small project that reproduces it,
+- any fix or mitigation you already have in mind.
 
-Please include the following information:
+## What happens next
 
-- Type of issue (e.g., deep link injection, state manipulation, etc.)
-- Full paths of source file(s) related to the manifestation of the issue
-- The location of the affected source code (tag/branch/commit or direct URL)
-- Any special configuration required to reproduce the issue
-- Step-by-step instructions to reproduce the issue
-- Proof-of-concept or exploit code (if possible)
-- Impact of the issue, including how an attacker might exploit it
+- You get a reply within 7 days confirming that the report arrived.
+- I confirm the issue, work on a fix and agree a disclosure date with you. Fixes are released as
+  soon as they are ready, together with a GitHub security advisory.
+- You are credited in the advisory unless you prefer not to be.
 
-### What to Expect
+Please give a reasonable amount of time to fix the issue before disclosing it publicly.
 
-- A confirmation of receipt within 48 hours
-- An assessment of the vulnerability within 7 days
-- Regular updates on our progress
-- Credit for responsible disclosure (if desired)
+## Scope for GlobalLingo
 
-## Security Best Practices
+GlobalLingo reads the files of the folder you point it at: String Catalogs, `.strings` and
+`.stringsdict` files, ARB files and `l10n.yaml`, JSON translation files, `package.json`, the
+`developmentRegion` of `project.pbxproj`, `.globallingo.json`, and Swift, Objective-C, Dart and
+JavaScript/TypeScript source files. It writes only the report (`--output`) or baseline
+(`--write-baseline`) you ask for, makes no network requests, never runs project code, and has no
+runtime dependencies.
 
-When using SwiftRouter in your projects:
+Its reports quote the project's own keys, translations, file names and code literals, and contain
+nothing else from your machine. A CI log that shows the report shows those quotes.
 
-1. **Validate Deep Links** - Always validate URL parameters before navigation
-2. **Use Route Guards** - Implement authentication guards for protected routes
-3. **Sanitize Parameters** - Never trust user input from URL parameters
-4. **Audit Navigation Paths** - Review which screens are accessible via deep links
+What it guards against, with tests in
+[test/integration/robustness.test.ts](test/integration/robustness.test.ts) and
+[test/integration/growth.test.ts](test/integration/growth.test.ts): symbolic links are not followed
+while reading the folder; a `.globallingo.json` or baseline that is a link is refused unread, and a
+JSON error in either names the line, never the text; reports and baselines are not written through a
+link; JSON, property list and ICU readers stop at a nesting limit, and property list tags over 1024
+characters are refused; every reader (String Catalog, `.strings`, `.stringsdict`, ARB, JSON,
+`l10n.yaml`, printf, ICU and i18next placeholders), the catalog checks, the source patterns and the
+KEY003 prefix lookup take time that grows in step with the input, which the tests measure as a ratio
+on crafted inputs grown 16 times to 2 MB; every path and key is matched against every ignore glob,
+so that work is the length of the path or key times the characters of the globs, and
+`.globallingo.json` is refused when a glob is over 256 characters or a list over 4096, which keeps
+the second factor fixed; the code prefixes of KEY003 take memory in step with their own text, which
+a test checks by scanning 8 MB of them with a 128 MB heap; catalogs over 16 MB, source files over 2
+MB, more than 200,000 files, 24 folder levels or 100,000 findings are not read or kept; and control
+characters and bidirectional overrides from the project are escaped in every output format, line
+breaks and tabs included wherever a file name or message has to stay on one line.
 
-## Security Features
-
-SwiftRouter includes several security considerations:
-
-- **Type-Safe Parameters** - Reduces injection risks
-- **Route Guards** - Authentication/authorization interceptors
-- **URL Validation** - Built-in URL parsing with validation
-- **No External Dependencies** - Minimal attack surface
+Reports that fit this policy include, for example: a crafted file or configuration that makes
+GlobalLingo write outside the file you named, follow a link out of the folder, run code, hang,
+exhaust memory, or print terminal escape sequences.

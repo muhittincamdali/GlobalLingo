@@ -1,61 +1,245 @@
 name: Release
 
+# Runs when a version tag (v1.2.3) is pushed:
+#
+# 1. verify: the tag matches package.json and CHANGELOG.md has a section for it; lint, typecheck,
+#    tests and build pass; the packed tarball installs and runs (scripts/smoke-pack.ts).
+# 2. github-release: creates the GitHub release with that CHANGELOG section as its notes and the
+#    tarball attached. A release that already exists keeps its notes; only missing files are added.
+# 3. npm: publishes the verified tarball as @mcamdali/globallingo with provenance through npm trusted
+#    publishing, when the repository variable NPM_TRUSTED_PUBLISHING is "true". Until then the
+#    owner publishes by hand.
+# 4. homebrew: once the GitHub release exists, writes Formula/globallingo.rb from its tarball and opens
+#    a pull request on muhittincamdali/homebrew-tap (secret HOMEBREW_TAP_TOKEN; without it the
+#    formula is only uploaded as an artifact).
+#
+# The package is scoped, so npm pack writes mcamdali-globallingo-<version>.tgz; the release names it
+# globallingo-<version>.tgz, as the docs and the Homebrew formula do. It is the same file.
+#
+# Run it by hand with an existing tag to redo the Homebrew step, and the npm step when that version
+# is not on npm yet.
+
 on:
   push:
-    tags:
-      - 'v*'
+    tags: ['v[0-9]+.[0-9]+.[0-9]+*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag, e.g. v2.0.0
+        required: true
+        type: string
 
-permissions:
-  contents: write
+permissions: {}
+
+concurrency:
+  group: release-${{ inputs.tag || github.ref_name }}
+  cancel-in-progress: false
 
 jobs:
-  release:
-    name: Create Release
-    runs-on: macos-14
-    
+  verify:
+    name: Verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    outputs:
+      tag: ${{ steps.version.outputs.tag }}
+      version: ${{ steps.version.outputs.version }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-    
-    - name: Build Package
-      run: swift build -c release
-      continue-on-error: true
-    
-    - name: Generate Changelog
-      id: changelog
-      run: |
-        # Get the previous tag
-        PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
-        
-        if [ -z "$PREV_TAG" ]; then
-          CHANGELOG=$(git log --pretty=format:"- %s" HEAD)
-        else
-          CHANGELOG=$(git log --pretty=format:"- %s" $PREV_TAG..HEAD)
-        fi
-        
-        echo "changelog<<EOF" >> $GITHUB_OUTPUT
-        echo "$CHANGELOG" >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
-    
-    - name: Create Release
-      uses: softprops/action-gh-release@v2
-      with:
-        body: |
-          ## What's Changed
-          ${{ steps.changelog.outputs.changelog }}
-          
-          ## Installation
-          
-          ### Swift Package Manager
-          ```swift
-          dependencies: [
-              .package(url: "https://github.com/muhittincamdali/${{ github.event.repository.name }}.git", from: "${{ github.ref_name }}")
-          ]
-          ```
-        draft: false
-        prerelease: ${{ contains(github.ref_name, 'alpha') || contains(github.ref_name, 'beta') || contains(github.ref_name, 'rc') }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+          persist-credentials: false
 
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+
+      - name: Check tag, version and changelog
+        id: version
+        env:
+          TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          if ! printf '%s' "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
+            echo "::error::$TAG is not a version tag such as v1.2.3"
+            exit 1
+          fi
+          version="${TAG#v}"
+          manifest="$(node -p "require('./package.json').version")"
+          if [ "$manifest" != "$version" ]; then
+            echo "::error::Tag $TAG does not match package.json version $manifest"
+            exit 1
+          fi
+          node scripts/release-notes.ts "$version" > "$RUNNER_TEMP/notes.md"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - run: npm ci --no-audit --no-fund
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+      - name: Install the packed tarball and run it
+        run: node scripts/smoke-pack.ts
+
+      - name: Pack
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/release"
+          npm pack --ignore-scripts --pack-destination "$RUNNER_TEMP/release"
+          mv "$RUNNER_TEMP/release/mcamdali-globallingo-$VERSION.tgz" "$RUNNER_TEMP/release/globallingo-$VERSION.tgz"
+          cp "$RUNNER_TEMP/notes.md" "$RUNNER_TEMP/release/notes.md"
+          (cd "$RUNNER_TEMP/release" && sha256sum ./*.tgz > SHA256SUMS)
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: release
+          path: ${{ runner.temp }}/release
+          if-no-files-found: error
+
+  github-release:
+    name: GitHub release
+    needs: verify
+    if: github.event_name == 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: release
+          path: release
+
+      - name: Create the release, or add missing files to an existing one
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ needs.verify.outputs.tag }}
+          VERSION: ${{ needs.verify.outputs.version }}
+        run: |
+          prerelease=""
+          case "$VERSION" in *-*) prerelease="--prerelease" ;; esac
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            echo "Release $TAG exists; its notes are left as they are."
+            existing="$(gh release view "$TAG" --json assets --jq '.assets[].name')"
+            for file in release/*.tgz release/SHA256SUMS; do
+              if ! printf '%s\n' "$existing" | grep -Fxq "$(basename "$file")"; then
+                gh release upload "$TAG" "$file"
+              fi
+            done
+          else
+            gh release create "$TAG" release/*.tgz release/SHA256SUMS \
+              --title "GlobalLingo $VERSION" --notes-file release/notes.md --verify-tag $prerelease
+          fi
+
+  npm:
+    name: Publish to npm
+    needs: verify
+    if: vars.NPM_TRUSTED_PUBLISHING == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      id-token: write
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/@mcamdali/globallingo/v/${{ needs.verify.outputs.version }}
+    steps:
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: release
+          path: release
+
+      - name: Publish
+        env:
+          VERSION: ${{ needs.verify.outputs.version }}
+        run: |
+          if npm view "@mcamdali/globallingo@$VERSION" version > /dev/null 2>&1; then
+            echo "::notice::@mcamdali/globallingo@$VERSION is already on npm."
+            exit 0
+          fi
+          tag="latest"
+          case "$VERSION" in *-*) tag="next" ;; esac
+          # The trusted publisher may only stage; a maintainer approves the version with 2FA on npmjs.com.
+          npm install --global npm@11.20.0
+          # The ./ makes npm read a file: "release/globallingo-x.tgz" alone is a GitHub owner/repo.
+          npm stage publish "./release/globallingo-$VERSION.tgz" --provenance --access public --tag "$tag"
+          echo "::notice::@mcamdali/globallingo@$VERSION is staged. Approve it at https://www.npmjs.com/package/@mcamdali/globallingo to publish."
+
+  homebrew:
+    name: Homebrew formula
+    needs: [verify, github-release]
+    if: >-
+      always() && needs.verify.result == 'success' && !contains(needs.verify.outputs.version, '-') &&
+      (needs.github-release.result == 'success' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.verify.outputs.tag }}
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+
+      - name: Write the formula from the release tarball
+        env:
+          VERSION: ${{ needs.verify.outputs.version }}
+        run: |
+          url="https://github.com/muhittincamdali/GlobalLingo/releases/download/v$VERSION/globallingo-$VERSION.tgz"
+          for attempt in $(seq 1 20); do
+            if curl -fsSL -o "$RUNNER_TEMP/globallingo.tgz" "$url"; then break; fi
+            if [ "$attempt" = 20 ]; then echo "::error::$url is not available"; exit 1; fi
+            sleep 30
+          done
+          sha256="$(sha256sum "$RUNNER_TEMP/globallingo.tgz" | cut -d' ' -f1)"
+          mkdir -p "$RUNNER_TEMP/formula"
+          node scripts/homebrew-formula.ts "$VERSION" "$sha256" > "$RUNNER_TEMP/formula/globallingo.rb"
+          cat "$RUNNER_TEMP/formula/globallingo.rb"
+
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: homebrew-formula
+          path: ${{ runner.temp }}/formula/globallingo.rb
+          if-no-files-found: error
+
+      - name: Open a pull request on the tap
+        env:
+          GH_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+          VERSION: ${{ needs.verify.outputs.version }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::notice::HOMEBREW_TAP_TOKEN is not set; the formula is in the homebrew-formula artifact."
+            exit 0
+          fi
+          branch="globallingo-$VERSION"
+          gh repo clone muhittincamdali/homebrew-tap "$RUNNER_TEMP/tap" -- --depth 1
+          cd "$RUNNER_TEMP/tap"
+          git switch -c "$branch"
+          mkdir -p Formula
+          cp "$RUNNER_TEMP/formula/globallingo.rb" Formula/globallingo.rb
+          git add Formula/globallingo.rb
+          if git diff --cached --quiet; then
+            echo "Formula/globallingo.rb is already at $VERSION."
+            exit 0
+          fi
+          git -c user.name="Muhittin Camdali" -c user.email="muhittincamdali@gmail.com" \
+            commit -m "GlobalLingo $VERSION" -m "Formula for GlobalLingo $VERSION from the GitHub release tarball."
+          gh auth setup-git
+          git push origin "$branch"
+          gh pr create --repo muhittincamdali/homebrew-tap --head "$branch" \
+            --title "GlobalLingo $VERSION" \
+            --body "Updates Formula/globallingo.rb to GlobalLingo $VERSION (https://github.com/muhittincamdali/GlobalLingo/releases/tag/v$VERSION)."

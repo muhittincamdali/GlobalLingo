@@ -1,0 +1,30 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "GlobalLingo",
+  "entryPoints": ["../../src/index.ts"],
+  "tsconfig": "./tsconfig.json",
+  "out": "../../site",
+  "readme": "./index.md",
+  "projectDocuments": [
+    "../rules.md",
+    "../configuration.md",
+    "../guides/ci.md",
+    "../guides/placeholders-and-plurals.md",
+    "../guides/turkish-i.md"
+  ],
+  "customCss": "./theme.css",
+  "navigationLinks": {
+    "GitHub": "https://github.com/muhittincamdali/GlobalLingo"
+  },
+  "sourceLinkTemplate": "https://github.com/muhittincamdali/GlobalLingo/blob/{gitRevision}/{path}#L{line}",
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": false
+  },
+  "treatWarningsAsErrors": true,
+  "alwaysCreateEntryPointModule": false,
+  "highlightLanguages": ["bash", "sh", "json", "jsonc", "swift", "text", "ts", "typescript", "xml", "yaml", "dart", "tsx", "js", "javascript"]
+}

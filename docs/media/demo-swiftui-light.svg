@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="847" height="1841" viewBox="0 0 847 1841" role="img" aria-label="npx @mcamdali/globallingo fixtures/swiftui-catalog: terminal output">
+<title>GlobalLingo · SwiftUI package with a String Catalog</title>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:13px;white-space:pre}
+.t{opacity:0;animation:show 0.01s linear forwards}
+.caret{opacity:0;animation:blink 1.1s step-end infinite}
+@keyframes show{to{opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.t{animation:none;opacity:1}.caret{animation:none;opacity:1}}
+</style>
+<rect width="847" height="1841" fill="#FFFFFF"/>
+<rect x="0.5" y="0.5" width="846" height="1840" rx="10" fill="#F5F9FF" stroke="#D0E2F7"/>
+<path d="M0.5 34V10.5a10 10 0 0 1 10-10h826a10 10 0 0 1 10 10V34z" fill="#EAF4FF"/>
+<line x1="0.5" y1="34" x2="846.5" y2="34" stroke="#D0E2F7"/>
+<circle cx="20" cy="17" r="6" fill="#0071E3"/><circle cx="40" cy="17" r="6" fill="#5AC8FA"/><circle cx="60" cy="17" r="6" fill="#D0E2F7"/>
+<text x="423.5" y="22" text-anchor="middle" fill="#5A6B80" style="font-size:12px">GlobalLingo · SwiftUI package with a String Catalog</text>
+<text x="20" y="67" fill="#5A6B80"># fixtures/swiftui-catalog: keys extracted by Xcode 27.1, en/de/fr/pl/tr</text>
+<text x="20" y="86"><tspan fill="#0071E3" font-weight="700">$ </tspan><tspan fill="#0B1F33"><tspan class="t" style="animation-delay:0.40s">n</tspan><tspan class="t" style="animation-delay:0.45s">p</tspan><tspan class="t" style="animation-delay:0.49s">x</tspan><tspan class="t" style="animation-delay:0.54s"> </tspan><tspan class="t" style="animation-delay:0.58s">@</tspan><tspan class="t" style="animation-delay:0.63s">m</tspan><tspan class="t" style="animation-delay:0.67s">c</tspan><tspan class="t" style="animation-delay:0.72s">a</tspan><tspan class="t" style="animation-delay:0.76s">m</tspan><tspan class="t" style="animation-delay:0.80s">d</tspan><tspan class="t" style="animation-delay:0.85s">a</tspan><tspan class="t" style="animation-delay:0.90s">l</tspan><tspan class="t" style="animation-delay:0.94s">i</tspan><tspan class="t" style="animation-delay:0.98s">/</tspan><tspan class="t" style="animation-delay:1.03s">g</tspan><tspan class="t" style="animation-delay:1.07s">l</tspan><tspan class="t" style="animation-delay:1.12s">o</tspan><tspan class="t" style="animation-delay:1.17s">b</tspan><tspan class="t" style="animation-delay:1.21s">a</tspan><tspan class="t" style="animation-delay:1.25s">l</tspan><tspan class="t" style="animation-delay:1.30s">l</tspan><tspan class="t" style="animation-delay:1.34s">i</tspan><tspan class="t" style="animation-delay:1.39s">n</tspan><tspan class="t" style="animation-delay:1.44s">g</tspan><tspan class="t" style="animation-delay:1.48s">o</tspan><tspan class="t" style="animation-delay:1.52s"> </tspan><tspan class="t" style="animation-delay:1.57s">f</tspan><tspan class="t" style="animation-delay:1.61s">i</tspan><tspan class="t" style="animation-delay:1.66s">x</tspan><tspan class="t" style="animation-delay:1.71s">t</tspan><tspan class="t" style="animation-delay:1.75s">u</tspan><tspan class="t" style="animation-delay:1.79s">r</tspan><tspan class="t" style="animation-delay:1.84s">e</tspan><tspan class="t" style="animation-delay:1.88s">s</tspan><tspan class="t" style="animation-delay:1.93s">/</tspan><tspan class="t" style="animation-delay:1.98s">s</tspan><tspan class="t" style="animation-delay:2.02s">w</tspan><tspan class="t" style="animation-delay:2.06s">i</tspan><tspan class="t" style="animation-delay:2.11s">f</tspan><tspan class="t" style="animation-delay:2.15s">t</tspan><tspan class="t" style="animation-delay:2.20s">u</tspan><tspan class="t" style="animation-delay:2.25s">i</tspan><tspan class="t" style="animation-delay:2.29s">-</tspan><tspan class="t" style="animation-delay:2.33s">c</tspan><tspan class="t" style="animation-delay:2.38s">a</tspan><tspan class="t" style="animation-delay:2.42s">t</tspan><tspan class="t" style="animation-delay:2.47s">a</tspan><tspan class="t" style="animation-delay:2.51s">l</tspan><tspan class="t" style="animation-delay:2.56s">o</tspan><tspan class="t" style="animation-delay:2.60s">g</tspan></tspan></text>
+<text class="t" x="20" y="105" style="animation-delay:3.15s"><tspan fill="#00285C" font-weight="700">GlobalLingo 2.0.0</tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#5A6B80">·</tspan><tspan fill="#0B1F33"> fixtures/swiftui-catalog</tspan></text>
+<text class="t" x="20" y="124" style="animation-delay:3.19s"></text>
+<text class="t" x="20" y="143" style="animation-delay:3.22s"><tspan fill="#0B1F33">  </tspan><tspan fill="#00285C" font-weight="700">Sources/Shelf/Resources/Localizable.xcstrings</tspan><tspan fill="#0B1F33">  </tspan><tspan fill="#5A6B80">String Catalog, format specifiers · source en · 6 keys</tspan></text>
+<text class="t" x="20" y="162" style="animation-delay:3.25s"><tspan fill="#0B1F33">    de 100% · fr 100% · pl 66% · tr 83%</tspan></text>
+<text class="t" x="20" y="181" style="animation-delay:3.29s"></text>
+<text class="t" x="20" y="200" style="animation-delay:3.32s"><tspan fill="#00285C" font-weight="700">ERROR   </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">KEY001</tspan><tspan fill="#0B1F33">  Sources/Shelf/Messages.swift:10  </tspan><tspan fill="#5A6B80">Unknown key</tspan></text>
+<text class="t" x="20" y="219" style="animation-delay:3.36s"><tspan fill="#0B1F33">         "sync.retry" is not in the Localizable table</tspan></text>
+<text class="t" x="20" y="238" style="animation-delay:3.40s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Add the key to the String Catalog or .strings table the lookup names, or correct the</tspan></text>
+<text class="t" x="20" y="257" style="animation-delay:3.43s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">key in the code.</tspan></text>
+<text class="t" x="20" y="276" style="animation-delay:3.46s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#key001</tspan></text>
+<text class="t" x="20" y="295" style="animation-delay:3.50s"></text>
+<text class="t" x="20" y="314" style="animation-delay:3.54s"><tspan fill="#0058D4" font-weight="700">WARNING </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">TRI001</tspan><tspan fill="#0B1F33">  Sources/Shelf/Messages.swift:15  </tspan><tspan fill="#5A6B80">Locale-dependent case change on a key</tspan></text>
+<text class="t" x="20" y="333" style="animation-delay:3.57s"><tspan fill="#0B1F33">         The lookup key goes through localizedLowercase, which depends on the device locale</tspan></text>
+<text class="t" x="20" y="352" style="animation-delay:3.60s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Use lowercased() or uppercased(), which do not depend on the locale, or no case change</tspan></text>
+<text class="t" x="20" y="371" style="animation-delay:3.64s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">at all; keep keys in one case in the catalog.</tspan></text>
+<text class="t" x="20" y="390" style="animation-delay:3.67s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#tri001</tspan></text>
+<text class="t" x="20" y="409" style="animation-delay:3.71s"></text>
+<text class="t" x="20" y="428" style="animation-delay:3.75s"><tspan fill="#0058D4" font-weight="700">WARNING </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">PLU001</tspan><tspan fill="#0B1F33">  Sources/Shelf/Resources/Localizable.xcstrings:42  </tspan><tspan fill="#5A6B80">Missing plural form</tspan></text>
+<text class="t" x="20" y="447" style="animation-delay:3.78s"><tspan fill="#0B1F33">         "%lld books on %@" in French (fr) has no plural forms for one (e.g. 0, 1), many (e.g.</tspan></text>
+<text class="t" x="20" y="466" style="animation-delay:3.81s"><tspan fill="#0B1F33">         1000000)</tspan></text>
+<text class="t" x="20" y="485" style="animation-delay:3.85s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: In the String Catalog editor, add the missing plural form for this locale (Vary by</tspan></text>
+<text class="t" x="20" y="504" style="animation-delay:3.88s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Plural shows every category the language uses).</tspan></text>
+<text class="t" x="20" y="523" style="animation-delay:3.92s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#plu001</tspan></text>
+<text class="t" x="20" y="542" style="animation-delay:3.96s"></text>
+<text class="t" x="20" y="561" style="animation-delay:3.99s"><tspan fill="#00285C" font-weight="700">ERROR   </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">FMT001</tspan><tspan fill="#0B1F33">  Sources/Shelf/Resources/Localizable.xcstrings:45  </tspan><tspan fill="#5A6B80">Placeholder mismatch</tspan></text>
+<text class="t" x="20" y="580" style="animation-delay:4.03s"><tspan fill="#0B1F33">         "%lld books on %@" in French (fr) uses %@ (an object) for argument 1; the source text has</tspan></text>
+<text class="t" x="20" y="599" style="animation-delay:4.06s"><tspan fill="#0B1F33">         %1$lld (a 64-bit integer)</tspan></text>
+<text class="t" x="20" y="618" style="animation-delay:4.09s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Use the same format specifiers as the source text, with positions (%1$@, %2$lld) when</tspan></text>
+<text class="t" x="20" y="637" style="animation-delay:4.13s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">the order changes.</tspan></text>
+<text class="t" x="20" y="656" style="animation-delay:4.17s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#fmt001</tspan></text>
+<text class="t" x="20" y="675" style="animation-delay:4.20s"></text>
+<text class="t" x="20" y="694" style="animation-delay:4.24s"><tspan fill="#00285C" font-weight="700">ERROR   </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">FMT001</tspan><tspan fill="#0B1F33">  Sources/Shelf/Resources/Localizable.xcstrings:45  </tspan><tspan fill="#5A6B80">Placeholder mismatch</tspan></text>
+<text class="t" x="20" y="713" style="animation-delay:4.27s"><tspan fill="#0B1F33">         "%lld books on %@" in French (fr) uses %lld (a 64-bit integer) for argument 2; the source</tspan></text>
+<text class="t" x="20" y="732" style="animation-delay:4.30s"><tspan fill="#0B1F33">         text has %2$@ (an object)</tspan></text>
+<text class="t" x="20" y="751" style="animation-delay:4.34s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Use the same format specifiers as the source text, with positions (%1$@, %2$lld) when</tspan></text>
+<text class="t" x="20" y="770" style="animation-delay:4.38s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">the order changes.</tspan></text>
+<text class="t" x="20" y="789" style="animation-delay:4.41s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#fmt001</tspan></text>
+<text class="t" x="20" y="808" style="animation-delay:4.45s"></text>
+<text class="t" x="20" y="827" style="animation-delay:4.48s"><tspan fill="#0058D4" font-weight="700">WARNING </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">PLU001</tspan><tspan fill="#0B1F33">  Sources/Shelf/Resources/Localizable.xcstrings:50  </tspan><tspan fill="#5A6B80">Missing plural form</tspan></text>
+<text class="t" x="20" y="846" style="animation-delay:4.52s"><tspan fill="#0B1F33">         "%lld books on %@" in Polish (pl) has no plural forms for few (e.g. 2, 3, 4), many (e.g. 0,</tspan></text>
+<text class="t" x="20" y="865" style="animation-delay:4.55s"><tspan fill="#0B1F33">         5, 6)</tspan></text>
+<text class="t" x="20" y="884" style="animation-delay:4.58s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: In the String Catalog editor, add the missing plural form for this locale (Vary by</tspan></text>
+<text class="t" x="20" y="903" style="animation-delay:4.62s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Plural shows every category the language uses).</tspan></text>
+<text class="t" x="20" y="922" style="animation-delay:4.66s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#plu001</tspan></text>
+<text class="t" x="20" y="941" style="animation-delay:4.69s"></text>
+<text class="t" x="20" y="960" style="animation-delay:4.72s"><tspan fill="#00285C" font-weight="700">ERROR   </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">MIS001</tspan><tspan fill="#0B1F33">  Sources/Shelf/Resources/Localizable.xcstrings:114  </tspan><tspan fill="#5A6B80">Missing translation</tspan></text>
+<text class="t" x="20" y="979" style="animation-delay:4.76s"><tspan fill="#0B1F33">         "Delete all" has no Polish (pl) translation</tspan></text>
+<text class="t" x="20" y="998" style="animation-delay:4.79s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Translate the key for this locale in Xcode's String Catalog editor, or add it to the</tspan></text>
+<text class="t" x="20" y="1017" style="animation-delay:4.83s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">locale's .strings file.</tspan></text>
+<text class="t" x="20" y="1036" style="animation-delay:4.87s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis001</tspan></text>
+<text class="t" x="20" y="1055" style="animation-delay:4.90s"></text>
+<text class="t" x="20" y="1074" style="animation-delay:4.94s"><tspan fill="#0058D4" font-weight="700">WARNING </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">MIS003</tspan><tspan fill="#0B1F33">  Sources/Shelf/Resources/Localizable.xcstrings:122  </tspan><tspan fill="#5A6B80">Needs review</tspan></text>
+<text class="t" x="20" y="1093" style="animation-delay:4.97s"><tspan fill="#0B1F33">         The French (fr) translation of "Delete all" is marked as needing review</tspan></text>
+<text class="t" x="20" y="1112" style="animation-delay:5.00s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Check the translation against the current source text, correct it if needed, and mark</tspan></text>
+<text class="t" x="20" y="1131" style="animation-delay:5.04s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">it as reviewed in the String Catalog editor.</tspan></text>
+<text class="t" x="20" y="1150" style="animation-delay:5.08s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis003</tspan></text>
+<text class="t" x="20" y="1169" style="animation-delay:5.11s"></text>
+<text class="t" x="20" y="1188" style="animation-delay:5.14s"><tspan fill="#0058D4" font-weight="700">WARNING </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">STA001</tspan><tspan fill="#0B1F33">  Sources/Shelf/Resources/Localizable.xcstrings:136  </tspan><tspan fill="#5A6B80">Stale key</tspan></text>
+<text class="t" x="20" y="1207" style="animation-delay:5.18s"><tspan fill="#0B1F33">         "Old banner" is stale: Xcode no longer finds it in the source code</tspan></text>
+<text class="t" x="20" y="1226" style="animation-delay:5.21s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Delete the key in the String Catalog editor (Remove Stale Strings), or mark it as</tspan></text>
+<text class="t" x="20" y="1245" style="animation-delay:5.25s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">manually managed if the code builds it at run time.</tspan></text>
+<text class="t" x="20" y="1264" style="animation-delay:5.29s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#sta001</tspan></text>
+<text class="t" x="20" y="1283" style="animation-delay:5.32s"></text>
+<text class="t" x="20" y="1302" style="animation-delay:5.36s"><tspan fill="#00285C" font-weight="700">ERROR   </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">MIS001</tspan><tspan fill="#0B1F33">  Sources/Shelf/Resources/Localizable.xcstrings:213  </tspan><tspan fill="#5A6B80">Missing translation</tspan></text>
+<text class="t" x="20" y="1321" style="animation-delay:5.39s"><tspan fill="#0B1F33">         "Shelf" is not translated into Turkish (tr) yet (state "new")</tspan></text>
+<text class="t" x="20" y="1340" style="animation-delay:5.43s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Translate the key for this locale in Xcode's String Catalog editor, or add it to the</tspan></text>
+<text class="t" x="20" y="1359" style="animation-delay:5.46s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">locale's .strings file.</tspan></text>
+<text class="t" x="20" y="1378" style="animation-delay:5.50s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis001</tspan></text>
+<text class="t" x="20" y="1397" style="animation-delay:5.53s"></text>
+<text class="t" x="20" y="1416" style="animation-delay:5.56s"><tspan fill="#00285C" font-weight="700">ERROR   </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">MIS002</tspan><tspan fill="#0B1F33">  Sources/Shelf/Resources/Localizable.xcstrings:243  </tspan><tspan fill="#5A6B80">Empty translation</tspan></text>
+<text class="t" x="20" y="1435" style="animation-delay:5.60s"><tspan fill="#0B1F33">         "sync.failed" has an empty Polish (pl) translation</tspan></text>
+<text class="t" x="20" y="1454" style="animation-delay:5.63s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Write the translation, or remove the empty value so the fallback text is used until it</tspan></text>
+<text class="t" x="20" y="1473" style="animation-delay:5.67s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">is translated.</tspan></text>
+<text class="t" x="20" y="1492" style="animation-delay:5.71s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#mis002</tspan></text>
+<text class="t" x="20" y="1511" style="animation-delay:5.74s"></text>
+<text class="t" x="20" y="1530" style="animation-delay:5.78s"><tspan fill="#0058D4" font-weight="700">WARNING </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">KEY002</tspan><tspan fill="#0B1F33">  Sources/Shelf/ShelfView.swift:21  </tspan><tspan fill="#5A6B80">SwiftUI text not in the String Catalog</tspan></text>
+<text class="t" x="20" y="1549" style="animation-delay:5.81s"><tspan fill="#0B1F33">         "Pull to refresh" is shown by SwiftUI but is not in the Localizable String Catalog</tspan></text>
+<text class="t" x="20" y="1568" style="animation-delay:5.85s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Build the target once so Xcode adds the string to the catalog (with "Use Compiler to</tspan></text>
+<text class="t" x="20" y="1587" style="animation-delay:5.88s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Extract Swift Strings"), translate it, and commit the catalog. Use Text(verbatim:) for text</tspan></text>
+<text class="t" x="20" y="1606" style="animation-delay:5.92s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">that must not be translated.</tspan></text>
+<text class="t" x="20" y="1625" style="animation-delay:5.95s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#key002</tspan></text>
+<text class="t" x="20" y="1644" style="animation-delay:5.99s"></text>
+<text class="t" x="20" y="1663" style="animation-delay:6.02s"><tspan fill="#0058D4" font-weight="700">WARNING </tspan><tspan fill="#0B1F33"> </tspan><tspan fill="#00285C" font-weight="700">TRI003</tspan><tspan fill="#0B1F33">  Sources/Shelf/ShelfView.swift:29  </tspan><tspan fill="#5A6B80">Translated text cased without the locale</tspan></text>
+<text class="t" x="20" y="1682" style="animation-delay:6.05s"><tspan fill="#0B1F33">         Translated text is changed with uppercased(), which ignores the locale; Turkish and</tspan></text>
+<text class="t" x="20" y="1701" style="animation-delay:6.09s"><tspan fill="#0B1F33">         Azerbaijani need İ and ı</tspan></text>
+<text class="t" x="20" y="1720" style="animation-delay:6.13s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Fix: Use uppercased(with:) with the locale the text is in, e.g. uppercased(with:</tspan></text>
+<text class="t" x="20" y="1739" style="animation-delay:6.16s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">Locale(identifier: "tr")), or localizedUppercase when that is the device locale.</tspan></text>
+<text class="t" x="20" y="1758" style="animation-delay:6.20s"><tspan fill="#0B1F33">         </tspan><tspan fill="#5A6B80">https://github.com/muhittincamdali/GlobalLingo/blob/master/docs/rules.md#tri003</tspan></text>
+<text class="t" x="20" y="1777" style="animation-delay:6.23s"></text>
+<text class="t" x="20" y="1796" style="animation-delay:6.27s"><tspan fill="#00285C">✗</tspan><tspan fill="#0B1F33"> 6 errors, 7 warnings in 1 catalog and 3 source files</tspan></text>
+<text class="t" x="20" y="1815" style="animation-delay:6.50s"><tspan fill="#0071E3" font-weight="700">$ </tspan></text>
+<rect class="caret" x="35.66" y="1803" width="7.83" height="16" fill="#0071E3" style="animation-delay:6.50s"/>
+</svg>

@@ -1,0 +1,15 @@
+{
+  "greeting": "Merhaba {{name}}",
+  "cart": {
+    "title": "Sepetiniz",
+    "empty": "",
+    "items_one": "{{count}} ürün",
+    "items_other": "{{count}} ürün"
+  },
+  "checkout": {
+    "total": "Toplam: {{amount}}"
+  },
+  "legacy": {
+    "banner": "Yeni sepet deneyimi"
+  }
+}

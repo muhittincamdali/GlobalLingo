@@ -1,0 +1,7 @@
+/* Navigation title of the inbox */
+"inbox.title" = "Posteingang";
+
+/* Alert before archiving */
+"archive.confirm.title" = "Alle Nachrichten archivieren?";
+"archive.confirm.message" = "Du findest sie später im Archiv.";
+"archive.confirm.message" = "Sie finden sie später im Archiv.";

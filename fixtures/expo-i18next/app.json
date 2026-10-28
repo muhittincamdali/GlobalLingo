@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Cart",
+    "slug": "cart-app",
+    "version": "1.0.0",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "dev.globallingo.fixtures.cart"
+    },
+    "plugins": [
+      "expo-localization"
+    ]
+  }
+}
