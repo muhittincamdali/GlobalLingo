@@ -61,11 +61,11 @@
     "smoke": "node scripts/smoke-pack.ts"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.15",
-    "@types/node": "24.19.2",
-    "@vitest/coverage-v8": "5.0.4",
+    "@biomejs/biome": "2.6.3",
+    "@types/node": "26.6.5",
+    "@vitest/coverage-v8": "5.0.5",
     "prettier": "3.9.10",
     "typescript": "7.0.2",
-    "vitest": "5.0.4"
+    "vitest": "5.0.5"
   }
 }
