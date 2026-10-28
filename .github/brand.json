@@ -16,8 +16,5 @@
     "examples": "examples/"
   },
   "languages": ["en", "tr", "zh-CN", "ja", "ko", "es", "de", "fr", "pt-BR", "ru"],
-  "socialTheme": "dark",
-  "badgeOverrides": {
-    "versionNote": "older Swift package"
-  }
+  "socialTheme": "dark"
 }
