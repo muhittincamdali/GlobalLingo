@@ -44,17 +44,21 @@ nothing else from your machine. A CI log that shows the report shows those quote
 
 What it guards against, with tests in
 [test/integration/robustness.test.ts](test/integration/robustness.test.ts) and
-[test/integration/growth.test.ts](test/integration/growth.test.ts): symbolic links are not
-followed while reading the folder; a `.globallingo.json` or baseline that is a link is refused unread,
-and a JSON error in either names the line, never the text; reports and baselines are not written
-through a link; JSON, property list and ICU readers stop at a nesting limit, and property list tags
-over 1024 characters are refused; every reader (String Catalog, `.strings`, `.stringsdict`, ARB,
-JSON, `l10n.yaml`, printf, ICU and i18next placeholders), the catalog checks, the source patterns
-and the ignore globs take time that grows in step with the input, which the tests measure as a
-ratio on crafted inputs grown 16 times to 2 MB; catalogs over 16 MB, source files over 2 MB, more than
-200,000 files, 24 folder levels or 100,000 findings are not read or kept; and control characters
-and bidirectional overrides from the project are escaped in every output format, line breaks and
-tabs included wherever a file name or message has to stay on one line.
+[test/integration/growth.test.ts](test/integration/growth.test.ts): symbolic links are not followed
+while reading the folder; a `.globallingo.json` or baseline that is a link is refused unread, and a
+JSON error in either names the line, never the text; reports and baselines are not written through a
+link; JSON, property list and ICU readers stop at a nesting limit, and property list tags over 1024
+characters are refused; every reader (String Catalog, `.strings`, `.stringsdict`, ARB, JSON,
+`l10n.yaml`, printf, ICU and i18next placeholders), the catalog checks, the source patterns and the
+KEY003 prefix lookup take time that grows in step with the input, which the tests measure as a ratio
+on crafted inputs grown 16 times to 2 MB; every path and key is matched against every ignore glob,
+so that work is the length of the path or key times the characters of the globs, and
+`.globallingo.json` is refused when a glob is over 256 characters or a list over 4096, which keeps
+the second factor fixed; the code prefixes of KEY003 take memory in step with their own text, which
+a test checks by scanning 8 MB of them with a 128 MB heap; catalogs over 16 MB, source files over 2
+MB, more than 200,000 files, 24 folder levels or 100,000 findings are not read or kept; and control
+characters and bidirectional overrides from the project are escaped in every output format, line
+breaks and tabs included wherever a file name or message has to stay on one line.
 
 Reports that fit this policy include, for example: a crafted file or configuration that makes
 GlobalLingo write outside the file you named, follow a link out of the folder, run code, hang,

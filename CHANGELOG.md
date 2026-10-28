@@ -39,6 +39,10 @@ the 1.0.0 API remains.
   maps, ignore globs match the folders of a path in the same pass, and KEY003 looks up code
   prefixes with a binary search in a sorted list, which also keeps their memory to the prefixes
   themselves.
+- Ignore globs are matched 32 characters of a path or key at a time, each key once, and
+  `.globallingo.json` refuses a glob over 256 characters or a list (`ignore.paths`,
+  `ignore.keys`) over 4096 characters: every path and key is matched against every glob, so the
+  globs' length multiplies the work.
 - Four fixture apps (SwiftUI with a String Catalog, UIKit with `.strings`, Flutter with ARB, Expo
   with i18next) with their expected findings, terminal demos recorded from the CLI, examples for
   GitHub Actions, shell, the API, a pre-commit hook and a configuration, an API reference and
