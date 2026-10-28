@@ -117,6 +117,28 @@ describe('finding catalogs', () => {
     });
   });
 
+  it('needs a name inside the braces, and reads l10n.yaml lines as gen_l10n does', () => {
+    expect(syntaxFromContent(['%{} {{}} {n}'])).toBe('icu');
+    expect(syntaxFromContent(['{{a} b}} {{}'])).toBe('icu');
+    expect(syntaxFromContent(['{{{a}}'])).toBe('i18next');
+    expect(syntaxFromContent(['%{%{}'])).toBe('i18n-js');
+    expect(syntaxFromContent(['{"a": "%{n"}', '{"b": "}"}'])).toBe('i18n-js');
+    const yaml = [
+      'arb-dir :  "lib/i18n"   # where the files are',
+      'template-arb-file: app_tr.arb\t',
+      "output-class:'Strings'",
+      'not a key: x',
+      '  nested: y',
+      'use-escaping: true#not a comment',
+    ].join('\n');
+    expect(readFlutterSettings(yaml, '')).toEqual({
+      arbDir: 'lib/i18n',
+      templateArbFile: 'app_tr.arb',
+      outputClass: 'Strings',
+      useEscaping: false,
+    });
+  });
+
   it('fails with a clear error when there is nothing to check', async () => {
     await expect(scan(tree({ 'README.md': '# app' }))).rejects.toThrow(NothingToCheckError);
     await expect(scan(join(tree({}), 'missing'))).rejects.toThrow(/is not a folder/);

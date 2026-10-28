@@ -14,6 +14,7 @@ import { parseJson } from '../../src/parse/json.ts';
 import { parsePlist } from '../../src/parse/plist.ts';
 import { parseStrings } from '../../src/parse/strings.ts';
 import { globMatcher } from '../../src/project/files.ts';
+import { readFlutterSettings, syntaxFromContent } from '../../src/project/settings.ts';
 import { checkCatalog } from '../../src/rules/catalog-checks.ts';
 import { BASE_SIZE, fill, growth, MAX_GROWTH } from '../helpers/growth.ts';
 
@@ -222,6 +223,25 @@ describe('catalogs and their checks', () => {
       return () => check(readJsonCatalog('locales', 'locales', 'en', 'i18next', files));
     };
     expect(growth(read, CATALOG_SIZE)).toBeLessThan(MAX_GROWTH);
+  });
+});
+
+describe('project settings', () => {
+  it.each([
+    ['"%{"', (size: number) => syntaxFromContent([fill('%{', size)])],
+    ['"{{a"', (size: number) => syntaxFromContent([fill('{{a', size)])],
+    ['"{{a}"', (size: number) => syntaxFromContent([fill('{{a}', size)])],
+  ])('detects the placeholder syntax of files full of %s in linear time', (_name, read) => {
+    expect(growth((size) => () => read(size))).toBeLessThan(MAX_GROWTH);
+  });
+
+  it.each([
+    ['spaces before a value', (size: number) => `a:${' '.repeat(size)}x`],
+    ['spaces inside a value', (size: number) => `a: x${' '.repeat(size)}y`],
+    ['spaces before a comment', (size: number) => `a: x${' '.repeat(size)}#`],
+    ['a long key', (size: number) => `${'a'.repeat(size)} x`],
+  ])('reads l10n.yaml with %s in linear time', (_name, make) => {
+    expect(growth((size) => () => readFlutterSettings(make(size), ''))).toBeLessThan(MAX_GROWTH);
   });
 });
 

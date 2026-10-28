@@ -15,6 +15,12 @@ export interface FlutterSettings {
   useEscaping: boolean;
 }
 
+/** A YAML scalar without its matching quotes. */
+const unquote = (value: string) =>
+  value.length >= 2 && (value[0] === '"' || value[0] === "'") && value.endsWith(value[0])
+    ? value.slice(1, -1)
+    : value;
+
 /**
  * Reads the flat `key: value` lines of l10n.yaml that matter here, with gen_l10n's defaults.
  * https://docs.flutter.dev/ui/internationalization#configuring-the-l10n-yaml-file
@@ -22,9 +28,15 @@ export interface FlutterSettings {
 export function readFlutterSettings(text: string, folder: string): FlutterSettings {
   const values = new Map<string, string>();
   for (const line of text.split(/\r?\n/)) {
-    const match = /^([A-Za-z-]+)\s*:\s*(.*?)\s*$/.exec(line.replace(/\s+#.*$/, ''));
-    if (!match) continue;
-    values.set(match[1] as string, (match[2] as string).replace(/^(['"])(.*)\1$/, '$2'));
+    // Split with indexOf and trim instead of one pattern: `\s*(.*?)\s*$` and `\s+#` retry every
+    // split of a long run of spaces, which makes a crafted line quadratic.
+    const comment = line.search(/\s#/);
+    const content = comment === -1 ? line : line.slice(0, comment);
+    const colon = content.indexOf(':');
+    if (colon === -1) continue;
+    const key = content.slice(0, colon).trimEnd();
+    if (!/^[A-Za-z-]+$/.test(key)) continue;
+    values.set(key, unquote(content.slice(colon + 1).trim()));
   }
   const arbDir = (values.get('arb-dir') ?? 'lib/l10n').replace(/^\.\/|\/$/g, '');
   return {
@@ -57,11 +69,29 @@ export function syntaxFromPackageJson(text: string): MessageSyntax | undefined {
   return undefined;
 }
 
+/**
+ * Whether the text has `open`, at least one character other than `}`, then `close`: what
+ * /%\{[^}]+\}/ and /\{\{[^}]+\}\}/ find, in one pass. Those patterns rescan the text after every
+ * `%{` or `{{` that has no closing brace, which makes a crafted file quadratic.
+ */
+function hasPlaceholder(text: string, open: string, close: string): boolean {
+  let from = 0;
+  for (;;) {
+    const start = text.indexOf(open, from);
+    if (start === -1) return false;
+    const brace = text.indexOf('}', start + open.length);
+    if (brace === -1) return false;
+    if (brace > start + open.length && text.startsWith(close, brace)) return true;
+    // Every opening before this brace ends at the same brace, so none of them can match either.
+    from = brace + 1;
+  }
+}
+
 /** Placeholders written in the files themselves, for apps whose package.json says nothing. */
 export function syntaxFromContent(texts: string[]): MessageSyntax {
   const all = texts.join('\n');
-  if (/%\{[^}]+\}/.test(all)) return 'i18n-js';
-  if (/\{\{[^}]+\}\}/.test(all)) return 'i18next';
+  if (hasPlaceholder(all, '%{', '}')) return 'i18n-js';
+  if (hasPlaceholder(all, '{{', '}}')) return 'i18next';
   return 'icu';
 }
 
