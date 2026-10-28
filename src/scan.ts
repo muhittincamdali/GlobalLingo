@@ -72,6 +72,22 @@ function finalize(drafts: Draft[], config: Config): Finding[] {
   );
 }
 
+/**
+ * The answer for each text, worked out once: a key is asked about by the catalog checks and by
+ * KEY003, and again in every catalog that has it.
+ */
+function remembered(test: (text: string) => boolean): (text: string) => boolean {
+  const answers = new Map<string, boolean>();
+  return (text) => {
+    let answer = answers.get(text);
+    if (answer === undefined) {
+      answer = test(text);
+      answers.set(text, answer);
+    }
+    return answer;
+  };
+}
+
 export async function scan(root: string, options: ScanOptions = {}): Promise<Report> {
   const info = await stat(root).catch(() => undefined);
   if (!info?.isDirectory()) throw new NothingToCheckError(`${root} is not a folder`);
@@ -84,7 +100,7 @@ export async function scan(root: string, options: ScanOptions = {}): Promise<Rep
     ...(options.locales ? { locales: options.locales } : {}),
   };
   const ignoredPath = globMatcher(config.ignore?.paths ?? []);
-  const ignoredKey = globMatcher(config.ignore?.keys ?? []);
+  const ignoredKey = remembered(globMatcher(config.ignore?.keys ?? []));
   const tree = await walk(root, ignoredPath);
   const notes = [...tree.notes];
 
