@@ -1,24 +1,18 @@
-// Inputs a pull request could add to make GlobalLingo crash, hang, run out of memory or write to
-// the terminal: deep nesting, huge counts, crafted globs and source files, odd numbers.
+// Inputs a pull request could add to make GlobalLingo crash, run out of memory, read or write
+// through a link or write to the terminal: deep nesting, huge counts, odd names. Inputs that could
+// make it hang are in growth.test.ts.
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, symlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { checkSource, codeContext } from '../../src/code/check-code.ts';
 import { checkCatalog } from '../../src/rules/catalog-checks.ts';
 import { readJsonCatalog } from '../../src/catalogs/json-catalog.ts';
-import { globMatcher, MAX_DEPTH, readLimited } from '../../src/project/files.ts';
+import { MAX_DEPTH, readLimited } from '../../src/project/files.ts';
 import { render } from '../../src/report/index.ts';
 import { readBaseline } from '../../src/baseline.ts';
 import { run } from '../../src/cli/run.ts';
 import { scan } from '../../src/scan.ts';
 import { tree } from '../helpers/tree.ts';
-
-const elapsed = (work: () => void) => {
-  const start = performance.now();
-  work();
-  return performance.now() - start;
-};
 
 describe('hostile catalogs', () => {
   it('reports a JSON file nested 100,000 levels deep as invalid instead of overflowing the stack', async () => {
@@ -153,41 +147,5 @@ describe('settings files that point elsewhere', () => {
       (error: Error) => error.message,
     );
     expect(baselineMessage).not.toContain('SECRET');
-  });
-});
-
-describe('crafted patterns and source files', () => {
-  it('matches a pathological glob against a long path in linear time', () => {
-    const match = globMatcher(['**/**/**/**/**/**/**/**/a*a*a*a*a*a*a*a*a*a*b']);
-    const path = `${'a/'.repeat(200)}${'a'.repeat(2000)}`;
-    expect(elapsed(() => expect(match(path)).toBe(false))).toBeLessThan(2000);
-  });
-
-  const size = 2 * 1024 * 1024;
-  const fill = (unit: string) => unit.repeat(Math.floor(size / unit.length));
-  it.each([
-    ['a.tsx', fill('t(')],
-    ['a.tsx', fill('a.a.')],
-    ['a.tsx', fill('<Trans ')],
-    ['a.tsx', fill('<FormattedMessage ')],
-    ['a.tsx', `<Text>${'a'.repeat(size)}`],
-    ['a.tsx', fill('<Text>a ')],
-    ['a.tsx', fill('formatMessage({ id: ')],
-    ['a.tsx', fill("Alert.alert('")],
-    ['a.tsx', fill('/ ')],
-    ['a.tsx', fill('`${')],
-    ['a.swift', fill('NSLocalizedString(')],
-    ['a.swift', `UIAlertController(${'a'.repeat(size)}`],
-    ['a.swift', fill('.text = "\\')],
-    ['a.swift', fill('/*')],
-    ['a.swift', fill('"""')],
-    ['a.m', fill('NSLocalizedString(@"%')],
-    ['a.dart', fill("hintText: '")],
-    ['a.dart', fill('l10n.a.')],
-    ['a.dart', fill("Text('")],
-  ])('reads a crafted 2 MB %s in linear time', (path, text) => {
-    const context = codeContext([]);
-    context.shipsTurkic = true;
-    expect(elapsed(() => checkSource({ path, text }, context))).toBeLessThan(3000);
   });
 });
