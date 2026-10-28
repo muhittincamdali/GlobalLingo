@@ -4,6 +4,7 @@
 import type { MessageSyntax, RuleId, Severity } from './model.js';
 import { JsonSyntaxError, parseJson } from './parse/json.js';
 import { readLimited } from './project/files.js';
+import { MAX_GLOB_CHARACTERS, MAX_GLOB_LENGTH } from './project/glob.js';
 import { RULE_IDS } from './rules/registry.js';
 
 export type RuleSetting = Severity | 'off';
@@ -56,6 +57,22 @@ function stringList(value: unknown, field: string, file: string): string[] {
   return value as string[];
 }
 
+/** A list of globs, within the limits that keep matching each path and key short. */
+function globList(value: unknown, field: string, file: string): string[] {
+  const globs = stringList(value, field, file);
+  if (globs.some((glob) => glob.length > MAX_GLOB_LENGTH)) {
+    throw new ConfigError(
+      `${file}: "${field}" has a glob longer than ${MAX_GLOB_LENGTH} characters`,
+    );
+  }
+  if (globs.reduce((total, glob) => total + glob.length, 0) > MAX_GLOB_CHARACTERS) {
+    throw new ConfigError(
+      `${file}: "${field}" has more than ${MAX_GLOB_CHARACTERS} characters of globs in all`,
+    );
+  }
+  return globs;
+}
+
 /** Checks a parsed configuration and returns it typed; throws ConfigError with the problem. */
 export function validateConfig(value: unknown, file = CONFIG_FILE): Config {
   if (!isObject(value)) throw new ConfigError(`${file}: the file must contain a JSON object`);
@@ -93,9 +110,9 @@ export function validateConfig(value: unknown, file = CONFIG_FILE): Config {
       }
     }
     if (value.ignore.paths !== undefined)
-      ignore.paths = stringList(value.ignore.paths, 'ignore.paths', file);
+      ignore.paths = globList(value.ignore.paths, 'ignore.paths', file);
     if (value.ignore.keys !== undefined)
-      ignore.keys = stringList(value.ignore.keys, 'ignore.keys', file);
+      ignore.keys = globList(value.ignore.keys, 'ignore.keys', file);
     config.ignore = ignore;
   }
   if (value.rules !== undefined) {

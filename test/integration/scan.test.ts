@@ -219,6 +219,15 @@ describe('configuration', () => {
     );
     expect(() => validateConfig({ locales: 'de' })).toThrow(/list of non-empty strings/);
     expect(() => validateConfig({ ignore: { files: [] } })).toThrow(/ignore.files/);
+    expect(() => validateConfig({ ignore: { keys: ['a'.repeat(257)] } })).toThrow(
+      /"ignore.keys" has a glob longer than 256 characters/,
+    );
+    expect(() => validateConfig({ ignore: { paths: Array(17).fill('*'.repeat(256)) } })).toThrow(
+      /"ignore.paths" has more than 4096 characters of globs in all/,
+    );
+    expect(validateConfig({ ignore: { keys: Array(16).fill('*'.repeat(256)) } })).toEqual({
+      ignore: { keys: Array(16).fill('*'.repeat(256)) },
+    });
     expect(() => validateConfig({ catalogDirs: ['../outside'] })).toThrow(
       /inside the checked folder/,
     );

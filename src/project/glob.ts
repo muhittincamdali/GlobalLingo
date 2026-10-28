@@ -3,6 +3,14 @@
 // tokens so far can end at: no backtracking, whatever the glob. The set is a row of bits, 32
 // positions to a word, so each token costs a pass over the words of the text, not its characters.
 
+/** The longest glob .globallingo.json accepts; real ones are a few dozen characters. */
+export const MAX_GLOB_LENGTH = 256;
+/**
+ * The most characters of globs in one list (`ignore.paths` or `ignore.keys`). Every path and key
+ * is matched against every glob, so this, and not the 1 MB of the file, bounds the work per path.
+ */
+export const MAX_GLOB_CHARACTERS = 4096;
+
 type GlobToken = { kind: 'char'; char: string } | { kind: 'one' | 'star' | 'any' | 'dirs' };
 
 function tokenize(pattern: string): GlobToken[] {

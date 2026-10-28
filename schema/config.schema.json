@@ -30,19 +30,21 @@
           "type": "array",
           "items": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 256
           },
           "maxItems": 1000,
-          "description": "Globs matched against paths from the checked folder, e.g. **/Tests/**."
+          "description": "Globs matched against paths from the checked folder, e.g. **/Tests/**. At most 256 characters each and 4096 in all."
         },
         "keys": {
           "type": "array",
           "items": {
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "maxLength": 256
           },
           "maxItems": 1000,
-          "description": "Globs matched against keys, e.g. debug.*."
+          "description": "Globs matched against keys, e.g. debug.*. At most 256 characters each and 4096 in all."
         }
       }
     },
